@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mathIsART | Images and preimages</title>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/> <!-- Key for responsiveness! -->
+<link href="img/favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Material+Icons" rel="stylesheet"/>
+<link href="material.blue-red.min.css" rel="stylesheet"/>
+<style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#00aaff; }  /* #2196f3 */
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .text_center{ text-align:center; }
+      .text_left{   text-align:left; }
+
+      .vcenter_parent{ display:flex; display:-webkit-flex; display:-moz-box-flex; display:-ms-flexbox; }  /*Just plain flexbox!*/
+      .vcenter_child{  align-self:center; -webkit-align-self:center; }
+
+      .red{    color:#ff8888; }
+      .green{  color:#77ee77; }
+      .blue{   color:#00aaff; }
+      .purple{ color:#8888ff; }
+
+      /*----------------------------------------------------------------------*/
+      .article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000000; }
+      /*.article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; -webkit-text-stroke-width:2px; -webkit-text-stroke-color:#000000; }*/
+      @media screen and (max-width:800px){ .article_headline{ font-size:32px; } }zz
+      #article_text{      padding-bottom:32px; }
+      .article_container{ width:99%; padding:0; width:100%; }
+
+      h1{ padding:16px; font-family:'Montserrat'; font-weight:bold; font-size:32px; }
+      p{  max-width:96%; font-size:14px; margin:0 auto; margin-bottom:16px; }  /*letter-spacing:-1px;*/
+
+      .minilogo{ width:48px; height:48px; background:#f8f8f8 url('img/mathisart_small.png') no-repeat center; background-size:50%; border-radius:24px; margin:0 16px 0 24px; }
+
+      body::before{ background:#080808; background-size:cover; background-attachment:fixed; content:''; will-change:transform; z-index:-1; left:0; right:0; bottom:0; top:0; position:fixed; }
+
+      .btn_back{ position:absolute; color:white; z-index:1; top:16px; left:16px; }
+      .btn_down{ position:absolute; color:white; z-index:1; top:16px; right:16px; }
+
+      .drawer_icon{ width:24px; height:24px; }
+
+      .navigation{ display:flex; display:-webkit-flex; display:-ms-flexbox; -webkit-flex-direction:row; -ms-flex-direction:row; flex-direction:row; -webkit-justify-content:space-between; -ms-flex-pack:justify; justify-content:space-between; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
+
+      /*----------------------------------------------------------------------*/
+      .mdl-layout__content{ padding-top:128px; position: relative; -webkit-overflow-scrolling: touch;  }
+      .mdl-mini-footer{     margin-top:128px; padding:32px; }
+
+      .mdl-card__media{           background:url('img/mathisart_big.png') no-repeat center; height:300px; cursor:pointer; }
+      .mdl-card__supporting-text{ padding:0; margin-top:16px; width:100%; }
+
+      /*----------------------------------------------------------------------*/
+      video{ width:960; height:540; margin:0 auto; display:block; max-width:95%; }
+      .video_controls{ width:960; margin:7px auto 28px auto; display:block; max-width:95%; }
+      .vid{ width:853px; max-width:100%; margin:0 auto; }
+    </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-63802655-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+<script src="material.min.js"></script>
+</head>
+<body>
+<div class="demo-blog--blogpost mdl-layout mdl-js-layout">
+<main class="mdl-layout__content">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_back" href="/#grid" role="button" title="Go back"><i class="material-icons">arrow_back</i></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_down" href="#bottom" role="button" title="Scroll to bottom"><i class="material-icons">arrow_downward</i></a>
+<div class="mdl-grid article_container">
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+<div class="mdl-card__media mdl-color--grey-900 vcenter_parent" style="background:url('img/mathisart_big.png') no-repeat center;">
+<h1 class="mdl-color-text--grey-50 article_headline vcenter_child" id="title_article">The preimage function is a morphism of Boolean algebras</h1>
+</div>
+<div class="mdl-card__supporting-text vcenter_parent">
+<a href="/#grid"><div class="minilogo inline_block vconter_child"></div></a>
+<div class="text_left inline_block vcenter_child">
+<a href=""><h2 class="mdl-typography--body-2" id="category0">Set theory</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category1">Zermelo-Fraenkel with Choice</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category2">/ Functions</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category3">/ Functions</h2></a>
+</div>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+    },
+    MathML: {
+      useMathMLspacing: true
+    },
+    'HTML-CSS': {
+      availableFonts: ["TeX"],
+      styles: {
+        ".MathJax_Display": {"text-align": "left", margin: "0em 0em"},
+        ".MathJax": {padding: '0px 0px 0px 0px', margin: '0px 0px 0px 0px', 'line-height': '0', 'font-size': '50%', color: '#616161'},
+      }
+    },
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css' integrity='sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb' crossorigin='anonymous'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js' integrity='sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h' crossorigin='anonymous'></script>
+-->
+<div class="hide">
+$
+\def \N {{ \mathbb N }}
+\def \Z {{ \mathbb Z }}
+\def \Q {{ \mathbb Q }}
+\def \R {{ \mathbb R }}
+\def \C {{ \mathbb C }}
+\def \H {{ \mathbb H }}
+\def \S {{ \mathbb S }}
+\def \P {{ \mathbb P }}
+
+\def \to      { \longrightarrow }
+\def \mapsto  { \longmapsto }
+
+\def \then    { ~ \Longrightarrow ~ }
+\def \iff     { ~ \Longleftrightarrow ~ }
+\def \and     { ~ \wedge ~ }
+\def \or      { ~ \vee ~ }
+
+\def \d {{~\rm d}}  % We prepend a space to the differential symbol `d`, for good measure!
+
+\def \IFF     {{\hskip4pt \sc iff \hskip2pt}}
+
+\def \Int   {{ \bf Int }}
+\def \Clo   {{ \bf Clo }}
+\def \Lim   {{ \bf Lim }}
+
+\def \Dom   {{ \bf Dom }}
+\def \Cod   {{ \bf Cod }}
+
+\def \Ker   {{ \bf Ker }}
+\def \Img   {{ \bf Img }}
+\def \coKer {{ \bf coKer }}
+\def \coImg {{ \bf coImg }}
+
+\def \rem {{ \hskip4pt \rm rem \hskip4pt }}
+\def \tab {{ \hskip16pt }}
+$
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text" id="article_text">
+<p>Functions are some of the most important objects in math. So they’re studied all over the place.<br/>
+In calculus, you study differentiable functions.<br/>
+In topology, you study functions that preserve <span><em>topological structure</em></span> (continuous functions).<br/>
+In group theory, you study functions that preserve <span><em>group structure</em></span> (group morphisms).<br/>
+In ring theory, you study functions that preserve <span><em>ring structure</em></span> (ring morphisms).<br/>
+In complex analysis, you study functions that preserve <span><em>complex structure</em></span> (holomorphic functions).<br/>
+In the theory of topological manifolds, you study continuous functions between topological manifolds.<br/>
+In the theory of differentiable manifolds, you study differentiable functions between differentiable manifolds.<br/>
+In the theory of smooth manifolds, you study smooth functions between smooth manifolds.<br/>
+And so on.</p>
+<p>For sets, the functions that preserve <span><em>set structure</em></span> are simply... <a href="https://en.wikipedia.org/wiki/Function_(mathematics)"><strong>functions</strong></a>. (Sets don’t have a lot of structure.) The <span><em>core idea</em></span> of functions is very simple:</p>
+<p><span class="math inline">\(\tab\tab\)</span> <span><em>associate one object to every object</em></span>.</p>
+<p>But there’s a ton of important stuff that can be deduced from this idea without building too much technical machinery. For example, every function <span class="math inline">\(f: A \to B\)</span> between <span><strong>sets</strong></span> gives rise to a function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> between their <a href="https://en.wikipedia.org/wiki/Power_set"><strong>power sets</strong></a>, going in the <span><em>opposite direction</em></span>. The function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> can be called the <span><strong>preimage function</strong></span> of <span class="math inline">\(f\)</span>, or the <span><strong>contravariant subset function</strong></span> of <span class="math inline">\(f\)</span>, and it has very nice properties. For starters, <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves <span><strong>unions</strong></span>, <span><strong>intersections</strong></span>, <span><strong>complements</strong></span>, and <span><strong>inclusions</strong></span>. The power set of a set is always a <a href="https://ncatlab.org/nlab/show/Boolean+algebra"><strong>Boolean algebra</strong></a> (under unions, intersections, complements, and inclusions), and the preimage function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves its Boolean algebra structure: <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> is a Boolean algebra morphism, or a morphism of Boolean algebras. There’s a <span><strong>dual</strong></span> function function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span>, which we denote <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> and which we can call the <span><strong>image function</strong></span> of <span class="math inline">\(f\)</span>, or the <span><strong>covariant subset function</strong></span> of <span class="math inline">\(f\)</span>. The function <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> goes in the <span><em>same direction</em></span> as <span class="math inline">\(f: A \to B\)</span> (that is, if <span class="math inline">\(f\)</span> goes from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>, then <span class="math inline">\(f_*\)</span> goes from <span class="math inline">\({ \mathcal P } A\)</span> to <span class="math inline">\({ \mathcal P } B\)</span>). The function <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> doesn’t behave as nicely as is dual function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span>, but it still warrants attention.</p>
+<h1 id="the-image-function-and-the-preimage-function.-a-first-look">The image function and the preimage function. A first look</h1>
+<p>Let <span class="math inline">\(f: \{0, 1, 2\} \to \{5, 6\}\)</span> be a map from the set <span class="math inline">\(\{0, 1, 2\}\)</span> to the set <span class="math inline">\(\{5, 6\}\)</span>, and let <span class="math inline">\(f: \{0, 1, 2\} \to \{5, 6\}\)</span> be defined by<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f:0 \mapsto 5\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f:1 \mapsto 6\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f:2 \mapsto 5\)</span>.<br/>
+First, take the <span><strong>element</strong></span> <span class="math inline">\(1 \in \{0, 1, 2\}\)</span> of <span class="math inline">\(\{0, 1, 2\}\)</span>.<br/>
+Consider the <span><em>(unique!)</em></span> <span><strong>image</strong></span> of <span class="math inline">\(1\)</span> under <span class="math inline">\(f\)</span>.<br/>
+The <span><strong>image</strong></span> of <span class="math inline">\(1 \in \{0, 1, 2\}\)</span> under <span class="math inline">\(f\)</span> is denoted <span class="math inline">\(f[1]\)</span>, or <span class="math inline">\(f(1)\)</span>, and it’s the <span><em>sole</em></span> <span><strong>element</strong></span> of <span class="math inline">\(\{5, 6\}\)</span> that <span class="math inline">\(1\)</span> is <span class="math inline">\(f\)</span>-associated to.<br/>
+By the definition of <span class="math inline">\(f\)</span>, the image <span class="math inline">\(f[1]\)</span> of <span class="math inline">\(1\)</span> under <span class="math inline">\(f\)</span> is the element <span class="math inline">\(6 \in \{5, 6\}\)</span>.<br/>
+Notice that <span class="math inline">\(1\)</span> is an <span><em>element</em></span> of <span class="math inline">\(\{0, 1, 2\}\)</span>, and <span class="math inline">\(f[1]\)</span> is an <span><em>element</em></span> of <span class="math inline">\(\{5, 6\}\)</span>.</p>
+<p>Second, take the <span><strong>subset</strong></span> <span class="math inline">\(\{0, 2\} \subseteq \{0, 1, 2\}\)</span> of <span class="math inline">\(\{0, 1, 2\}\)</span>.<br/>
+Consider the <span><em>(unique!)</em></span> <span><strong>image</strong></span> of <span><em>each</em></span> element of <span class="math inline">\(\{0, 2\}\)</span> under <span class="math inline">\(f\)</span>.<br/>
+The <span><strong>image</strong></span> of <span class="math inline">\(0 \in \{0, 2\}\)</span> under <span class="math inline">\(f\)</span> is denoted <span class="math inline">\(f[0]\)</span>, or <span class="math inline">\(f(0)\)</span>, and it’s the <span><em>sole</em></span> element of <span class="math inline">\(\{5, 6\}\)</span> that <span class="math inline">\(0\)</span> is <span class="math inline">\(f\)</span>-associated to.<br/>
+The <span><strong>image</strong></span> of <span class="math inline">\(2 \in \{0, 2\}\)</span> under <span class="math inline">\(f\)</span> is denoted <span class="math inline">\(f[2]\)</span>, or <span class="math inline">\(f(2)\)</span>, and it’s the <span><em>sole</em></span> element of <span class="math inline">\(\{5, 6\}\)</span> that <span class="math inline">\(2\)</span> is <span class="math inline">\(f\)</span>-associated to.<br/>
+By the definition of <span class="math inline">\(f\)</span>, the image <span class="math inline">\(f[0]\)</span> of <span class="math inline">\(0\)</span> under <span class="math inline">\(f\)</span> is the element <span class="math inline">\(5 \in \{5, 6\}\)</span>.<br/>
+By the definition of <span class="math inline">\(f\)</span>, the image <span class="math inline">\(f[2]\)</span> of <span class="math inline">\(2\)</span> under <span class="math inline">\(f\)</span> is the element <span class="math inline">\(5 \in \{5, 6\}\)</span>.<br/>
+Now, the <span><strong>image</strong></span> of <span class="math inline">\(\{0, 2\}\)</span> under <span class="math inline">\(f\)</span> is defined as the set <span class="math inline">\(\{f[0], f[2]\}\)</span>, which can also be written as the set <span class="math inline">\(\{5, 5\}\)</span> (using the definition of <span class="math inline">\(f\)</span>), which is also the set <span class="math inline">\(\{5\}\)</span> (sets don’t allow repetitions).<br/>
+The <span><strong>image</strong></span> of <span class="math inline">\(\{0, 2\}\)</span> under <span class="math inline">\(f\)</span> is denoted <span class="math inline">\(f_*[\{0, 2\}]\)</span>, or simply <span class="math inline">\(f(\{0, 2\})\)</span>, and it’s the <span><em>sole</em></span> <span><strong>subset</strong></span> of <span class="math inline">\(\{5, 6\}\)</span> that <span class="math inline">\(\{0, 2\}\)</span> if <span class="math inline">\(f\)</span>-associated to.<br/>
+Notice that <span class="math inline">\(\{0, 2\}\)</span> is a <span><em>subset</em></span> of <span class="math inline">\(\{0, 1, 2\}\)</span>, and <span class="math inline">\(f_*[\{0, 2\}]\)</span> is a <span><em>subset</em></span> of <span class="math inline">\(\{5, 6\}\)</span>.</p>
+<p>Third, take the <span><strong>subset</strong></span> <span class="math inline">\(\{5\} \subseteq \{5, 6\}\)</span> of <span class="math inline">\(\{5, 6\}\)</span>.<br/>
+Consider the <span><em>elements</em></span> of <span class="math inline">\(\{0, 1, 2\}\)</span> that have some element of <span class="math inline">\(\{5, 6\}\)</span> as their image under <span class="math inline">\(f\)</span>.<br/>
+The <span><strong>preimage</strong></span> of <span class="math inline">\(\{5\}\)</span> under <span class="math inline">\(f\)</span> is defined as the set of all such <span><em>elements</em></span>, and it’s denoted <span class="math inline">\(f^*[\{5\}]\)</span>, or <span class="math inline">\(f^{-1}[\{5\}]\)</span> (not to be confused with the <span><em>inverse function</em></span> of <span class="math inline">\(f\)</span>, which doesn’t always exist!).</p>
+<p>In general, the <span><strong>image</strong></span> of a subset <span class="math inline">\(A' \subseteq A\)</span> under <span class="math inline">\(f\)</span> is denoted <span class="math inline">\(f_*[A']\)</span>, or simply <span class="math inline">\(f(A')\)</span>, and in symbols you can write it down as<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*[A'] \hskip8pt := \hskip8pt \{f[a] \in B \hskip6pt | \hskip6pt a \in A'\}\)</span>,<br/>
+and you can read this as <span><em>"the set of all <span class="math inline">\(f[a]\)</span> in <span class="math inline">\(B\)</span> as <span class="math inline">\(a\)</span> ranges over <span class="math inline">\(A'\)</span>"</em></span>.</p>
+<p>In general, the <span><strong>preimage</strong></span> of a subset <span class="math inline">\(B' \subseteq B\)</span> under <span class="math inline">\(f\)</span> is denoted <span class="math inline">\(f^*[B']\)</span>, or also <span class="math inline">\(f^{-1}(B')\)</span>, and in symbols you can write it down as<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f^*[B'] \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt f[a] \in B'\}\)</span>,<br/>
+and you can read this as <span><em>"the set of all <span class="math inline">\(a\)</span> in <span class="math inline">\(A\)</span> whose image <span class="math inline">\(f[a]\)</span> is in <span class="math inline">\(B'\)</span>"</em></span>.</p>
+<p>Notice that<br/>
+<span class="math inline">\(\tab\tab1)\)</span> if <span class="math inline">\(f: A \to B\)</span> is a function from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> and <span class="math inline">\(a \in A\)</span> is an <span><em>element</em></span> of <span class="math inline">\(A\)</span>, then <span class="math inline">\(f[a]\)</span> is an <span><em>element</em></span> of <span class="math inline">\(B\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> if <span class="math inline">\(f: A \to B\)</span> is a function from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> and <span class="math inline">\(A' \subseteq A\)</span> is a <span><em>subset</em></span> of <span class="math inline">\(A\)</span>, then <span class="math inline">\(f_*[A']\)</span> is a <span><em>subset</em></span> of <span class="math inline">\(B\)</span><br/>
+<span class="math inline">\(\tab\tab3)\)</span> if <span class="math inline">\(f: A \to B\)</span> is a function from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> and <span class="math inline">\(B' \subseteq B\)</span> is a <span><em>subset</em></span> of <span class="math inline">\(B\)</span>, then <span class="math inline">\(f^*[B']\)</span> is a <span><em>subset</em></span> of <span class="math inline">\(A\)</span>.<br/>
+Every function <span class="math inline">\(f: A \to B\)</span> from a set <span class="math inline">\(A\)</span> to a set <span class="math inline">\(B\)</span> gives rise to a pair <span class="math inline">\((f_*: { \mathcal P } A \to { \mathcal P } B, f^*: { \mathcal P } B \to { \mathcal P } A)\)</span> of functions:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> a function <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> from the power set <span class="math inline">\({ \mathcal P } A\)</span> of <span class="math inline">\(A\)</span> to the power set <span class="math inline">\({ \mathcal P } B\)</span> of <span class="math inline">\(B\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> a function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> from the power set <span class="math inline">\({ \mathcal P } B\)</span> of <span class="math inline">\(B\)</span> to the power set <span class="math inline">\({ \mathcal P } A\)</span> of <span class="math inline">\(A\)</span>.<br/>
+In other words, the function <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> maps subsets of <span class="math inline">\(A\)</span> to subsets of <span class="math inline">\(B\)</span>, and the function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> maps subsets of <span class="math inline">\(B\)</span> to subsets of <span class="math inline">\(A\)</span>. The functions <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> and <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> are closely related to the function <span class="math inline">\(f: A \to B\)</span>, and they <span><em>depend</em></span> on <span class="math inline">\(f: A \to B\)</span>, which is why they have the symbol <span class="math inline">\(f\)</span> in their name.</p>
+<p>In this page, we intend to prove that, for any subsets <span class="math inline">\(A',A1,A2 \subseteq A\)</span> and for any <span class="math inline">\(B',B1,B2 \subseteq B\)</span>, the following hold:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(A' \subseteq f^*[f_*[A']]\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(f_*[f^*[B']] \subseteq B'\)</span><br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(f^*: B1 \cup B2 \hskip6pt\mapsto\hskip6pt f^*[B1] \cup f^*[B1]\)</span><br/>
+<span class="math inline">\(\tab\tab4)\)</span> <span class="math inline">\(f^*: B1 \cap B2 \hskip6pt\mapsto\hskip6pt f^*[B1] \cap f^*[B2]\)</span><br/>
+<span class="math inline">\(\tab\tab5)\)</span> <span class="math inline">\(f^*: B \setminus B1 \hskip6pt\mapsto\hskip6pt A \setminus f^*[B1]\)</span><br/>
+<span class="math inline">\(\tab\tab6)\)</span> <span class="math inline">\(B1 \subseteq B2 \hskip6pt\then\hskip6pt f^*[B1] \subseteq f^*[B2]\)</span><br/>
+<span class="math inline">\(\tab\tab7)\)</span> <span class="math inline">\(f^*: \{\} \hskip6pt\mapsto\hskip6pt \{\}\)</span><br/>
+<span class="math inline">\(\tab\tab8)\)</span> <span class="math inline">\(f^*: B \hskip6pt\mapsto\hskip6pt A\)</span><br/>
+In particular, this means that the preimage function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> is a morphism of the Boolean algebras <span class="math inline">\({ \mathcal P } B\)</span> and <span class="math inline">\({ \mathcal P } A\)</span>. (More on this later!)</p>
+<h1 id="the-image-function-and-the-preimage-function.-example">The image function and the preimage function. Example</h1>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. Let <span class="math inline">\(A\)</span> be the set <span class="math inline">\(\{0, 1, 2\}\)</span>, let <span class="math inline">\(B\)</span> be the set <span class="math inline">\(\{5, 6\}\)</span>, let <span class="math inline">\(f: A \to B\)</span> be the function given by<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f:0 \mapsto 5\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f:1 \mapsto 6\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f:2 \mapsto 5\)</span>.<br/>
+Equivalently, the data for the function <span class="math inline">\(f: A \to B\)</span> could be given using the <span><strong>graph</strong></span> of <span class="math inline">\(f: A \to B\)</span>, which is a subset of the Cartesian product <span class="math inline">\(A \times B\)</span>. We can denote the <span><strong>graph</strong></span> of the function <span class="math inline">\(f: A \to B\)</span> using the letter <span class="math inline">\(f\)</span>, and then specify the <span><strong>graph</strong></span> <span class="math inline">\(f\)</span> of the function <span class="math inline">\(f: A \to B\)</span> as<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f \hskip8pt := \hskip8pt \{(0, 5), (1, 6), (2, 5)\}\)</span>.<br/>
+Notice <span class="math inline">\(f: A \to B\)</span> is indeed a function: it maps <span><em>each</em></span> element of <span class="math inline">\(A\)</span> to <span><em>exactly one</em></span> element of <span class="math inline">\(B\)</span>.<br/>
+Now, what do the functions <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> and <span class="math inline">\(f^*: { \mathcal P } A \to { \mathcal P } B\)</span> look like? First, let’s construct the <span><strong>powersets</strong></span> <span class="math inline">\({ \mathcal P } A\)</span> and <span class="math inline">\({ \mathcal P } B\)</span>.<br/>
+Since <span class="math inline">\(A\)</span> is the set <span class="math inline">\(\{0, 1, 2\}\)</span>, then <span class="math inline">\({ \mathcal P } A\)</span> is the set <span class="math inline">\(\{\{\}, \{0\}, \{1\}, \{2\}, \{0, 1\}, \{0, 2\}, \{1, 2\}, \{0, 1, 2\}\}\)</span>.<br/>
+Since <span class="math inline">\(B\)</span> is the set <span class="math inline">\(\{5, 6\}\)</span>, then <span class="math inline">\({ \mathcal P } B\)</span> is the set <span class="math inline">\(\{\{\}, \{5\}, \{6\}, \{5, 6\}\}\)</span>.<br/>
+Now, from the data for the function <span class="math inline">\(f: A \to B\)</span>, we can derive the data for the <span><strong>image function</strong></span> <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span>. More explicitly, from the data for the function<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f: \{0, 1, 2\} \to \{5, 6\}\)</span>,<br/>
+we can derive the data for the <span><strong>image function</strong></span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*: \{\{\}, \{0\}, \{1\}, \{2\}, \{0, 1\}, \{0, 2\}, \{1, 2\}, \{0, 1, 2\}\} \to \{\{\}, \{5\}, \{6\}, \{5, 6\}\}\)</span>.<br/>
+This yields<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{\} \mapsto \{\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{0\} \mapsto \{5\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{1\} \mapsto \{6\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{2\} \mapsto \{5\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{0, 1\} \mapsto \{5, 6\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{0, 2\} \mapsto \{5\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{1, 2\} \mapsto \{5, 6\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f_*:\{0, 1, 2\} \mapsto \{5, 6\}\)</span>.<br/>
+And, from the data for the function <span class="math inline">\(f: A \to B\)</span>, we can derive the data for the <span><strong>preimage function</strong></span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span>. More explicitly, from the data for the function<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f: \{0, 1, 2\} \to \{5, 6\}\)</span>,<br/>
+we can derive the data for the <span><strong>preimage function</strong></span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f^*: \{\{\}, \{5\}, \{6\}, \{5, 6\}\} \to \{\{\}, \{0\}, \{1\}, \{2\}, \{0, 1\}, \{0, 2\}, \{1, 2\}, \{0, 1, 2\}\}\)</span>.<br/>
+This yields<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f^*:\{\} \mapsto \{\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f^*:\{5\} \mapsto \{0, 2\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f^*:\{6\} \mapsto \{1\}\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(f^*:\{5, 6\} \mapsto \{0, 1, 2\}\)</span>.<br/>
+And we’re done.<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<p>Having seen an example, we can look at the definitions.</p>
+<h1 id="the-image-function-of-a-function.-definition">The image function of a function. Definition</h1>
+<p>Every function from a set <span class="math inline">\(A\)</span> to a set <span class="math inline">\(B\)</span> gives rise to a function from the power set of <span class="math inline">\(A\)</span> to the power set of <span class="math inline">\(B\)</span>.<br/>
+That is, every function <span class="math inline">\(f: A \to B\)</span> gives rise to a function <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span>.<br/>
+That is, if <span class="math inline">\(f: A \to B\)</span> maps elements of <span class="math inline">\(A\)</span> to elements of <span class="math inline">\(B\)</span>, then <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> maps subsets of <span class="math inline">\(A\)</span> to subsets of <span class="math inline">\(B\)</span>.<br/>
+The function <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> is not too special, and it doesn’t have too many properties. We call <span class="math inline">\(f_*\)</span> the <span><strong>image function</strong></span> of <span class="math inline">\(f\)</span>, or the <span><strong>covariant subset function</strong></span> of <span class="math inline">\(f\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. Let <span class="math inline">\(f: A \to B\)</span> be a function between sets, let <span class="math inline">\(A' \subseteq A\)</span> be a subset of <span class="math inline">\(A\)</span>.<br/>
+The <span><strong>image of <span class="math inline">\(A'\)</span> under <span class="math inline">\(f\)</span></strong></span>, denoted <span class="math inline">\(f_*[A']\)</span>, is the set of all elements of the form <span class="math inline">\(f[a]\)</span> as <span class="math inline">\(a\)</span> ranges over <span class="math inline">\(A'\)</span>.<br/>
+Equivalently, <span class="math inline">\(f_*[A']\)</span> is the set of all elements of <span class="math inline">\(B\)</span> that are the image of <span><em>at least one</em></span> element of <span class="math inline">\(A'\)</span>.<br/>
+In symbols, the <span><strong>image</strong></span> <span class="math inline">\(f_*[A']\)</span> of <span class="math inline">\(A'\)</span> under <span class="math inline">\(f\)</span> can be defined in any of the following equivalent ways:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(f_*[A'] \hskip8pt := \hskip8pt \{f[a] \in B \hskip6pt | \hskip6pt a \in A'\}\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(f_*[A'] \hskip8pt := \hskip8pt \{b \in B \hskip6pt | \hskip6pt \exists a \in A' \hskip4pt \langle f[a] = b \rangle\}\)</span><br/>
+Even though these two definitions yield the same set, they have different "flavors". You can think about them in terms of how an "algorithm" would "compute" the image <span class="math inline">\(f_*[A']\)</span> of <span class="math inline">\(A'\)</span> under <span class="math inline">\(f\)</span> using each definition.</p>
+<p>An algorithm to compute the image <span class="math inline">\(f_*[A']\)</span> of <span class="math inline">\(A'\)</span> under <span class="math inline">\(f\)</span> using definition <span class="math inline">\(1)\)</span> would do the following. Loop through each element <span class="math inline">\(a\)</span> of <span class="math inline">\(A'\)</span>, apply <span class="math inline">\(f\)</span> to each element <span class="math inline">\(a\)</span> of <span class="math inline">\(A'\)</span>, and gather <span><em>all</em></span> the results inside a set; this set is your desired image <span class="math inline">\(f[A']\)</span>.</p>
+<p>An algorithm to compute the image <span class="math inline">\(f_*[A']\)</span> of <span class="math inline">\(A'\)</span> under <span class="math inline">\(f\)</span> using definition <span class="math inline">\(2)\)</span> would do the following. Loop through each element <span class="math inline">\(b\)</span> of <span class="math inline">\(B\)</span> and, for <span><em>each</em></span> element <span class="math inline">\(b\)</span> of <span class="math inline">\(B\)</span>, it would loop through <span><em>all</em></span> elements <span class="math inline">\(a\)</span> of <span class="math inline">\(A'\)</span> and apply <span class="math inline">\(f\)</span> to <span class="math inline">\(a\)</span> until the image <span class="math inline">\(f[a]\)</span> of <span class="math inline">\(a\)</span> lands in <span class="math inline">\(b\)</span> (in which case it stores this <span class="math inline">\(b\)</span> somewhere safe) or until it has traversed through all of <span class="math inline">\(A'\)</span> and <span class="math inline">\(f[a]\)</span> never lands in <span class="math inline">\(b\)</span> (in which case it discards this <span class="math inline">\(b\)</span>). The set of all <span class="math inline">\(b\)</span>’s that the algorithm didn’t discard in the desired image <span class="math inline">\(f[A']\)</span>.</p>
+<p>Using the definition of the image <span class="math inline">\(f_*[A']\)</span></p>
+<p>Notice that <span class="math inline">\(f: A \to B\)</span> and <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> can’t be the same function because they don’t have the same domain or the same codomain. In the literature people drop the notational distinction between <span class="math inline">\(f: A \to B\)</span> and <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span>, calling them both <span class="math inline">\(f\)</span>.</p>
+<h1 id="the-preimage-function-of-a-function.-definition">The preimage function of a function. Definition</h1>
+<p>Every function from a set <span class="math inline">\(A\)</span> to a set <span class="math inline">\(B\)</span> gives rise to a function from the power set of <span class="math inline">\(B\)</span> to the power set of <span class="math inline">\(A\)</span>.<br/>
+That is, every function <span class="math inline">\(f: A \to B\)</span> gives rise to a function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span>.<br/>
+That is, if <span class="math inline">\(f: A \to B\)</span> maps elements of <span class="math inline">\(A\)</span> to elements of <span class="math inline">\(B\)</span>, then <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> maps subsets of <span class="math inline">\(B\)</span> to subsets of <span class="math inline">\(A\)</span>.<br/>
+The function <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> is very special, and it has very nice properties. We call <span class="math inline">\(f^*\)</span> the <span><strong>contravariant subset function</strong></span> of <span class="math inline">\(f\)</span>, or the <span><strong>preimage function</strong></span> of <span class="math inline">\(f\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. Let <span class="math inline">\(f: A \to B\)</span> be a function between sets, let <span class="math inline">\(B' \subseteq B\)</span> be a subset of <span class="math inline">\(B\)</span>.<br/>
+The <span><strong>preimage of <span class="math inline">\(B'\)</span> under <span class="math inline">\(f\)</span></strong></span>, denoted <span class="math inline">\(f^*[B']\)</span>, is the set of all <span class="math inline">\(a\)</span> in <span class="math inline">\(A\)</span> whose image <span class="math inline">\(f[a]\)</span> is in <span class="math inline">\(B'\)</span>.<br/>
+Equivalently, <span class="math inline">\(f_*[B']\)</span> is the set of all elements of <span class="math inline">\(A\)</span> whose image is <span><em>at least one</em></span> element of <span class="math inline">\(B'\)</span>.<br/>
+In symbols, the <span><strong>preimage</strong></span> <span class="math inline">\(f^*[B']\)</span> of <span class="math inline">\(B'\)</span> under <span class="math inline">\(f\)</span> can be defined in any of the following equivalent ways:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(f^*[B'] \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt f[a] \in B'\}\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(f^*[B'] \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt \exists b \in B' \hskip4pt \langle f[a] = b \rangle\}\)</span><br/>
+Even though these two definitions yield the same set, they have different "flavors".</p>
+<h1 id="the-domain-is-a-subset-of-the-preimage-of-the-image">The domain is a subset of the preimage of the image</h1>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Theorem</strong></span>. Let <span class="math inline">\(f: A \to B\)</span> be a function from set <span class="math inline">\(A\)</span> to set <span class="math inline">\(B\)</span>, let <span class="math inline">\(A' \subseteq A\)</span> be a subset of <span class="math inline">\(A\)</span>. Now<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(A'\)</span> is a subset of the preimage of the image of <span class="math inline">\(A'\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(A'\)</span> is a subset of the preimage (under <span class="math inline">\(f\)</span>) of the image (under <span class="math inline">\(f\)</span>) of <span class="math inline">\(A'\)</span><br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(A'\)</span> is a subset of <span class="math inline">\(f^* \circ f_*[A']\)</span><br/>
+<span class="math inline">\(\tab\tab4)\)</span> <span class="math inline">\(A' \subseteq f^* \circ f_*[A']\)</span><br/>
+<span class="math inline">\(\tab\tab5)\)</span> <span class="math inline">\(A' \subseteq f^*[f_*[A']]\)</span><br/>
+<span class="math inline">\(\tab\tab6)\)</span> for every <span class="math inline">\(a\)</span> in <span class="math inline">\(A'\)</span>, <span class="math inline">\(a\)</span> is in <span class="math inline">\(f^*[f_*[A']]\)</span><br/>
+<span class="math inline">\(\tab\tab7)\)</span> <span class="math inline">\(\forall a \in A' \hskip4pt \langle\hskip4pt a \in f^*[f_*[A']] \hskip4pt\rangle\)</span><br/>
+<span class="math inline">\(\tab\tab8)\)</span> for every <span class="math inline">\(a\)</span>, if <span class="math inline">\(a\)</span> is in <span class="math inline">\(A'\)</span>, then <span class="math inline">\(a\)</span> is in <span class="math inline">\(f^*[f_*[A']]\)</span><br/>
+<span class="math inline">\(\tab\tab9)\)</span> <span class="math inline">\(\forall a \hskip4pt \langle\hskip4pt a \in A' \then a \in f^*[f_*[A']] \hskip4pt\rangle\)</span><br/>
+<span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. TODO</p>
+<h1 id="the-image-of-the-preimage-is-a-subset-of-the-codomain">The image of the preimage is a subset of the codomain</h1>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Theorem</strong></span>. Let <span class="math inline">\(f: A \to B\)</span> be a function from set <span class="math inline">\(A\)</span> to set <span class="math inline">\(B\)</span>, let <span class="math inline">\(B' \subseteq B\)</span> be a subset of <span class="math inline">\(B\)</span>. Now<br/>
+<span class="math inline">\(\tab\tab1)\)</span> the image of the preimage of <span class="math inline">\(B'\)</span> is a subset of <span class="math inline">\(B'\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> the image (under <span class="math inline">\(f\)</span>) of the preimage (under <span class="math inline">\(f\)</span>) of <span class="math inline">\(B'\)</span> is a subset of <span class="math inline">\(B'\)</span><br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(f_* \circ f^*[B']\)</span> is a subset of <span class="math inline">\(B'\)</span><br/>
+<span class="math inline">\(\tab\tab4)\)</span> <span class="math inline">\(f_* \circ f^*[B'] \subseteq B'\)</span><br/>
+<span class="math inline">\(\tab\tab5)\)</span> <span class="math inline">\(f_*[f^*[B']] \subseteq B'\)</span><br/>
+<span class="math inline">\(\tab\tab6)\)</span> for every <span class="math inline">\(b\)</span> in <span class="math inline">\(f_*[f^*[B']]\)</span>, <span class="math inline">\(b\)</span> is in <span class="math inline">\(B'\)</span><br/>
+<span class="math inline">\(\tab\tab7)\)</span> <span class="math inline">\(\forall b \in f_*[f^*[B']] \hskip4pt \langle\hskip4pt b \in B' \hskip4pt\rangle\)</span><br/>
+<span class="math inline">\(\tab\tab8)\)</span> for every <span class="math inline">\(b\)</span>, if <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span>, then <span class="math inline">\(b\)</span> is in <span class="math inline">\(B'\)</span><br/>
+<span class="math inline">\(\tab\tab9)\)</span> <span class="math inline">\(\forall b \hskip4pt \langle\hskip4pt b \in f_*[f^*[B']] \then b \in B' \hskip4pt\rangle\)</span><br/>
+<span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. Statements <span class="math inline">\(1)\)</span> through <span class="math inline">\(9)\)</span> are all the same statement written in different (but equivalent) ways. We want to prove that<br/>
+<span class="math display">\[f_*[f^*[B']] \subseteq B'.\]</span></p>
+<p>To do this, take an arbitrary element <span class="math inline">\(b \in f_*[f^*[B']]\)</span>. We don’t know much about the element <span class="math inline">\(b\)</span>, except that it belongs to <span class="math inline">\(f_*[f^*[B']]\)</span>.<br/>
+From the definition of <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span>, we can immediately deduce that <span><em>there exists</em></span> an element <span class="math inline">\(a \in f^*[B']\)</span> that <span><em>goes to</em></span> <span class="math inline">\(b\)</span> (under <span class="math inline">\(f\)</span>), meaning <span class="math inline">\(f: a \mapsto b\)</span>.<br/>
+That is, the very definition of <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span> guarantees the <span><em>existence</em></span> of a particular element <span class="math inline">\(a \in f^*[B']\)</span> whose image <span class="math inline">\(f[a]\)</span> under <span class="math inline">\(f\)</span> is <span class="math inline">\(b\)</span> (remember that <span class="math inline">\(b \in f_*[f^*[B']]\)</span> is the original element we started with).</p>
+<p>This element <span class="math inline">\(a \in f^*[B']\)</span> will be the key to everything.<br/>
+One thing to notice about <span class="math inline">\(a \in f^*[B']\)</span> is that it’s <span><em>not</em></span> arbitrary. I mean, the element <span class="math inline">\(b \in f_*[f^*[B']]\)</span> <span><em>is</em></span> arbitrary, but, after we "lock in" our choice of <span class="math inline">\(b \in f_*[f^*[B']]\)</span>, we find that our realm of possibilities for <span class="math inline">\(a\)</span> is <span><em>not</em></span> arbitrary. That is, this element <span class="math inline">\(a \in f^*[B']\)</span>, whose existence is guaranteed by the very definition of <span class="math inline">\(f_*: { \mathcal P } A \to { \mathcal P } B\)</span>, <span><em>depends</em></span> the specific <span class="math inline">\(b \in f_*[f^*[B']]\)</span> that we take.<br/>
+Another thing to notice about <span class="math inline">\(a \in f^*[B']\)</span> is that it <span><em>need not be unique</em></span>! The hypothesis that <span class="math inline">\(f\)</span> is a <span><strong>function</strong></span> is perfectly fine with this fact: indeed, there can exist <span><em>multiple</em></span> elements of <span class="math inline">\(f^*[B']\)</span> whose image (under <span class="math inline">\(f\)</span>) is <span class="math inline">\(b\)</span>. The important thing is that we’re guaranteed the <span><strong>existence</strong></span> of <span><em>at least one</em></span>.</p>
+<p>So, to recap.<br/>
+Assume <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span>.<br/>
+It follows that there exists <span><em>at least one</em></span> element <span class="math inline">\(a\)</span> of <span class="math inline">\(f^*[B']\)</span> whose image <span class="math inline">\(f[a]\)</span> is <span class="math inline">\(b\)</span>, meaning <span class="math inline">\(f: a \mapsto b\)</span>.</p>
+<p>Now let’s look at the definition of <span class="math inline">\(f^*[B']\)</span>. What does it mean to be an element of <span class="math inline">\(f^*[B']\)</span>? What does it mean that <span class="math inline">\(a\)</span> is an element of <span class="math inline">\(f^*[B']\)</span>? What membership criteria must <span class="math inline">\(a\)</span> fulfill in order to be an element of <span class="math inline">\(f^*[B']\)</span>? Given the knowledge that <span class="math inline">\(a\)</span> is in <span class="math inline">\(f^*[B']\)</span>, what can we deduce about <span class="math inline">\(a\)</span>? What can we deduce about <span class="math inline">\(f[a]\)</span>?<br/>
+One crucial thing the membership of <span class="math inline">\(a\)</span> to <span class="math inline">\(f^*[B']\)</span> allows us to deduce is the existence of <span><em>some</em></span> element of <span class="math inline">\(B'\)</span> that <span class="math inline">\(a\)</span> <span><em>goes to</em></span> (under <span class="math inline">\(f\)</span>). This element is important, so let’s give it a name: call it <span class="math inline">\(b'\)</span>. So, <span class="math inline">\(b'\)</span> is an element of <span class="math inline">\(B'\)</span>.<br/>
+Let’s state this again. Given the fact that <span class="math inline">\(a\)</span> is in <span class="math inline">\(f^*[B']\)</span>, we’re guaranteed the existence of an element <span class="math inline">\(b'\)</span> in <span class="math inline">\(B'\)</span> that <span class="math inline">\(a\)</span> <span><em>goes to</em></span> (under <span class="math inline">\(f\)</span>), meaning <span class="math inline">\(f: a \mapsto b'\)</span>.</p>
+<p>Now we stop, and look back.<br/>
+We started with the hypothesis that <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span>.<br/>
+Then, we deduced the existence of an element <span class="math inline">\(a \in A\)</span> with the property that <span class="math inline">\(f: a \mapsto b\)</span>.<br/>
+And now we’ve deduced the existence of an element <span class="math inline">\(b' \in B'\)</span> with the property that <span class="math inline">\(f: a \mapsto b'\)</span>.<br/>
+So we simultaneously have that <span class="math inline">\(f: a \mapsto b\)</span> and that <span class="math inline">\(f: a \mapsto b'\)</span>.<br/>
+What does this mean? Can we deduce anything from this? The really important question is: are <span class="math inline">\(b\)</span> and <span class="math inline">\(b'\)</span> <span><strong>distinct</strong></span> elements, or are they secretly the same element written in two different (but equivalent) ways?</p>
+<p>The hypothesis that <span class="math inline">\(f: A \to B\)</span> is a <span><em>function</em></span> contradicts the possibility that <span class="math inline">\(b\)</span> and <span class="math inline">\(b'\)</span> are <span><em>distinct</em></span>. We can’t have that <span class="math inline">\(f: A \to B\)</span> is a function <span><em>and</em></span> also that <span class="math inline">\(b\)</span> and <span class="math inline">\(b'\)</span> are distinct. If we assume that <span class="math inline">\(b\)</span> and <span class="math inline">\(b'\)</span> are distinct, then <span class="math inline">\(f: A \to B\)</span> is not a function. But, if we do insist that <span class="math inline">\(f: A \to B\)</span> is a function (and we do; this is one of our hypotheses), then we must necessarily arrive at the conclusion that <span class="math inline">\(b\)</span> is equal to <span class="math inline">\(b'\)</span>, meaning <span class="math inline">\(b = b'\)</span>. And recall that <span class="math inline">\(b'\)</span> is in <span class="math inline">\(B'\)</span>. Since <span class="math inline">\(b'\)</span> was actually <span class="math inline">\(b\)</span> all along, it follows that <span class="math inline">\(b\)</span> is in <span class="math inline">\(B'\)</span>.<br/>
+So, we started with the hypothesis that <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span>, and we’ve arrived at the conclusion that <span class="math inline">\(b\)</span> is in <span class="math inline">\(B'\)</span>. This argument proves that, if <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span>, then <span class="math inline">\(b\)</span> is in <span class="math inline">\(B'\)</span>, which, by definition, means that <span class="math inline">\(f_*[f^*[B']]\)</span> is a subset of <span class="math inline">\(B'\)</span>, meaning <span class="math inline">\(f_*[f^*[B']] \subseteq B'\)</span>, which is our goal.<br/>
+But there’s one subtlety left. What if <span class="math inline">\(f_*[f^*[B']]\)</span> is the empty set <span class="math inline">\(\{\}\)</span>? That is, what if <span class="math inline">\(f_*[f^*[B']]\)</span> has <span><em>no</em></span> elements? Then we couldn’t possibly have that <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span> to start with. In this case, the statement that <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span> is a <span><strong>false statement</strong></span>, and so the <span><strong>implication</strong></span> "if <span class="math inline">\(b\)</span> is in <span class="math inline">\(f_*[f^*[B']]\)</span>, then <span class="math inline">\(b\)</span> is in <span class="math inline">\(B'\)</span>" is (vacuously) <span><strong>true</strong></span>, by the definition of <a href="https://en.wikipedia.org/wiki/Material_conditional"><strong>implication</strong></a>.<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<p>A proof of <span class="math inline">\(f_*[f^*[B']] \subseteq B'\)</span> that outlines the steps, but doesn’t explain any of the reasoning, goes as follows.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. Let <span class="math inline">\(b \in f_*[f^*[B']]\)</span>. Then there exists <span class="math inline">\(a \in f^*[B']\)</span> such that <span class="math inline">\(f[a] = b\)</span>. Since <span class="math inline">\(a \in f^*[B']\)</span>, then <span class="math inline">\(f[a] \in B'\)</span>. It follows that <span class="math inline">\(b \in B'\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<h1 id="the-preimage-function-is-a-morphism-of-boolean-algebras">The preimage function is a morphism of Boolean algebras</h1>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Theorem</strong></span>. Let <span class="math inline">\(f: A \to B\)</span> be a map from set <span class="math inline">\(A\)</span> to set <span class="math inline">\(B\)</span>.<br/>
+Now the <span><strong>preimage function</strong></span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> induced by map <span class="math inline">\(f\)</span> is a morphism of Boolean algebras.<br/>
+In symbols, the <span><strong>preimage function</strong></span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> satisfies the following, <span><em>for all</em></span> subsets <span class="math inline">\(B1,B2 \subseteq B\)</span>:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(f^*: B1 \cup B2 \hskip6pt\mapsto\hskip6pt f^*[B1] \cup f^*[B1]\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(f^*: B1 \cap B2 \hskip6pt\mapsto\hskip6pt f^*[B1] \cap f^*[B2]\)</span><br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(f^*: B \setminus B1 \hskip6pt\mapsto\hskip6pt A \setminus f^*[B1]\)</span><br/>
+<span class="math inline">\(\tab\tab4)\)</span> <span class="math inline">\(B1 \subseteq B2 \hskip6pt\then\hskip6pt f^*[B1] \subseteq f^*[B2]\)</span><br/>
+<span class="math inline">\(\tab\tab5)\)</span> <span class="math inline">\(f^*: \{\} \hskip6pt\mapsto\hskip6pt \{\}\)</span><br/>
+<span class="math inline">\(\tab\tab6)\)</span> <span class="math inline">\(f^*: B \hskip6pt\mapsto\hskip6pt A\)</span><br/>
+<span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. To prove that <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> is a morphism of Boolean algebras, we must prove that, in passing from the Boolean algebra <span class="math inline">\({ \mathcal P } B\)</span> to the Boolean algebra <span class="math inline">\({ \mathcal P } A\)</span>, the map <span class="math inline">\(f^*\)</span> preserves the Boolean algebra structure. The Boolean algebra structure has four components: unions, intersections, complements, inclusions, the least element, and the greatest element. So, we must prove that<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves unions<br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves intersections<br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves complements<br/>
+<span class="math inline">\(\tab\tab4)\)</span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves inclusions<br/>
+<span class="math inline">\(\tab\tab5)\)</span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves the least element<br/>
+<span class="math inline">\(\tab\tab6)\)</span> <span class="math inline">\(f^*: { \mathcal P } B \to { \mathcal P } A\)</span> preserves the greatest element.<br/>
+To prove <span class="math inline">\(1)\)</span>, let <span class="math inline">\(B1\)</span> and <span class="math inline">\(B2\)</span> be subsets of <span class="math inline">\(B\)</span>.</p>
+<p>To prove <span class="math inline">\(2)\)</span>, let <span class="math inline">\(B1\)</span> and <span class="math inline">\(B2\)</span> be subsets of <span class="math inline">\(B\)</span>.</p>
+<p>To prove <span class="math inline">\(5)\)</span>, recall that the Boolean-least element of <span class="math inline">\({ \mathcal P } B\)</span> is the empty set <span class="math inline">\(\{\}\)</span> and the Boolean-least element of <span class="math inline">\({ \mathcal P } A\)</span> is the empty set <span class="math inline">\(\{\}\)</span>. Now, what is the image of <span class="math inline">\(\{\}\)</span> under <span class="math inline">\(f^*\)</span>? That is, what is the preimage <span class="math inline">\(f^*[\{\}]\)</span> of the empty set under the map <span class="math inline">\(f\)</span>? Well, recall the definition of preimage. If <span class="math inline">\(B1\)</span> is a subset of <span class="math inline">\(B\)</span>, then <span class="math inline">\(f^*[B1]\)</span> is defined as the set of all elements of <span class="math inline">\(A\)</span> that are mapped to an element of <span class="math inline">\(B1\)</span>. This means</p>
+<p><span class="math display">\[f^*[B1] \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt f[a] \in B1\}.\]</span></p>
+<p>Now, the empty set <span class="math inline">\(\{\}\)</span> is a subset of <span class="math inline">\(B\)</span>, so <span class="math inline">\(f^*[\{\}]\)</span> is defined as the set of all elements of <span class="math inline">\(A\)</span> that are mapped to an element of the empty set <span class="math inline">\(\{\}\)</span>. This means</p>
+<p><span class="math display">\[f^*[\{\}] \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt f[a] \in \{\}\}.\]</span></p>
+<p>But there’s something very wrong with the expression: <span class="math inline">\(f[a] \in \{\}\)</span>. Namely, <span class="math inline">\(f[a]\)</span> can’t be an element of <span class="math inline">\(\{\}\)</span> because <span class="math inline">\(\{\}\)</span> <span><em>has no elements</em></span>. So, there can’t be any element of <span class="math inline">\(A\)</span> that gets mapped (by <span class="math inline">\(f\)</span>) an element of <span class="math inline">\(\{\}\)</span>. This means that the set of all such elements is also empty. This shows that the <span><em>preimage</em></span> (under <span class="math inline">\(f\)</span>) of the empty set is also empty, meaning that the <span><em>image</em></span> (under <span class="math inline">\(f^*\)</span>) of the empty set is the empty set, meaning that <span class="math inline">\(f^*[\{\}]\)</span> is <span class="math inline">\(\{\}\)</span>. And this is the desired result: the preimage function <span class="math inline">\(f^*\)</span> maps to Boolean-least element of <span class="math inline">\({ \mathcal P } B\)</span> to the Boolean-least element of <span class="math inline">\({ \mathcal P } A\)</span>.</p>
+<p>To prove <span class="math inline">\(6)\)</span>, let <span class="math inline">\(B1\)</span> and <span class="math inline">\(B2\)</span> be subsets of <span class="math inline">\(B\)</span>.</p>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+</div> <!-- <div class='mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'> -->
+</div> <!-- <div class='mdl-grid article_container'> -->
+<a id="bottom"></a>
+<footer class="mdl-mini-footer mdl-color--blue">
+<div class="mdl-mini-footer--left-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="/" title="Home"><i class="material-icons">home</i></a>
+<!-- <a href='/#set_theory'      title='Set theory'      class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_set_theory.svg'/></a> -->
+<!-- <a href='/#analysis'        title='Analysis'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>gesture</i></a> -->
+<!-- <a href='/#algebra'         title='Algebra'         class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>ac_unit</i></a> -->
+<!-- <a href='/#topology'        title='Topology'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>all_inclusive</i></a> -->
+<!-- <a href='/#geometry'        title='Geometry'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_geometry.svg'/></a> -->
+<!-- <a href='/#category_theory' title='Category theory' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_category_theory.png'/></a> -->
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://www.youtube.com/c/mathisart" title="YouTube"><img class="drawer_icon" src="img/icon_youtube.svg"/></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://github.com/etale-cohomology" title="GitHub"><img class="drawer_icon" src="img/icon_github.svg"/></a>
+</div>
+<div class="mdl-mini-footer--right-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="https://github.com/etale-cohomology/mathisart-website" title="Source"><i class="material-icons">code</i></a>
+</div>
+</footer>
+</main>
+</div>
+</body>
+</html>

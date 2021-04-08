@@ -1,0 +1,168 @@
+% -------------------------------------------------------------------------------------------------
+\def \mathbb { \bf }
+
+\def \N {{ \mathbb N }}
+\def \Z {{ \mathbb Z }}
+\def \Q {{ \mathbb Q }}
+\def \R {{ \mathbb R }}
+\def \C {{ \mathbb C }}
+\def \H {{ \mathbb H }}
+
+
+\def \to      { \longrightarrow }
+\def \mapsto  { \longmapsto }
+
+\def \then    { ~ \Longrightarrow ~ }
+\def \iff     { ~ \Longleftrightarrow ~ }
+\def \and     { ~ \wedge ~ }
+\def \or      { ~ \vee ~ }
+
+\def \d {{~\rm d}}  % We prepend a space to the differential symbol `d`, for good measure!
+
+\def \IFF     {{\hskip4pt \sc iff \hskip2pt}}
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+{\bf Analysis} is the study of both the {\it very small} and the {\it very big}. Few areas of math are dominated by a single idea as much as analysis, all of which rests on one: the idea of a {\bf limit}. Obscure, unintuitive, and useful, limits underlie virtually all major definitions and theorems in analysis, so it's not possible to understand much of analysis without being comfortable around limits. Understanding limits, in turn, requires understanding {\bf functions}, because {\it limits are applied to functions}.
+
+{\bf Functions} can be thought of as {\it dual streams of numbers}, and they generalize the idea of a {\bf number} by allowing us to consider {\it many numbers at once}, instead of just one. A function is made of 2 streams of numbers. One stream is called the {\bf domain}, and the other stream is called the {\bf codomain}. A function not only provides the data for these 2 streams, but it also provides a {\it strong link} between them. Like numbers, functions can be added, subtracted, multiplied, divided, and factored: they form {\it arithmetic} called {\bf fields} and {\bf rings}. Functions also form {\it topological} objects called {\bf sheaves}. In order to fully specify a function, one needs 3 pieces of data: {\bf 1)} a domain, {\bf 2)} a codomain, and {\bf 3)} a "link" between the two.
+
+3 big ideas in analysis (all based on limits) are:
+
+{\bf 1)} {\bf convergence} \par
+{\bf 2)} {\bf differentiation}, and \par
+{\bf 3)} {\bf integration}.
+
+{\bf Convergence} is a generalization of {\bf equality} that allows us to consider to be {\bf equal} things that weren't considered equal before. {\bf Equality} is an idea that applies to numbers (because numbers {\it can} be said to be equal or not equal), but {\bf convergence} is an idea that doesn't apply to numbers (because numbers {\it cannot} be said to converge or not converge); rather, it warrants a {\bf generalization} of numbers. {\bf Functions} are such a generalization. Convergence, then, is a generalization of equality that applies to functions, and it {\it allows us to say that a function attains a certain value even if the function never actually attains that value}.
+
+{\bf Differentiation} is a tool to analyze the {\bf local} behavior of functions. {\bf Functions} are inherently {\bf global} objects, and a function considers all of its values at all points, at the same time. However, we can also "localize" a function by considering its behavior {\bf at} a single point, or {\bf close to} a single point. Many theorems of calculus relate the local behavior of functions to their global behavior; one example is the {\bf mean value theorem}, which relates the {\it"local" derivative} of a function (called simply the {\bf derivative}) to its {\it"global" derivative} (known as the {\bf mean}).
+
+{\bf Integration} is a tool to analyze the {\bf global} behavior of functions. It considers all the "local contributions" of a function and adds them up to produce a global picture.
+
+These 3 big ideas rest on the notion of {\bf being close to} something. It turns out that {\it being close to} something is an idea that's not that easy to formulate rigorously. One way is to use {\bf limits}. Another way is to use {\bf infinitesimals}. We'll focus on {\it limits} because the rigorous formulation of limits is much older and less technical than the rigorous formulation of infinitesimals. The downside is that {\it limits} are hard to work with and less intuitive than infinitesimals. The upside is that {\it limits} are on the real line ${\bf R}$ (and, more generally, on its $n$-dimensional flavors ${\bf R}^n$) can be {\bf abstracted} to a formulation that disregards many complicated yet non-essential details while still allowing us to say precisely what we mean by {\bf close}: this uses {\bf topology} and {\bf open sets}.
+
+This is good news: anything we define with $\epsilon$-$\delta$ limits we can re-formulate with open sets (convergence, continuity, differentiation, integration, etc.), and the $\epsilon$-$\delta$ limits can be recovered from open-set formulation, as a special case. Even better, $\epsilon$-$\delta$ limits can only be used in objects where there's a notion of {\bf distance} (these are called {\bf metric spaces}), while open sets make sense in every {\bf topological space}. Every metric space is a topological space, but not every topological space is a metric space, so, by using open sets, we not only gain simplicity, but generality.
+
+Here's a preview of {\it why} this is possible. The $\epsilon$-$\delta$ letters in "$\epsilon$-$\delta$ limit" are {\it positive} real numbers that refer to the radii of certain {\bf open balls} (don't worry if you don't know what these are). The key insight is that the precisely value of these radii is not important, and neither is the fact that the open balls are balls. So we can forget about the {\it size} of the balls (which is a positive {\it real number}) and the {\it shape} of the balls (which is an $n$-dimensional {\it ball}), and focus only of the fact that they're {\it open}.
+
+{\it Abstracting away unimportant details} is a common theme in mathematics, and it can be used to vastly simplify otherwise unnecessarily cumbersome constructions and to generalize results to a wider class of spaces.
+
+[...]
+
+{\bf Definition}. A function $f:A \subseteq R \longrightarrow R$ {\bf converges to} $L \in {\rm cod}[f]$ {\bf at} $a \in {\rm dom}[f]$ IFF for every $\epsilon \in R^+$ there exists a $\delta \in R^+$ satisfying
+
+$$
+\forall x: d[x,a] < \delta \Longrightarrow d[f[x], L] < \epsilon
+$$
+
+Now we can use {\bf convergence} to define {\bf continuity}.
+
+{\bf Definition}. A function $f:A \subseteq R \longrightarrow R$ is {\bf continuous} {\bf at} $a \in {\rm dom}[f]$ IFF it {\bf converges to} $f[a]$ {\bf at} $a$.
+
+If we expand the meaning of convergence to its $\epsilon$-$\delta$ definition, then the previous definition looks like:
+
+{\bf Definition}. A function $f:A \subseteq R \longrightarrow R$ is {\bf continuous} {\bf at} $a \in {\rm dom}[f]$ IFF for every $\epsilon \in R$ there exists a $\delta \in R$ satisfying
+
+$$
+\forall x: d[x,a] < \delta \Longrightarrow d[f[x], f[a]] < \epsilon
+$$
+
+
+
+[...]
+
+{\it Example}. Consider the function
+
+$$\eqalign{
+  f : R^\times & \longrightarrow R \cr
+  x            & \mapsto {\sin x \over x} \cr
+}$$
+
+which, by definition, has no value at $0$. Yet {\bf close} to $0$, the value of $f$ is {\bf close} to $1$. The function $f$ does {\it not} attain the value $1$ {\it anywhere}. So, even though the function $f$ never {\bf equals} $1$, the function $f$ does {\bf converge to} $1$. This example illustrates how {\bf convergence} generalizes {\bf equality}.
+
+The function $f$ is {\bf continuous everywhere} (in its domain), but not in all of $R$ (because it's not defined in all of $R$). We can extend the function $f$ to all of $R$ by setting its value at $0$ to be any real number we like, say $3$. And there's a particular choice that will make the extended function continuous and differentiable at $0$: the real number $1$. Why? Because, {\bf close to} $0$ the function $f$ is {\bf close to} $1$; using our old language, $f$ {\bf converges to} $1$ {\bf at} $0$. 
+
+
+{\it Example}. Consider the function
+
+$$\eqalign{
+  f : R^\times & \longrightarrow R \cr
+  x            & \mapsto {1 \over x^2} \cr
+}$$
+
+
+which, by definition, has no value at $0$. The function $f$ is {\bf continuous everywhere} (in its domain), but not in all of $R$ (because it's not defined on all of $R$). We can extend the function $f$ to all of $R$ by setting its value at $0$ to be any real number we like, say $5$, but not in a way that preserves nice properties, like continuity of differentiability. No matter which real number we choose to be the value of $f$ at $0$, the extended function will be discontinuous at $0$.
+
+
+[...]
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+In the {\bf calculus} of {\bf real numbers} you can't say that the number $1/0$ is a real number, because it doesn't satisfy the properties of a real number. If you were to call the number $1/0$ an element of $R$, you'd break the math of the real numbers by introducing {\bf contradictions}. In a mathematical system with contradictions, it's impossible to distinguish between what is {\it true} and what is {\it not true}. But {\bf truth is the cornerstone of mathematics}, and the {\it goal} of mathematics is to {\bf discover more truths}. Without {\bf truth}, there's no mathematics!
+
+So, the real numbers don't have {\bf infinite numbers}; every real number is {\bf finite}! Does it mean we can't talk about infinity within the real numbers? Certainly, we can! The (classical) real numbers don't have {\bf infinitely small numbers}, either. Does this mean we can't talk about {\bf infinitesimals} within the real numbers? Certainly, we can! {\bf Calculus} studies both the {\bf infinitely big} and the {\bf infinitely small}, and, the real numbers, while not having elements that embody either of these ideas, can still be used to talk about them.
+
+The {\bf arithmetic} of the real numbers turns them into a {\bf field}. A field is an {\it arithmetic object} where we can add, subtract, multiply, divide. A field with {\it no infinitely big} and {\it no infinitely small elements} is called an {\bf Archimedean field}. So, the real numbers form an Archimedean field. A non-Archimedean field is a field with some infinitely big or some infinitely small elements. Non-Archimedean fields are routinely studied in many areas of math, notably algebra. And it's possible to build non-Archimedean fields out of Archimedean fields, or to extend Archimedean fields into non-Archimedean fields, so it's fair to say that, even if your field has no infinitesimals, infinitesimals may be lurking in the shadows, just around the corner. For example, the real numbers are an Archimedean field, but the real-valued rational functions on the real numbers (which we encounter early on in Calculus) are, surprisingly, a non-Archimedean field! Less surprisingly, the real numbers themselves can be extended into a non-Archimedean field, by enriching them with infinitesimals or infinitely big elements. The {\bf hyperreal numbers} are an example of this that includes both infinitesimals and infinitely big numbers; {\bf smooth infinitesimal analysis} is an example that includes only infinitesimals, and it considers lines to be made {\it not} of points, but of {\bf line segments of infinitesimal length}.
+
+How do we talk about the infinitely big and the infinitely small in the calculus of the {\it vanilla} real numbers, then, since they're Archimedean? People struggled with this question for a long time, and after centuries they came with an answer: a logical contraption known as a {\bf limit}. Limits are powerful, but complicated to work with. To {\it prove} something using the {\it definition of a limit} is usually a ton of work, but you can write all of Calculus with them: all the definitions, all the theorems. [...] Using infinitesimals, two real numbers can be said to be equal IFF they differ by an infinitesimal. Notice that this generalizes the original idea of equality of real numbers, because the number $0$ is an infinitesimal, too! If two real numbers differ by $0$, then they're equal under our old notion and they differ by the infinitesimal $0$. But now we're relaxing the idea of equality to include infinitesimals other than $0$. Using limits, two real numbers can be said to be equal iff their difference is smaller than any positive real number.
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+2 major areas of topology are {\bf set topology} and {\bf algebraic topology}.
+
+{\bf Set topology} (also called general topology or point-set topology) is the topology of sets, which is built on sets and set-theoretic operations: union, intersection, complement, powerset, and subset. A little bit of knowledge of these operations can help a lot in understanding topological proofs. To even {\it define} what a {\bf topology} is we need the idea of powerset, subset, union, and intersection.
+
+{\bf Algebraic topology} contains one of the most powerful ideas in all of math: cohomology.
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+Quotient spaces are some of the most common constructions in math. The integers Z are a quotient space based on the natural numbers. The rational numbers are a quotient space based on the integers. The real numbers are a quotient space based on the rational numbers. The complex numbers are a quotient space based on the real numbers.
+
+In topology, the circle is a quotient space of the real numbers R by the integers Z.
+
+In geometry, the projective plane $R^2$ is a quotient space of [...].
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+[on the Zariski topology sucking]... has too few open sets, which introduces technical difficulties. For example, developing cohomology for algebraic varieties over finite fields (like elliptic curves, of cryptographic fame) using the Zariski topology yields badly behaved cohomology groups, whereas, for instance, the {\bf singular cohomology} of topological spaces is super powerful and leads to amazing results like the Fundamental Theorem of Calculus and its generalizations, eg. Stokes' Theorem.
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+Lagrange's theorem is a natural consequence of the way cosets {\bf partition} a group, so, to understand why Lagrange's theorem is true, we must understand {\it how} this partition occurs, and {\it why}. The {\it how} is: cosets partition a group in chunks of {\it equal size}. The {\it why} is: if $g_1$ is not in in the coset $g_2 H$, then the cosets $g_1 H$ and $g_1 H$ are disjoint.
+
+% -------------------------------------------------------------------------------------------------
+\vskip8pt
+We can use the language of algebras to concisely define:
+
+{\bf Definition.} An {\bf ideal} is a {\bf non-unital subring} that is also an $R$-algebra.
+
+So, every ideal is a non-unital subring, but a non-unital subring need not be an ideal (sometimes some non-unital subrings won't be ideals, and sometimes all non-unital subrings will be ideals --which is the case for $\Z$).
+
+\vskip8pt
+Some terminology. {\it Ring} by itself means {\it unital ring}; {\it unital} means {\it definitely having a multiplicative identity}; {\it non-unital} means {\it not necessarily unital}; {\it strictly non-unital} means {\it not unital}, or equivalently {\it definitely not having a multiplicative identity}. {\it Subring} by itself means {\it unital subring}, which, by definition, requires the multiplicative identities to coincide; {\it non-unital subring} means that the multiplicative identities need not coincide or that the subset in question has no multiplicative identity at all. Recall that all rings (even strictly non-unital rings), by definition, have an {\it additive} identity! Example. An {\bf ideal} of a ring $R$ is a {\it non-unital} ring but not a {\it strictly non-unital ring} because an ideal $I$ usually doesn't have a multiplicative identity $1_I$, but sometimes does: $R$ itself is an ideal of $R$, and it certainly has a multiplicative identity, in this case $1_R$. There's more exotic examples where an ideal $I$ has a multiplicative identity $1_I$ which is different from the multiplicative identity $1_R$. For example, if $R$ is the ring $\Z / 10\Z$ of integers mod $10$ --which can be written $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$-- and $I$ is $2\Z / 10\Z$ --a subset of $Z / 10\Z$ which can be written $\{0, 2, 4, 6, 8\}$--, then $I$ is an ideal of $R$ with multiplicative identity $1_I = 6$, which is different from the multiplicative identity $1_R = 1$. So, $2\Z / 10\Z$ is a {\bf unital} ring by itself, but {\it not} a {\bf unital subring} of $\Z / 10\Z$ because the definition of unital subring requires the multiplicative identities to coincide! We can say that the ideal $2\Z / 10\Z$ of the ring $\Z / 10\Z$ is both a {\bf unital ring} and a {\bf non-unital subring} of $\Z / 10\Z$ but {\it not} a unital subring. This situation arises often for quotient rings $\Z / n\Z$ of the ring $\Z$ and it's related to the Chinese remainder theorem (of ring-theoretic and cryptographic interest). In the case of the ring $\Z / 10\Z$ and its ideal $2\Z / 10\Z$, it happens because the ring $\Z / 10\Z$ is {\bf ring-isomorphic} to the {\bf product ring} $\Z / 2\Z /times \Z / 5\Z$, by the Chinese remainder theorem, since $2 \in \Z$ and $5 \in \Z$ are {\bf coprime} in $\Z$. We omit the explanation due to laziness.
+
+Similarly, {\it commutative ring} means {\it definitely commutative}, whereas {\it non-commutative ring} means {\it not necessarily commutative}, and {\it strictly non-commutative} means {\it definitely not commutative}. Confusingly, the definition of {\it strictly non-commutative ring} allows for {\it some} elements (but {\it never all}) to commute! We omit examples due to laziness.
+
+\vskip8pt
+The commutative ring $\Z$ is the most important ring because there's a unique {\bf ring-morphism} from $\Z$ to any ring. More precisely: if $R$ is a ring, then there's a unique ring-morphism from $\Z$ to $R$. In the language of {\bf category theory}, this is what it means to be an {\bf initial object}; $\Z$ is the initial object in the {\bf category} of rings.
+
+\vskip8pt
+Don't be fooled by the simplicity of $\Z$; commutative rings in general can get very complicated, and to even talk about them we need to develop an {\it appropriate language}. I wouldn't even call $\Z$ simple: it still has many mysteries and unsolved problems, notably the Riemann hypothesis. Noncommutative rings can be even wilder, but also more powerful. In fact, there's a research effort by Fields Medalist Alain Connes to prove the Riemann hypothesis using noncommutative stuff.
+
+\vskip8pt
+(TITLE) The language of rings.
+
+As we've said, to talk about rings we need to learn the language of rings.
+
+\vskip8pt
+What if we want to express {\bf divisibility} by $5$ in terms of {\bf set membership}? What we can do is: construct the set of all elements that $5$ {\bf divides} (or equivalently the set of all elements that are {\bf divisible} by $5$, or equivalently the set of all elements for which $5$ is a {\bf divisor}, or equivalently the set of all {\bf multiples} of $5$), and call this set $5 \Z$. Now {\it testing for divisibility} by $5$ is the same as {\it testing for membership} to the set $5 \Z$: an integer $a \in \Z$ is divisible by $5 \in \Z$ IFF $a$ is an element of $5 \Z$. The set we called $5 \Z$ is also called the {\bf ideal} {\it generated} by $5$.
+
+Every statement about divisibility can be translated to a statement about ideals. Thinking about divisibility in terms ideals is very powerful.
+
+Recall that a {\bf ring} $R$ is just a {\it set of symbols} $\{0_R, 1_R, r_2, r_3, r_4, r_5, r_6, ...\}$ that satisfies the ring axioms, with the caveat that it may not be possible to write down each element of $R$ in an infinite list like this one (which is why we say $R$ is a {\it set} of symbols and {\it not} a {\it list} of symbols). One thing we can do is "think forward": if we have a ring $R$ given by the set $\{0, 1, r_2, r_3, r_4\}$, we can take each element $a$ in $R$ and build the ideal $aR$ generated by $a$; this yields a bunch of ideals $0_R R$, $1_R R$, $r_2 R$, $r_3 R$, $r_4 R$, maybe not all distinct. But we can also "think backwards" and, starting from $R$, ask: what are all the ideals of $R$? We may end up with the ideals $0_R R$, $1_R R$, $r_2 R$, $r_3 R$, $r_4 R$, and no more, but we may also find other ideals we didn't have before. If the first case --meaning, the set of all ideals of $R$ is the set $\{0_R R, 1_R R, r_2 R, r_3 R, r_4 R\}$--, we call $R$ a {\bf principal ideal ring}. In the second case, we don't.
+
+\vskip8pt
+Every ring is a $\Z$-algebra (in a unique way). This is a special case of the following fact: if $A$ and $R$ are (unital) rings, then every (unital) ring-morphism $\phi: R \longrightarrow A$ turns $A$ into an $R$-algebra. If $R$ is $\Z$, then every ring-morphism $\phi: \Z \longrightarrow A$ turns $A$ into a $\Z$-algebra, but there's only one such morphism, so there's only one $\Z$-algebra structure on $A$.
+
+% -------------------------------------------------------------------------------------------------
+\end

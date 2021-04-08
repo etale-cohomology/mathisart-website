@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mathIsART | Equivalence relations</title>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/> <!-- Key for responsiveness! -->
+<link href="img/favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Material+Icons" rel="stylesheet"/>
+<link href="material.blue-red.min.css" rel="stylesheet"/>
+<style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#00aaff; }  /* #2196f3 */
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .text_center{ text-align:center; }
+      .text_left{   text-align:left; }
+
+      .vcenter_parent{ display:flex; display:-webkit-flex; display:-moz-box-flex; display:-ms-flexbox; }  /*Just plain flexbox!*/
+      .vcenter_child{  align-self:center; -webkit-align-self:center; }
+
+      .red{    color:#ff8888; }
+      .green{  color:#77ee77; }
+      .blue{   color:#00aaff; }
+      .purple{ color:#8888ff; }
+
+      /*----------------------------------------------------------------------*/
+      .article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000000; }
+      /*.article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; -webkit-text-stroke-width:2px; -webkit-text-stroke-color:#000000; }*/
+      @media screen and (max-width:800px){ .article_headline{ font-size:32px; } }zz
+      #article_text{      padding-bottom:32px; }
+      .article_container{ width:99%; padding:0; width:100%; }
+
+      h1{ padding:16px; font-family:'Montserrat'; font-weight:bold; font-size:32px; }
+      p{  max-width:96%; font-size:14px; margin:0 auto; margin-bottom:16px; }  /*letter-spacing:-1px;*/
+
+      .minilogo{ width:48px; height:48px; background:#f8f8f8 url('img/mathisart_small.png') no-repeat center; background-size:50%; border-radius:24px; margin:0 16px 0 24px; }
+
+      body::before{ background:#080808; background-size:cover; background-attachment:fixed; content:''; will-change:transform; z-index:-1; left:0; right:0; bottom:0; top:0; position:fixed; }
+
+      .btn_back{ position:absolute; color:white; z-index:1; top:16px; left:16px; }
+      .btn_down{ position:absolute; color:white; z-index:1; top:16px; right:16px; }
+
+      .drawer_icon{ width:24px; height:24px; }
+
+      .navigation{ display:flex; display:-webkit-flex; display:-ms-flexbox; -webkit-flex-direction:row; -ms-flex-direction:row; flex-direction:row; -webkit-justify-content:space-between; -ms-flex-pack:justify; justify-content:space-between; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
+
+      /*----------------------------------------------------------------------*/
+      .mdl-layout__content{ padding-top:128px; position: relative; -webkit-overflow-scrolling: touch;  }
+      .mdl-mini-footer{     margin-top:128px; padding:32px; }
+
+      .mdl-card__media{           background:url('img/mathisart_big.png') no-repeat center; height:300px; cursor:pointer; }
+      .mdl-card__supporting-text{ padding:0; margin-top:16px; width:100%; }
+
+      /*----------------------------------------------------------------------*/
+      video{ width:960; height:540; margin:0 auto; display:block; max-width:95%; }
+      .video_controls{ width:960; margin:7px auto 28px auto; display:block; max-width:95%; }
+      .vid{ width:853px; max-width:100%; margin:0 auto; }
+    </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-63802655-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+<script src="material.min.js"></script>
+</head>
+<body>
+<div class="demo-blog--blogpost mdl-layout mdl-js-layout">
+<main class="mdl-layout__content">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_back" href="/#grid" role="button" title="Go back"><i class="material-icons">arrow_back</i></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_down" href="#bottom" role="button" title="Scroll to bottom"><i class="material-icons">arrow_downward</i></a>
+<div class="mdl-grid article_container">
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+<div class="mdl-card__media mdl-color--grey-900 vcenter_parent" style="background:url('img/mathisart_big.png') no-repeat center;">
+<h1 class="mdl-color-text--grey-50 article_headline vcenter_child" id="title_article">Equivalence relations, a tool for gluing stuff (with itself)</h1>
+</div>
+<div class="mdl-card__supporting-text vcenter_parent">
+<a href="/#grid"><div class="minilogo inline_block vconter_child"></div></a>
+<div class="text_left inline_block vcenter_child">
+<a href=""><h2 class="mdl-typography--body-2" id="category0">Algebra</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category1">Relations</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category2">/ Equivalence relations</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category3">/ Equivalence relations</h2></a>
+</div>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+    },
+    MathML: {
+      useMathMLspacing: true
+    },
+    'HTML-CSS': {
+      availableFonts: ["TeX"],
+      styles: {
+        ".MathJax_Display": {"text-align": "left", margin: "0em 0em"},
+        ".MathJax": {padding: '0px 0px 0px 0px', margin: '0px 0px 0px 0px', 'line-height': '0', 'font-size': '50%', color: '#616161'},
+      }
+    },
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css' integrity='sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb' crossorigin='anonymous'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js' integrity='sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h' crossorigin='anonymous'></script>
+-->
+<div class="hide">
+$
+\def \N {{ \mathbb N }}
+\def \Z {{ \mathbb Z }}
+\def \Q {{ \mathbb Q }}
+\def \R {{ \mathbb R }}
+\def \C {{ \mathbb C }}
+\def \H {{ \mathbb H }}
+\def \S {{ \mathbb S }}
+\def \P {{ \mathbb P }}
+
+\def \to      { \longrightarrow }
+\def \mapsto  { \longmapsto }
+
+\def \then    { ~ \Longrightarrow ~ }
+\def \iff     { ~ \Longleftrightarrow ~ }
+\def \and     { ~ \wedge ~ }
+\def \or      { ~ \vee ~ }
+
+\def \d {{~\rm d}}  % We prepend a space to the differential symbol `d`, for good measure!
+
+\def \IFF     {{\hskip4pt \sc iff \hskip2pt}}
+
+\def \Int   {{ \bf Int }}
+\def \Clo   {{ \bf Clo }}
+\def \Lim   {{ \bf Lim }}
+
+\def \Dom   {{ \bf Dom }}
+\def \Cod   {{ \bf Cod }}
+
+\def \Ker   {{ \bf Ker }}
+\def \Img   {{ \bf Img }}
+\def \coKer {{ \bf coKer }}
+\def \coImg {{ \bf coImg }}
+
+\def \rem {{ \hskip4pt \rm rem \hskip4pt }}
+\def \tab {{ \hskip16pt }}
+$
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text" id="article_text">
+<p>Despite being a difficult <a href="https://plato.stanford.edu/entries/identity-indiscernible/">philosophical</a> and <a href="http://www.math.harvard.edu/~mazur/preprints/when_is_one.pdf">mathematical</a> topic, <span><strong>equality</strong></span> is one of the most important ideas in mathematics. <span><strong>Equivalence relations</strong></span> <span><em>generalize</em></span> the idea of equality. Equivalence relations allow us to consider to be "equal" (or <span><em>equivalent</em></span>) things that weren’t equal before; they allow us to say two things are "equal" under a <span><em>particular lens</em></span> (or a particular point of view). Equivalence relations can be used to build <span><em>quotient objects</em></span>. Two elements are <span><strong>equal</strong></span> in the quotient object <span><em>iff</em></span> they’re <span><strong>equivalent</strong></span> under the equivalence relation. Quotient objects (like <a href="https://ncatlab.org/nlab/show/quotient+set">quotient sets</a>, <a href="https://en.wikipedia.org/wiki/Quotient_group">quotient groups</a>, <a href="https://en.wikipedia.org/wiki/Quotient_ring">quotient rings</a>, <a href="https://en.wikipedia.org/wiki/Quotient_space_(topology)">quotient topological spaces</a>, <a href="https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)">quotient vector spaces</a>, etc.) are ubiquitous in math.</p>
+<p>The first example of an equivalence relation is <span><em>equality</em></span> itself, denoted by the symbol <span class="math inline">\(=\)</span>.</p>
+<p>An <span><strong>equivalence relation</strong></span> on a set <span class="math inline">\(X\)</span> is a <a href="https://en.wikipedia.org/wiki/Binary_relation">binary relation</a> on the set <span class="math inline">\(X\)</span> that satisfies three properties.<br/>
+A <span><strong>binary relation</strong></span> relation on a set <span class="math inline">\(X\)</span> is just a subset of the Cartesian product <span class="math inline">\(X \times X\)</span> of <span class="math inline">\(X\)</span> with itself. Any subset of <span class="math inline">\(X \times X\)</span> will do!</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. A <a href="https://en.wikipedia.org/wiki/Binary_relation"><strong>binary relation</strong></a> on a <a href="https://en.wikipedia.org/wiki/Set_(mathematics)">set</a> <span class="math inline">\(X\)</span> is a <span><strong>subset</strong></span> of the 2-fold Cartesian product <span class="math inline">\(X \times X\)</span> of <span class="math inline">\(X\)</span> with itself.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Proposition</strong></span>. Let <span class="math inline">\(X\)</span> be a set. The <span><em>smallest</em></span> binary relation on <span class="math inline">\(X\)</span> is the empty set <span class="math inline">\(\{\}\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span><em>-Remark</em></span>. The empty set <span class="math inline">\(\{\}\)</span> is also denoted <span class="math inline">\(\emptyset\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. In <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ZF set theory</a>,</p>
+<p><span><em>the (unique) smallest subset</em></span> of an arbitrary set <span class="math inline">\(S\)</span> is the empty set <span class="math inline">\(\{\}\)</span> because:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(\{\}\)</span> is a subset of <span><em>every</em></span> set (reason: if <span class="math inline">\(S\)</span> is an arbitrary set, then every element of <span class="math inline">\(\{\}\)</span> is also an element of <span class="math inline">\(S\)</span>),<br/>
+<span class="math inline">\(\tab\tab2)\)</span> the size of <span class="math inline">\(\{\}\)</span> is exactly <span><em>zero</em></span> and there’s <span><em>no</em></span> set of size smaller than zero (reason: I don’t know), and<br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(\{\}\)</span> is the <span><em>unique</em></span> set of size zero (reason: two sets are equal <span><em>iff</em></span> they have exactly the same elements, and any two empty sets have the same elements, so they’re equal).</p>
+<p>Since <span class="math inline">\(X\)</span> is a set, then <span class="math inline">\(X \times X\)</span> is also a set (because Cartesian products exist). Since <span class="math inline">\(X \times X\)</span> is a set, then the unique smallest subset of <span class="math inline">\(X \times X\)</span> is the empty set <span class="math inline">\(\{\}\)</span>. But a subset of <span class="math inline">\(X \times X\)</span> is precisely a (binary) relation on <span class="math inline">\(X\)</span>, so <span class="math inline">\(\{\}\)</span> is the unique smallest (binary) relation on <span class="math inline">\(X\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Proposition</strong></span>. Let <span class="math inline">\(X\)</span> be a set. The <span><em>largest</em></span> binary relation on <span class="math inline">\(X\)</span> is the whole Cartesian product <span class="math inline">\(X \times X\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. In <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ZF set theory</a>,</p>
+<p><span><em>the (unique) largest subset</em></span> of an arbitrary set <span class="math inline">\(S\)</span> is <span class="math inline">\(S\)</span> itself because:<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(S\)</span> is a subset of itself (reason: if <span class="math inline">\(S\)</span> is an arbitrary set, then every element of <span class="math inline">\(S\)</span> is also an element of <span class="math inline">\(S\)</span>),<br/>
+<span class="math inline">\(\tab\tab2)\)</span> there’s <span><em>no</em></span> subset of <span class="math inline">\(S\)</span> that is larger than <span class="math inline">\(S\)</span> (reason: if there were a subset of <span class="math inline">\(S\)</span> larger than <span class="math inline">\(S\)</span>, then that set would have at least one element that <span class="math inline">\(S\)</span> doesn’t have, in which case it’d no longer be a subset of <span class="math inline">\(S\)</span>), and<br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(S\)</span> is the unique subset of <span class="math inline">\(S\)</span> with this property (reason: any other subset of <span class="math inline">\(S\)</span> either has the same element as <span class="math inline">\(S\)</span>, in which case it’s <span class="math inline">\(S\)</span> itself, or it has less elements, in which case it’s no longer the largest subset of <span class="math inline">\(S\)</span>).</p>
+<p>Since <span class="math inline">\(X\)</span> is a set, then <span class="math inline">\(X \times X\)</span> is also a set (because Cartesian products exist). Since <span class="math inline">\(X \times X\)</span> is a set, then the unique largest subset of <span class="math inline">\(X \times X\)</span> is <span class="math inline">\(X \times X\)</span> itself. But a subset of <span class="math inline">\(X \times X\)</span> is precisely a (binary) relation on <span class="math inline">\(X\)</span>, so <span class="math inline">\(\{\}\)</span> is the unique largest (binary) relation on <span class="math inline">\(X\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<h1 id="every-equivalence-relation-yields-a-partition-and-every-partition-yields-an-equivalence-relation">Every equivalence relation yields a partition, and every partition yields an equivalence relation</h1>
+<p><a href="https://en.wikipedia.org/wiki/Partition_of_a_set">Partitions</a> formalize the idea of "splitting" something into pieces that share nothing in common. We can think of a partition as taking a pizza and cutting it in slices, and then stuffing the slices into a bag. A bit more precisely, if the pizza itself is a <span><em>set</em></span>, then a slice of pizza is a <span><em>subset</em></span> of that set, and the bag is a <span><em>set</em></span>, and we can think of a partition of the pizza as cutting the pizza in slices and stuffing all the slices into a bag; now the <span><em>bag</em></span> is the <span><em>partition</em></span>. Every different way of slicing the pizza results in a different partition of the pizza. Notice that the slices are <span><em>not</em></span> the partition, but the partition is the <span><em>bag</em></span> containing the slices. The slices (by themselves) are just subsets of the pizza floating around in space, and it’s not until we collect the slices and stuff them into a bag that the slices form a <span><em>partition</em></span>, and the <span><em>bag</em></span> becomes that partition.</p>
+<p>A <span><strong>partition</strong></span> of a set <span class="math inline">\(X\)</span> is a certain subset of the power set <span class="math inline">\({ \mathcal P } X\)</span> of <span class="math inline">\(X\)</span>. This means a partition of <span class="math inline">\(X\)</span> is a certain <span class="math inline">\(2\)</span>-set over <span class="math inline">\(X\)</span>, or a certain set of subsets of <span class="math inline">\(X\)</span>, or a certain element of the power set of the power set of <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. If <span class="math inline">\(X\)</span> is the set <span class="math display">\[\{a, b, c\},\]</span> then the set <span class="math display">\[\{\{a, b\}, \{c\}\}\]</span> is a partition <span class="math inline">\(P\)</span> of <span class="math inline">\(X\)</span>. Notice that the partition <span class="math inline">\(P\)</span> is a <span><strong>subset</strong></span> of the power set <span class="math inline">\({ \mathcal P } X\)</span> of <span class="math inline">\(X\)</span>, because the power set <span class="math inline">\({ \mathcal P } X\)</span> is the set <span class="math display">\[\{\{\}, \{a\}, \{b\}, \{c\}, \{a, b\}, \{a, c\}, \{b, c\}, \{a, b, c\}\},\]</span> and every element of <span class="math inline">\(P\)</span> is an element of <span class="math inline">\({ \mathcal P } X\)</span>. The partition <span class="math inline">\(P\)</span> is also an <span><strong>element</strong></span> of <span class="math inline">\({ \mathcal P }{ \mathcal P } X\)</span>, which I won’t write down because it has <span class="math inline">\(256\)</span> elements. However, not every element of <span class="math inline">\({ \mathcal P }{ \mathcal P } X\)</span> is a partition of <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. Let <span class="math inline">\(X\)</span> be a set. The following are equivalent.<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(P\)</span> is a <span><strong>partition</strong></span> of <span class="math inline">\(X\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(P\)</span> is a set of (nonempty) subsets of <span class="math inline">\(X\)</span>, and any two elements <span class="math inline">\(A,B \in P\)</span> of <span class="math inline">\(P\)</span> either share everything in common or nothing in common<br/>
+<span class="math inline">\(\tab\tab3)\)</span> <span class="math inline">\(P\)</span> is a set of (nonempty) subsets of <span class="math inline">\(X\)</span>, and the union of <span class="math inline">\(P\)</span> is <span class="math inline">\(X\)</span> (meaning <span class="math inline">\(\cup P = X\)</span>, and the intersection of any two elements of <span class="math inline">\(P\)</span> is<br/>
+<span class="math inline">\(\tab\tab4)\)</span> <span class="math inline">\(P\)</span> is a <span><strong>cover</strong></span> of <span class="math inline">\(X\)</span> and the elements of <span class="math inline">\(P\)</span> are pairwise disjoint<br/>
+<span class="math inline">\(\tab\)</span> <span><strong>Theorem (the fundamental theorem of equivalence relations)</strong></span>. Let <span class="math inline">\(X\)</span> be a set.<br/>
+Every equivalence relation on <span class="math inline">\(X\)</span> yields a partition of <span class="math inline">\(X\)</span>, and every partition of <span class="math inline">\(X\)</span> yields an equivalence relation <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>.</p>
+<h1 id="congruence-modulo-n-is-an-equivalence-relation">Congruence modulo <span class="math inline">\(n\)</span> is an equivalence relation</h1>
+<p><span><strong>Congruence modulo <span class="math inline">\(n\)</span></strong></span> is a very important equivalence relation on the set <span class="math inline">\(\Z\)</span> of <a href="https://en.wikipedia.org/wiki/Integer">integers</a>; it yields the finite cyclic groups <span class="math inline">\((\Z / n\Z, +)\)</span> and the finite rings <span class="math inline">\((\Z / n\Z, +, \cdot)\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Theorem</strong></span>. Fix <span class="math inline">\(n \in \Z^+\)</span>. Congruence modulo <span class="math inline">\(n\)</span> is an <span><strong>equivalence relation</strong></span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. To show congruence modulo <span class="math inline">\(n\)</span> is an equivalence relation, we must show it <span><em>satisfies the properties</em></span> of an equivalence relation. So, we must show congruence modulo <span class="math inline">\(n\)</span> is 1) <span><strong>reflexive</strong></span>, 2) <span><strong>symmetric</strong></span>, and 3) <span><strong>transitive</strong></span>. More precisely, we must show that: congruence modulo <span class="math inline">\(1\)</span> is an equivalence relation, and congruence modulo <span class="math inline">\(2\)</span> is an equivalence relation, and congruence modulo <span class="math inline">\(3\)</span> is an equivalence relation, and so on, for every possible positive integer <span class="math inline">\(n \in \Z^+\)</span>.</p>
+<p>So, throughout the proof, let <span class="math inline">\(n \in \Z^+\)</span> be an arbitrary (but fixed) positive integer.</p>
+<p><span><strong>1)</strong></span> To show reflexivity, we must show that: any element of <span class="math inline">\(\Z\)</span> leaves the same remainder (when divided by <span class="math inline">\(n\)</span>) as itself (when divided by <span class="math inline">\(n\)</span>). In symbols, we must show that</p>
+<p><span class="math display">\[a \rem n \hskip8pt=\hskip8pt a \rem n\]</span></p>
+<p>is true for every integer <span class="math inline">\(a \in \Z\)</span>.</p>
+<p>For example, specifying <span class="math inline">\(a\)</span>, we must show that:<br/>
+if <span class="math inline">\(a\)</span> is set to <span class="math inline">\(-9\)</span>, then <span class="math inline">\(-9\)</span> leaves the same remainder (when divided by <span class="math inline">\(n\)</span>) as <span class="math inline">\(-9\)</span> (when divided by <span class="math inline">\(n\)</span>), and<br/>
+if <span class="math inline">\(a\)</span> is set to <span class="math inline">\(45\)</span>, then <span class="math inline">\(45\)</span> leaves the same remainder (when divided by <span class="math inline">\(n\)</span>) as <span class="math inline">\(45\)</span> (when divided by <span class="math inline">\(n\)</span>), and<br/>
+so on, for every integer <span class="math inline">\(a \in \Z\)</span> and every positive integer <span class="math inline">\(n \in \Z^+\)</span>.</p>
+<p>For example, specifying <span class="math inline">\(a\)</span> and <span class="math inline">\(n\)</span>, we must show that:<br/>
+if <span class="math inline">\(a\)</span> is set to <span class="math inline">\(-9\)</span> and <span class="math inline">\(n\)</span> is set to <span class="math inline">\(5\)</span>, then <span class="math inline">\(-9\)</span> leaves the same remainder (when divided by <span class="math inline">\(5\)</span>) as <span class="math inline">\(9\)</span> (when divided by <span class="math inline">\(5\)</span>), and<br/>
+if <span class="math inline">\(a\)</span> is set to <span class="math inline">\(45\)</span> and <span class="math inline">\(n\)</span> is set to <span class="math inline">\(7\)</span>, then <span class="math inline">\(45\)</span> leaves the same remainder (when divided by <span class="math inline">\(7\)</span>) as <span class="math inline">\(45\)</span> (when divided by <span class="math inline">\(7\)</span>), and<br/>
+so on, for every integer <span class="math inline">\(a \in \Z\)</span> and every positive integer <span class="math inline">\(n \in \Z^+\)</span>.</p>
+<p>This is true when <span class="math inline">\(a\)</span> is set to <span class="math inline">\(-9\)</span> and <span class="math inline">\(n\)</span> is set to <span class="math inline">\(5\)</span>, because <span class="math inline">\(-9\)</span> leaves a remainder of <span class="math inline">\(-1\)</span> (when divided by <span class="math inline">\(5\)</span>) and <span class="math inline">\(-9\)</span> leaves a remainder of <span class="math inline">\(-1\)</span> (when divided by <span class="math inline">\(5\)</span>), and these two remainders are the same (because <span class="math inline">\(-1\)</span> equals <span class="math inline">\(-1\)</span>).<br/>
+This is true when <span class="math inline">\(a\)</span> is set to <span class="math inline">\(45\)</span> and <span class="math inline">\(n\)</span> is set to <span class="math inline">\(7\)</span>, because <span class="math inline">\(45\)</span> leaves a remainder of <span class="math inline">\(3\)</span> (when divided by <span class="math inline">\(7\)</span>) and <span class="math inline">\(45\)</span> leaves a remainder of <span class="math inline">\(3\)</span> (when divided by <span class="math inline">\(7\)</span>), and these two remainders are the same (because <span class="math inline">\(3\)</span> equals <span class="math inline">\(3\)</span>).</p>
+<p>To prove the general case, let <span class="math inline">\(a \in \Z\)</span> be an arbitrary (but fixed) integer. Now <span class="math inline">\(a\)</span> divided by <span class="math inline">\(n\)</span> leaves some remainder, and this remainder is the same as the remainder that <span class="math inline">\(a\)</span> leaves when divided by <span class="math inline">\(n\)</span>. This shows <span class="math inline">\(a\)</span> is congruent to itself modulo <span class="math inline">\(n\)</span>, and so congruence modulo <span class="math inline">\(n\)</span> is a <span><strong>reflexive</strong></span> relation.</p>
+<p>But we have to be careful, because this doesn’t mean that every integer leaves the same remainder as every other integer when divided by any integer. Rather, it means that, if we <span><em>fix</em></span> an arbitrary positive integer <span class="math inline">\(n \in \Z^+\)</span> and we <span><em>fix</em></span> an arbitrary integer <span class="math inline">\(a \in \Z\)</span>, then it is indeed true that</p>
+<p><span class="math display">\[a \rem n \hskip8pt = \hskip8pt a \rem n.\]</span></p>
+<p><span><strong>2)</strong></span> To show symmetry, we must show that: if an element of <span class="math inline">\(\Z\)</span> leaves the same remainder (when divided by <span class="math inline">\(n\)</span>)</p>
+<h1 id="congruence-modulo-n-is-an-equivalence-relation-part-2">Congruence modulo <span class="math inline">\(n\)</span> is an equivalence relation, part 2</h1>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Theorem</strong></span>. Let <span class="math inline">\(a,b \in \Z\)</span> be integers, let <span class="math inline">\(n \in \Z^+\)</span> be a positive integer. The following are equivalent.<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(1)\)</span> <span class="math inline">\(a\)</span> is congruent to <span class="math inline">\(b\)</span> modulo <span class="math inline">\(n\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(2)\)</span> <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> leaves the same remainder when divided by <span class="math inline">\(n\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(3)\)</span> <span class="math inline">\(n\)</span> divides <span class="math inline">\(a-b\)</span><br/>
+<span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. The equivalence of <span class="math inline">\(1)\)</span> and <span class="math inline">\(2)\)</span> is simply the definition of congruence modulo <span class="math inline">\(n\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Corollary</strong></span>. Let <span class="math inline">\(a,b \in \Z\)</span> be integers, let <span class="math inline">\(n \in \Z^+\)</span> be a positive integer. The following are equivalent.<br/>
+<span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(1)\)</span> <span class="math inline">\(n\)</span> divides <span class="math inline">\(a-b\)</span> <span class="math inline">\(\tab\tab\)</span> <span class="math inline">\(2)\)</span> <span class="math inline">\(n\)</span> divides <span class="math inline">\(b-a\)</span></p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof 1</em></span>. The equivalence of <span class="math inline">\(1)\)</span> and <span class="math inline">\(2)\)</span> is simply the definition of congruence modulo <span class="math inline">\(n\)</span>. But "<span class="math inline">\(b\)</span> is congruent to <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span>" means that <span class="math inline">\(n\)</span> divides <span class="math inline">\(b-a\)</span> (by the previous theorem).<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Proof 2</em></span>. <span><em>(Only if)</em></span> Assume <span class="math inline">\(n\)</span> divides <span class="math inline">\(a-b\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(\square\)</span></p>
+<h1 id="prime-numbers-are-the-best-divisors-or-the-best-factors-in-the-ring-z-of-integers">Prime numbers are the best divisors (or the best factors) in the ring <span class="math inline">\(\Z\)</span> of integers</h1>
+<p><span><strong>Prime numbers</strong></span> are the <span><em>best</em></span> <span><strong>divisors</strong></span> (or the <span><em>best</em></span> <span><strong>factors</strong></span>) in the ring <span class="math inline">\(\Z\)</span> of integers. The <span><strong>prime divisors</strong></span> (or the <span><strong>prime factors</strong></span>) of an integer <span class="math inline">\(n \in \Z\)</span> are the <span><em>best</em></span> divisors (or the <span><em>best</em></span> factors) of <span class="math inline">\(n\)</span> in the sense that, if a prime number <span class="math inline">\(p\)</span> divides an integer <span class="math inline">\(n \in \Z\)</span>, then <span class="math inline">\(p\)</span> divides <span><em>some</em></span> factor in <span><em>every</em></span> factorization of <span class="math inline">\(n\)</span>.</p>
+<p><span><em>Example</em></span>. Take the integer <span class="math inline">\(20\)</span>, which is <span><em>not</em></span> prime. Now <span class="math inline">\(20\)</span> divides <span class="math inline">\(80\)</span>, meaning <span class="math inline">\(20 | 80\)</span>. Since <span class="math inline">\(20\)</span> is <span><em>not</em></span> prime, then <span><em>there exists</em></span> a factorization of <span class="math inline">\(80\)</span> where <span class="math inline">\(20\)</span> divides <span><em>no</em></span> factor.<br/>
+For instance, <span class="math inline">\(40 \cdot 2\)</span> is a factorization of <span class="math inline">\(80\)</span> (because <span class="math inline">\(40 \cdot 2\)</span> equals <span class="math inline">\(80\)</span>); now <span class="math inline">\(20\)</span> divides <span><em>some</em></span> factor in this factorization because <span class="math inline">\(20\)</span> divides <span class="math inline">\(40\)</span>.<br/>
+For instance, <span class="math inline">\(10 \cdot 8\)</span> is a factorization of <span class="math inline">\(80\)</span> (because <span class="math inline">\(10 \cdot 8\)</span> equals <span class="math inline">\(80\)</span>); now <span class="math inline">\(20\)</span> divides <span><em>no</em></span> factor in this factorization because <span class="math inline">\(20\)</span> doesn’t divide <span class="math inline">\(10\)</span> and <span class="math inline">\(20\)</span> doesn’t divide <span class="math inline">\(8\)</span>.<br/>
+And so we’ve found a factorization <span class="math inline">\(a \cdot b\)</span> of <span class="math inline">\(80\)</span> where <span class="math inline">\(20\)</span> divides no factor, because <span class="math inline">\(20\)</span> is <span><em>not</em></span> prime.<br/>
+In general, if an integer <span class="math inline">\(n \in \Z\)</span> is <span><em>not</em></span> prime and <span class="math inline">\(n\)</span> divides an integer <span class="math inline">\(c \in \Z\)</span>, then <span><em>there exists</em></span> some factorization <span class="math inline">\(a \cdot b\)</span> of <span class="math inline">\(c\)</span> (meaning <span class="math inline">\(a \cdot b\)</span> equals <span class="math inline">\(c\)</span>) where <span class="math inline">\(n\)</span> does <span><em>not</em></span> divide neither factor <span class="math inline">\(a\)</span> nor factor <span class="math inline">\(b\)</span> (even if <span class="math inline">\(n\)</span> <span><em>does</em></span> happen to divide <span><em>some</em></span> factors in <span><em>some</em></span> factorizations of <span class="math inline">\(c\)</span>).<br/>
+In other words, a <span><strong>non-prime</strong></span> integer <span class="math inline">\(n\)</span> can divide some factors in some factorizations some of the time, but it can’t divide some factors in all factorizations all of the time,</p>
+<p><span><em>Example</em></span>. Take the integer <span class="math inline">\(5\)</span>, which is prime. Now <span class="math inline">\(5\)</span> divides <span class="math inline">\(80\)</span>, meaning <span class="math inline">\(5 | 80\)</span>. Since <span class="math inline">\(5\)</span> is prime, then <span class="math inline">\(5\)</span> also divides <span><em>asome</em></span> factor in <span><em>every</em></span> factorization of <span class="math inline">\(80\)</span>.<br/>
+For instance, <span class="math inline">\(40 \cdot 2\)</span> is a factorization of <span class="math inline">\(80\)</span> (because <span class="math inline">\(40 \cdot 2\)</span> equals <span class="math inline">\(80\)</span>); now <span class="math inline">\(5\)</span> divides <span><em>some</em></span> factor in this factorization because <span class="math inline">\(5\)</span> divides <span class="math inline">\(40\)</span>.<br/>
+For instance, <span class="math inline">\(10 \cdot 8\)</span> is a factorization of <span class="math inline">\(80\)</span> (because <span class="math inline">\(10 \cdot 8\)</span> equals <span class="math inline">\(80\)</span>); now <span class="math inline">\(5\)</span> divides <span><em>no</em></span> factor in this factorization.<br/>
+And we can go on and find <span><em>every</em></span> factorization <span class="math inline">\(a \cdot b\)</span> of <span class="math inline">\(80\)</span>, but <span class="math inline">\(5\)</span> will always divide some factor in any factorization of <span class="math inline">\(80\)</span>, because <span class="math inline">\(5\)</span> is prime.<br/>
+In general, if integer <span class="math inline">\(p \in \Z\)</span> <span><em>is</em></span> prime and <span class="math inline">\(p\)</span> divides an integer <span class="math inline">\(c \in \Z\)</span>, then in <span><em>every</em></span> factorization <span class="math inline">\(a \cdot b\)</span> of <span class="math inline">\(c\)</span> (meaning <span class="math inline">\(a \cdot b\)</span> equals <span class="math inline">\(c\)</span>) we have that <span class="math inline">\(p\)</span> divides factor <span class="math inline">\(a\)</span> or factor <span class="math inline">\(b\)</span>.<br/>
+In other words, a <span><strong>prime</strong></span> integer <span class="math inline">\(p\)</span> can divide some factors in all factorizations all of the time, and it can divide all factors in all factorizations some of the time, but it can’t divide all factors in all factorizations all of the time.<br/>
+(There are special numbers which <span><em>can</em></span> divide everything all of the time; these are called <a href="https://en.wikipedia.org/wiki/Unit_(ring_theory)"><strong>units</strong></a>. The units in <span class="math inline">\(\Z\)</span> are <span class="math inline">\(1\)</span> and <span class="math inline">\(-1\)</span>).</p>
+<p>So, if a prime number divides an integer <span class="math inline">\(n\)</span>, then that prime number divides <span><em>some</em></span> factor in <span><em>every</em></span> factorization of <span class="math inline">\(n\)</span>. This is not to say that prime numbers are "magical" or "special" by accident, but by <span><em>design</em></span>. That is, prime numbers are not the best divisors of integers because they’re lucky, but because they’re <span><em>defined</em></span> be the best divisors of integers. (What <span><em>could</em></span> be seen as an accident, though, is the fact that prime numbers <span><em>exist</em></span>, because we can always define really powerful objects with really nice properties, but sometimes these objects will not exist and there’s nothing we can do about it.)</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. An integer <span class="math inline">\(p \in \Z\)</span> is <span><strong>prime</strong></span> <span><em>iff</em></span> it satisfies any of the following equivalent conditions:</p>
+<p><span class="math inline">\(\tab\tab\)</span> <span><strong>1)</strong></span> if <span class="math inline">\(p\)</span> divides a product <span class="math inline">\(a \cdot b\)</span>, then <span class="math inline">\(p\)</span> divides factor <span class="math inline">\(a\)</span> or factor <span class="math inline">\(b\)</span>, for any <span class="math inline">\(a,b \in \Z\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span><strong>2)</strong></span> if <span class="math inline">\(p | (a \cdot b)\)</span>, then <span class="math inline">\(p|a\)</span> or <span class="math inline">\(p|b\)</span>, for any <span class="math inline">\(a,b \in \Z\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span><strong>3)</strong></span> <span class="math inline">\(\forall a,b \in \Z \hskip4pt \langle p | (a \cdot b) \then p|a \text{ or } p|b \rangle\)</span><br/>
+<span class="math inline">\(\tab\tab\)</span> <span><strong>4)</strong></span><br/>
+<span class="math inline">\(\hskip8pt\)</span> <span class="math inline">\(\forall a,b \hskip4pt \langle\)</span><br/>
+<span class="math inline">\(\hskip8pt\)</span> <span class="math inline">\(\hskip8pt a,b \in \Z \then \langle\)</span><br/>
+<span class="math inline">\(\hskip8pt\)</span> <span class="math inline">\(\hskip32pt p | (a \cdot b) \then p|a \text{ or } p|b\)</span><br/>
+<span class="math inline">\(\hskip8pt\)</span> <span class="math inline">\(\hskip8pt \rangle\)</span><br/>
+<span class="math inline">\(\hskip8pt\)</span> <span class="math inline">\(\rangle\)</span></p>
+<p>The prime numbers in <span class="math inline">\(\Z\)</span> are generalized in <a href="https://en.wikipedia.org/wiki/Ring_theory">ring theory</a> to <a href="https://en.wikipedia.org/wiki/Prime_ideal">prime ideals</a>, and there’s lots to learn from a <a href="https://en.wikipedia.org/wiki/Commutative_ring">commutative ring</a> by studying its prime ideals.</p>
+<h1 id="the-integers-z-are-a-quotient-space-of-n-times-ntimes">The integers <span class="math inline">\(\Z\)</span> are a quotient space of <span class="math inline">\(\N \times \N^\times\)</span></h1>
+<p><span><strong>Theorem</strong></span>.</p>
+<p><span><em>Proof</em></span>.</p>
+<h1 id="the-rational-numbers-q-are-a-quotient-space-of-z-times-ztimes">The rational numbers <span class="math inline">\(\Q\)</span> are a quotient space of <span class="math inline">\(\Z \times \Z^\times\)</span></h1>
+<p><span><strong>Theorem</strong></span>.</p>
+<p><span><em>Proof</em></span>.</p>
+<p>This means the rational numbers <span class="math inline">\(\Q\)</span> can be constructed as a quotient space of the set <span class="math inline">\(\Z \times \Z^\times\)</span>. The rational numbers <span class="math inline">\(\Q\)</span> have a special relationship with the integers <span class="math inline">\(\Z\)</span>: <span class="math inline">\(\Q\)</span> is the <a href="https://en.wikipedia.org/wiki/Field_of_fractions">*field of fractions*</a> of <span class="math inline">\(\Z\)</span>. This means that <span class="math inline">\(\Q\)</span> is the smallest set we can possibly get if you want every element of <span class="math inline">\(\Z\)</span> to have a <span><em>multiplicative inverse</em></span>.</p>
+<p>Similarly, the real numbers <span class="math inline">\(\R\)</span> can be constructed as a quotient space of the <a href="https://en.wikipedia.org/wiki/Power_set">power set</a> <span class="math inline">\(\mathcal P \Q\)</span> of the rational numbers <span class="math inline">\(\Q\)</span>.</p>
+<p>In algebra, the <a href="https://en.wikipedia.org/wiki/Complex_number">complex numbers</a> <span class="math inline">\(\C\)</span> can be constructed as a quotient space of the set <span class="math inline">\(\R[x]\)</span>, which is the set of all polynomials (of one variable) with coefficients in <span class="math inline">\(\R\)</span>.</p>
+<p>In topology, the <a href="https://en.wikipedia.org/wiki/Circle">circle</a> <span class="math inline">\(\S_1\)</span> (aka. the <span class="math inline">\(1\)</span>-dimensional sphere) can be constructed as a quotient space of the real numbers <span class="math inline">\(\R\)</span>.</p>
+<h1 id="what-is-a-coset">What is a coset?</h1>
+<p>In <a href="https://en.wikipedia.org/wiki/Group_theory"><strong>group theory</strong></a>, <span><strong>cosets</strong></span> are some of the most important objects. A <span><strong>coset</strong></span> is a special <span><strong>subset</strong></span> of a group that <span><em>arises</em></span> from a <span><strong>subgroup</strong></span>. To every subgroup <span class="math inline">\(H\)</span> of a group <span class="math inline">\(G\)</span> we can associate <span><strong>the set of all cosets</strong></span> of <span class="math inline">\(H\)</span> in <span class="math inline">\(G\)</span>. We can think of the cosets of the subgroup <span class="math inline">\(H\)</span> as "logically attached" to <span class="math inline">\(H\)</span>. That is: every time you think of a particular group <span class="math inline">\(G\)</span>, we can immediately think of the subgroups of <span class="math inline">\(G\)</span>; and every time you think of a particular subgroup <span class="math inline">\(H\)</span>, we can immediately think of the cosets of <span class="math inline">\(H\)</span>.</p>
+<p>If you see the word <span><strong>coset</strong></span> in the wild, you need 3 pieces of data to specify the coset: <span class="math inline">\(1)\)</span> a <span><strong>group</strong></span> <span class="math inline">\(G\)</span>, a <span><strong>subgroup</strong></span> <span class="math inline">\(H\)</span>, and an <span><strong>element</strong></span> <span class="math inline">\(g\)</span> of <span class="math inline">\(G\)</span>. Then, the coset that these data specify is written as <span class="math inline">\(gH\)</span>. Every element <span class="math inline">\(g\)</span> of <span class="math inline">\(G\)</span> yields one coset <span class="math inline">\(gH\)</span>, but not all of these cosets will be different! If each element <span class="math inline">\(g\)</span> of <span class="math inline">\(G\)</span> were to generate a different coset <span class="math inline">\(gH\)</span>, then every subgroup <span class="math inline">\(H\)</span> would have as many cosets as <span class="math inline">\(G\)</span> has elements (one for each element of <span class="math inline">\(g\)</span>), but this is not (typically) the case.</p>
+<h1 id="example.-the-additive-cosets-of-3z-in-z">Example. The (additive) cosets of <span class="math inline">\(3\Z\)</span> in <span class="math inline">\(\Z\)</span></h1>
+<p>For <span class="math inline">\(G\)</span> take the additive group of integers <span class="math inline">\((\Z, +)\)</span>, for <span class="math inline">\(H \subseteq G\)</span> take the subgroup <span class="math inline">\(3\Z\)</span>. The subgroup <span class="math inline">\(3\Z\)</span> of <span class="math inline">\(\Z\)</span> is defined as</p>
+<p><span class="math display">\[3\Z \hskip8pt := \hskip8pt \{\ldots, -12, -9, -6, -3, 0, 3, 6, 9, 9, \ldots\}.\]</span></p>
+<p>It can also be written as</p>
+<p><span class="math display">\[3\Z \hskip8pt := \hskip8pt \{ 3n \in \Z \hskip4pt|\hskip4pt n \in \Z \},\]</span></p>
+<p>which reads "the set of all <span class="math inline">\(3n \in \Z\)</span>, as <span class="math inline">\(n\)</span> ranges over all elements of <span class="math inline">\(\Z\)</span>". The set <span class="math inline">\(3\Z\)</span> is just the set of all integer multiples of <span class="math inline">\(3 \in \Z\)</span>. Now, each element of <span class="math inline">\(\Z\)</span> yields a coset of <span class="math inline">\(3\Z\)</span> in <span class="math inline">\(\Z\)</span>. For instance:</p>
+<p>- the element <span class="math inline">\(1 \in \Z\)</span> yields the coset <span class="math inline">\(3\Z + 1\)</span>, which is defined as <span class="math inline">\(3\Z + 1 := \{\ldots, , \ldots\}\)</span></p>
+<p>- the element <span class="math inline">\(2 \in \Z\)</span> yields the coset <span class="math inline">\(3\Z + 2\)</span>, which is defined as <span class="math inline">\(3\Z + 2 := \{\ldots, , \ldots\}\)</span></p>
+<p>- the element <span class="math inline">\(3 \in \Z\)</span> yields the coset <span class="math inline">\(3\Z + 3\)</span>, which is defined as <span class="math inline">\(3\Z + 3 := \{\ldots, , \ldots\}\)</span></p>
+<p>- the element <span class="math inline">\(99 \in \Z\)</span> yields the coset <span class="math inline">\(3\Z + 99\)</span>, which is defined as <span class="math inline">\(3\Z + 99 := \{\ldots, , \ldots\}\)</span></p>
+<p>In symbols, we can denote <span><strong>the set of all cosets</strong></span> of a subgroup <span class="math inline">\(H\)</span> as <span class="math inline">\({\rm Cosets}[H]\)</span>, and we can write the set of all cosets of <span class="math inline">\(H\)</span> as</p>
+<p><span class="math display">\[{\rm Cosets}[H] := \{ gH\ |\ g \in G\}\]</span></p>
+<p>which reads "<span class="math inline">\({\rm Cosets}[H]\)</span> is <span><strong>defined</strong></span> as the set of all sets of the form <span class="math inline">\(gH\)</span>, as <span class="math inline">\(g\)</span> ranges over <span class="math inline">\(G\)</span>". We can also build the set of all cosets of all subgroups of <span class="math inline">\(G\)</span>, but let’s not get too carried away.</p>
+<h1 id="left-and-right-cosets">Left and right cosets</h1>
+<p>So far, we’ve ignored an important detail about cosets. If <span class="math inline">\(g \in G\)</span> is an element of <span class="math inline">\(G\)</span> and <span class="math inline">\(H \subseteq\)</span> is a subgroup of <span class="math inline">\(G\)</span>, then the coset <span class="math inline">\(gH\)</span> is not the same as the coset <span class="math inline">\(Hg\)</span>.</p>
+<p>These are the <span><strong>left cosets</strong></span> and the <span><strong>right cosets</strong></span>.</p>
+<h1 id="when-left-and-right-is-the-same">When left and right is the same</h1>
+<p>Sometimes <span class="math inline">\({\rm Cosets}[H]\)</span> will form a <span><strong>group</strong></span> under the operation it inherits from the parent group <span class="math inline">\(G\)</span>, in which case the group <span class="math inline">\({\rm Cosets}[H]\)</span> is written <span class="math inline">\(G / H\)</span>, which reads "<span class="math inline">\(G\)</span> modulo <span class="math inline">\(H\)</span>". The group <span class="math inline">\(G / H\)</span> is then called "the quotient group of <span class="math inline">\(G\)</span> by <span class="math inline">\(H\)</span>", or the "quotient group of <span class="math inline">\(G\)</span> modulo <span class="math inline">\(H\)</span>". Whether <span class="math inline">\({\rm Cosets}[H]\)</span> is a group or not hinges on a particular property that <span class="math inline">\(H\)</span> must satisfy.</p>
+<h1 id="three-lemmas">Three lemmas</h1>
+<p>So, how do we prove Lagrange’s theorem? We’ll be using a few technical lemmas.</p>
+<p>. Let <span class="math inline">\(G\)</span> be a group, let <span class="math inline">\(H \subseteq G\)</span> be a subgroup. The cosets of <span class="math inline">\(H\)</span> form a <span><strong>partition</strong></span> of <span class="math inline">\(G\)</span>.</p>
+<p>. Let <span class="math inline">\(G\)</span> be a group, let <span class="math inline">\(H \subseteq G\)</span> be a subgroup, let <span class="math inline">\(g \in G\)</span>. If <span class="math inline">\(g \notin H\)</span>, then <span class="math inline">\(H\)</span> is <span><strong>disjoint</strong></span> from the coset <span class="math inline">\(gH\)</span>.</p>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+</div> <!-- <div class='mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'> -->
+</div> <!-- <div class='mdl-grid article_container'> -->
+<a id="bottom"></a>
+<footer class="mdl-mini-footer mdl-color--blue">
+<div class="mdl-mini-footer--left-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="/" title="Home"><i class="material-icons">home</i></a>
+<!-- <a href='/#set_theory'      title='Set theory'      class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_set_theory.svg'/></a> -->
+<!-- <a href='/#analysis'        title='Analysis'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>gesture</i></a> -->
+<!-- <a href='/#algebra'         title='Algebra'         class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>ac_unit</i></a> -->
+<!-- <a href='/#topology'        title='Topology'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>all_inclusive</i></a> -->
+<!-- <a href='/#geometry'        title='Geometry'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_geometry.svg'/></a> -->
+<!-- <a href='/#category_theory' title='Category theory' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_category_theory.png'/></a> -->
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://www.youtube.com/c/mathisart" title="YouTube"><img class="drawer_icon" src="img/icon_youtube.svg"/></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://github.com/etale-cohomology" title="GitHub"><img class="drawer_icon" src="img/icon_github.svg"/></a>
+</div>
+<div class="mdl-mini-footer--right-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="https://github.com/etale-cohomology/mathisart-website" title="Source"><i class="material-icons">code</i></a>
+</div>
+</footer>
+</main>
+</div>
+</body>
+</html>

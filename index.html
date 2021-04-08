@@ -1,0 +1,620 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>mathIsART | Jesus is King of kings</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>  <!-- Key for responsiveness! -->
+
+    <link rel='icon' href='img/favicon.png'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,500,800|Cinzel|Jura|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+
+    <style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#2196f3; }
+
+      /*----------------------------------------------------------------------*/
+      /*--------------------- Change the drawer width! I can't figure out how to make these changes compatible with `mdl-layout--fixed-drawer` for the `mdl-layout`!*/
+      /*.mdl-layout__drawer{ border:none; width:360px; left:-360px; max-width:90%; }*/
+      /*.mdl-layout__drawer.is-visible{ left:0; }*/
+      .mdl-layout__drawer{ border:none; }
+
+      /*---------------------*/
+      .mdl-navigation__link{ font-weight:500!important; padding-left:16px!important; color:white!important;  }
+      .mdl-navigation__link:hover{ background:rgb(0%, 50%, 100%)!important; } /*menu hover!!*/
+
+      .drawer_header{ height:192px; background:url(img/mathisart_big.png) no-repeat center; background-size:150%; }
+      .drawer_icon{   width:24px; height:24px; }
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .outer_content{  width:1280px; max-width:100%; }
+      .text_center{    text-align:center; }
+      .flex{           display:flex; display:-webkit-box; display:-moz-box; display:-webkit-flex; flex-flow:row wrap; justify-content:center; }
+      .hcenter{        margin:0 auto; }
+      .vcenter_parent{ display:flex; }
+      .vcenter_child{  align-self:center; }
+
+      .montserrat{ font-family:'Montserrat'; }
+      .cinzel{     font-family:'Cinzel'; }
+      .jura{       font-family:'Jura'; }
+      .bold{       font-weight:800; }
+
+      .margin_top{    margin-top:64px; }
+      .margin_bottom{ margin-bottom:64px; }
+      .margin_left{   margin-left:8px }
+      .margin_right{  margin-right:8px }
+
+      .margin_bottom_256px{ margin-bottom:256px; }
+
+      .min_height_75vh{  min-height:75vh; }
+      .min_height_50vh{  min-height:50vh; }
+      .min_height_100vh{ min-height:100vh; }
+
+      /*----------------------------------------------------------------------*/
+      .title_mathisart{ font-family:'Cinzel';     font-size:8em; }
+      .title_main{      font-family:'Montserrat'; font-size:8em; font-weight:800; line-height:1; text-transform:uppercase; }
+      .subtitle_main{   font-family:'Jura';       font-size:3em; }
+      .text_main{       font-family:'Montserrat'; font-size:2em; line-height:1.5; font-weight:500; }
+
+      @media (orientation:portrait){  /*screen and (orientation:portrait)*/ /*(max-width:414px) or (orientation:portrait)*/
+        .title_mathisart,.title_main { font-size:4.0em; }
+        .subtitle_main{                font-size:1.8em; }
+        .text_main{                    font-size:1.4em; }
+      }
+
+      /*----------------------------------------------------------------------*/
+      .bg_mathisart{       background:url(img/bg_mathisart.jpg)       no-repeat center; background-size:cover; }
+      .bg_set_theory{      background:url(img/bg_set_theory.jpg)      no-repeat center; background-size:cover; }
+      .bg_analysis{        background:url(img/bg_analysis.jpg)        no-repeat center; background-size:cover; }
+      .bg_algebra{         background:url(img/bg_algebra.jpg)         no-repeat center; background-size:cover; }
+      .bg_topology{        background:url(img/bg_topology.jpg)        no-repeat center; background-size:cover; }
+      .bg_geometry{        background:url(img/bg_geometry.jpg)        no-repeat center; background-size:cover;}
+      .bg_category_theory{ background:url(img/bg_category_theory.jpg) no-repeat center; background-size:cover; }
+      .bg_overlay{         background:rgba(0, 0, 0, .5); }
+
+      /*----------------------------------------------------------------------*/
+      .grid_cells_center{ justify-content:center;  }
+
+      /*Split a 1920x1080 screen in 24:  for i in range(1, 24+1):  print('{:2}  {:4.0f}  {:4.0f}'.format(i, 1920 / 24*i, 1920 / 24*i * 9/16))*/
+      .cell_outer {                  position:relative; background-color:#000000; }
+      .cell_outer:hover .cell_img{   opacity:0.1; }
+      .cell_outer:hover .cell_inner{ opacity:1;   }
+
+      .cell_mid{   overflow:hidden; }
+      .cell_img{   width:100%; height:270px; object-fit:cover; }
+      .cell_inner{ margin:auto; opacity:0; position:absolute; top:0%; }
+      .cell_title{ font-family:'Montserrat'; color:#ffffff; margin:16px 16px 0 16px; font-size:22px; font-weight:800; }  /* CELL title! up-right-bot-left */
+      .cell_text{  font-family:'Montserrat'; color:#ffffff; margin:16px 16px 0 16px; font-size:14px; }                   /* CELL text!  up-right-bot-left */
+      .cell_white{ background:#ffffff; }
+
+      @media (orientation:portrait){
+        .cell_img{   height:240px; }
+        .cell_title{ font-size:16px; margin:12px 12px 0 12px; }  /*up-right-bot-left*/
+        .cell_text{  font-size:10px; margin:12px 12px 0 12px; }  /*up-right-bot-left*/
+      }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-63802655-1'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+  </head>
+
+  <body>
+
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header'>  <!-- 1. mdl-layout! -->  <!-- mdl-layout--fixed-drawer -->
+
+      <!-- ---------------------------------------------------------------------------------------------------- -->
+      <header class='mdl-layout__header mdl-color--grey-900'>  <!-- 1.1 mdl-layout__header! -->
+        <div class='mdl-layout__header-row'><a href='/' class='mdl-color-text--white mdl-typography--title montserrat'>mathIsART</a></div>
+      </header>
+
+      <!-- ---------------------------------------------------------------------------------------------------- -->
+      <div class='mdl-layout__drawer mdl-color--grey-900'>  <!-- 1.2 mdl-layout__drawer! -->
+        <a class='drawer_header' href='/'></a>
+
+        <nav class='mdl-navigation'>
+          <!-- <a href='/#set_theory'      class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_set_theory.svg'/>Set theory</a> -->
+          <!-- <a href='/#analysis'        class='mdl-navigation__link'><i   class='material-icons margin_right'>gesture</i>Analysis</a> -->
+          <!-- <a href='/#algebra'         class='mdl-navigation__link'><i   class='material-icons margin_right'>ac_unit</i>Algebra</a> -->
+          <!-- <a href='/#topology'        class='mdl-navigation__link'><i   class='material-icons margin_right'>all_inclusive</i>Topology</a> -->
+          <!-- <a href='/#geometry'        class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_geometry.svg'/>Geometry</a> -->
+          <!-- <a href='/#category_theory' class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_category_theory.png'/>Category theory</a> -->
+          <a href='https://www.youtube.com/c/mathisart' class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_youtube.svg'/></i>YouTube</a>
+          <a href='https://github.com/etale-cohomology' class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_github.svg'/>GitHub</a>
+          <hr>
+          <a href='https://github.com/etale-cohomology/mathisart-website' class='mdl-navigation__link'><i class='material-icons margin_right'>code</i>Source</a>
+        </nav>
+      </div>
+
+      <!-- ---------------------------------------------------------------------------------------------------- -->
+      <main class='mdl-layout__content mdl-color--grey-100'> <!-- 1.3 mdl-layout__content! -->
+
+        <!-- ---------------------------------------------------------------------- -->
+        <div class='min_height_100vh bg_mathisart vcenter_parent'>
+          <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+            <h1 class='title_mathisart'>mathIsART</h1>
+            <h2 class='subtitle_main'>Jesus is King of kings</h2>
+            <a href='#love' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Get started</a>
+          </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------------- -->
+        <a id='love'></a>
+        <div class='min_height_100vh mdl-color--blue vcenter_parent'>
+          <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+            <h1 class='title_main'>As I have loved you<br>also ye<br>love one another</h1>
+            <h2 class='subtitle_main'>John 13:34</h2>
+          </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------------- -->
+        <a id='grid'></a>
+        <div id='div_grid' class='mdl-grid mdl-grid--no-spacing grid_cells_center'>  <!-- margin_bottom_256px -->
+
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img001c_vacunas_de_arn_adn_ficha_tecnica.png'>
+              <div class='cell_mid'>
+                <img src='img001c_vacunas_de_arn_adn_ficha_tecnica.png' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Vacunas de ARN/ADN: Ficha Técnica</div>
+                  <div class='cell_text'> Las vacunas clásicas hacen <b>daño</b> a millones de personas cada año. Pero las <b>vacunas de ARN/ADN</b> son muchísimo peor: al insertar <b>material genético</b> en las células y forzarlas a expresar <b>genes sintéticos</b> (<b>transfeccion</b>/<b>transducción</b>), <b>convierten a los seres humanos en organismos transgénicos</b>. De estas vacunas surgen los <b>zombies</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img001e_vacunas_la_abominacion_en_el_templo_de_Dios.png'>
+              <div class='cell_mid'>
+                <img src='img001e_vacunas_la_abominacion_en_el_templo_de_Dios.png' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>La Abominación Desoladora</div>
+                  <div class='cell_text'> Classical vaccines <b>harm</b> millions every year. But <b>ARN/DNA vaccines</b> are far worse: by inserting <b>genetic material</b> into cells and forcing them to express <b>synthetic genes</b> (<b>transfection</b>/<b>transduction</b>), they turn <b>human beings into transgenic organisms</b>. These vaccines are where the <b>undead</b> come from.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img0020_esta_vacuna_los_van_a_matar_masters_voice.png'>
+              <div class='cell_mid'>
+                <img src='img0020_esta_vacuna_los_van_a_matar_masters_voice.png' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Esta <b>vacuna</b> los va a <b>matar</b></div>
+                  <div class='cell_text'> Para más profecías, visita el blog <b>The Master's Voice</b>.<br><br>Blog: https://the-masters-voice.com/<br>YouTube: https://www.youtube.com/channel/UCbcV-IwTyG5WjMdWN6mlFiw</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img0021_this_vaccine_will_kill_them_masters_voice.png'>
+              <div class='cell_mid'>
+                <img src='img0021_this_vaccine_will_kill_them_masters_voice.png' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>This <b>vaccine</b> will <b>kill</b> them</div>
+                  <div class='cell_text'> For more prophecies, visit the <b>The Master's Voice blog</b>.<br><br>Blog: https://the-masters-voice.com/<br>YouTube: https://www.youtube.com/channel/UCbcV-IwTyG5WjMdWN6mlFiw</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' el_templo_de_Dios'>
+              <div class='cell_mid'>
+                <img src='img/thumbad_el_templo_de_Dios.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>El Templo de Dios</div>
+                  <div class='cell_text'> Escrito está que el <b>Hijo de Perdición</b> <i>"se sienta en <b>el templo de Dios</b> como Dios, haciéndose pasar por Dios"</i> [2 Tesalonicenses 2]. <i>Qué</i> quiere decir esto?</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' doc0007_satanism_exposed_in_america_today.pdf'>
+              <div class='cell_mid'>
+                <img src='img/thumbaa_illuminati_usd.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Satanism Exposed in America Today, by Pamela Rae Schuffert</div>
+                  <div class='cell_text'> The Devil, aka. Lucifer, is the prince of this world. He has given power and authority [Revelation 13] to the rulers of the Earth, who worship him. How is Lucifer worshipped, you ask? With blood: human sacrifice, torture, rape. And the elite are not the only ones doing it.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' doc0009_westcott_and_hort_occultists_or_christians_you_decide.pdf'>
+              <div class='cell_mid'>
+                <img src='img/thumbab_nestle-aland.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Westcott & Hort: Occultists or Christians?</div>
+                  <div class='cell_text'> <b>Revelation 22</b> gives grave warnings against adding or subtracting from the <b>Word of God</b>. And yet this is <i>precisely</i> what a couple of occultists in the 19th century, <b>Westcott</b> and <b>Hort</b>, set out to do. The result was a <i>NEW</i> <b>Greek New Testament</b>, whose modern incarnation is called <b>Nestle-Aland/USB</b>. Now, <i>almost all</i> <b>modern Bible versions</b> have been corrupted with Luciferian ideas (notably: the <b>NIV</b> Bible and the <b>Vatican</b>'s official Bible).</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' doc000a_covid-19_james_perloff.pdf'>
+              <div class='cell_mid'>
+                <img src='img/thumbac_covid-19_perloff.png' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>COVID-19 and the Agendas to Come, Red-Pilled, by James Perloff</div>
+                  <div class='cell_text'> The world is headed towards the dystopia prophesied in <b>Revelation 13</b> (a mix between <b>1984</b> and <b>Brave New World</b>), for which <b>COVID-19</b> serves as stepping stone. In his book <b>COVID-19 and the Agendas to Come, Red-Pilled</b>, journalist and author <b>James Perloff</b> does a well-sourced deep dive into <b>COVID-19</b>: the lockdowns, the fear, the origin, the purpose, the future. After selling 3500+ copies, the book was <b>censored</b> by <b>Amazon</b>. <br><br>Support <b>James Perloff</b> by buying a hard copy of his book at <b>https://jamesperloff.net/order-covid-19-book</b> or by donating at <b>https://jamesperloff.net/donations/</b>.</p></div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img001a_mask_of_the_beast_covid_coronavirus_slavery.jpg'>
+              <div class='cell_mid'>
+                <img src='img001a_mask_of_the_beast_covid_coronavirus_slavery.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Masks Don't Work</div>
+                  <div class='cell_text'> COVID-19 is a hoax perpetrated on a public that insists on trusting the Luciferians that run the world. Masks don't protect against the virus, but they weaken the immune system and harm the brain. And the New World Order, described in Revelation 13, also known as the Beast System, is coming to enslave humanity.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img001b_mascara_de_la_bestia_covid_coronavirus_esclavitud.jpg'>
+              <div class='cell_mid'>
+                <img src='img001b_mascara_de_la_bestia_covid_coronavirus_esclavitud.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Las Máscaras No Funcionan</div>
+                  <div class='cell_text'> COVID-19 es una estafa perpetrada contra un público que insiste en confiar en los Luciferinos que gobiernan el mundo. Las mascarillas no protegen contra el virus, pero debilitan el sistema inmunológico y dañan el cerebro. Y el Nuevo Orden Mundial, descrito en Apocalipsis 13, también conocido como el Sistema de la Bestia, viene a esclavizar a la humanidad.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' vid0000_plandemic'>
+              <div class='cell_mid'>
+                <img src='img/thumba4_plandemic.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Plandemic</div>
+                  <div class='cell_text'> The medical & scientific communities have been usurped by <i>dark forces</i>... dark forces working for the prince/<i>god</i> of this world [1 John 5:19, John 16:11, 2 Corinthians 4:4, Matthew 4:8-10, Luke 4:5-8]. And soon no one will be able to buy or sell without the <b>Mark of Vaccination</b> [Revelation 13-14]. <br><br>Here, <b>Judy Mikovits</b> begins to expose the <b>2020 plandemic</b>. <br><br>But this is only the tip of the iceberg.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' doc0002_mark_of_the_beast_quantum_dot_microneedle_certificate_of_vaccination.pdf'>
+              <div class='cell_mid'>
+                <img src='img0008_mark_of_the_beast_quantum_dot_microneedle_certificate_of_vaccination.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Mark of the Beast technology: Quantum dot microneedle certificate of vaccination</div>
+                  <div class='cell_text'> Vaccines destroy millions of lives every year. Now, the Luciferian elite wants <b>all</b>, small and great, rich and poor, free and bond, to receive a <b>Mark of vaccination</b>. Their method of choice? <b>Quantum dots</b> & <b>microneedles</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' doc0001_mark_of_the_beast_snake_fang-inspired_microneedle_vaccine.pdf'>
+              <div class='cell_mid'>
+                <img src='img0006_mark_of_the_beast_snake_fang-inspired_microneedle_vaccine.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Mark of the Beast technology: Snake fang-inspired microneedle vaccine delivery system</div>
+                  <div class='cell_text'> Vaccines destroy millions of lives every year. Now, the Luciferian elite wants <b>all</b>, small and great, rich and poor, free and bond, to receive a <b>DNA-altering vaccine</b>. Their delivery method? The <b>microneedle array patch</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto.pdf'>
+              <div class='cell_mid'>
+                <img src='img0011_chick_tracts_the_crusaders_alberto.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Alberto: ex-Jesuit Priest Testimony (1-8)</div>
+                  <div class='cell_text'> In his testimony, Alberto Rivera, a former <b>Jesuit priest</b>, reveals the inner workings of the secretive <b>Jesuits</b>, their true agenda, and the powers that they serve.<br><br>Support <b>Chick Publications</b> at <b>chick.com</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto1.pdf'>
+              <div class='cell_mid'>
+                <img src='img0011_chick_tracts_the_crusaders_alberto.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Alberto, Alberto Series Part 1 (The Crusaders Book 12)</div>
+                  <div class='cell_text'> As a <b>Jesuit</b>, Alberto helped destroy churches and ministries. But as he read <b>the Scriptures</b>, he saw that <b>Catholicism couldn't save</b>. This is the emotional story of a Jesuit priest who left the Roman Catholic Church and found <b>salvation through faith in Jesus Christ alone</b>. He became a hunted man, because he knew the carefully guarded secrets of <b>the Vatican</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto2.pdf'>
+              <div class='cell_mid'>
+                <img src='img0012_chick_tracts_the_crusaders_double-cross.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Double-Cross, Alberto Series Part 2 (The Crusaders Book 13)</div>
+                  <div class='cell_text'> After <b>Jesuit</b> priest <b>Alberto Rivera</b> found <b>Christ</b> by <b>faith alone</b> (not faith in his Church) he was a hunted man. No man can leave the <b>Jesuit</b> order alive! This is part 2 of his personal story. He reveals how the Jesuits <b>infiltrate Protestant organizations</b> and warns of "<i>false brethren</i>" in our midst. Learn why he was placed on a death list, read the <b>incredible oath</b> he had to take as a Jesuit, and see why the <b>Ecumenical Movement</b> will lead to the ultimate <b>Inquisition</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto3.pdf'>
+              <div class='cell_mid'>
+                <img src='img0013_chick_tracts_the_crusaders_the_godfathers.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The Godfathers, Alberto Series Part 3 (The Crusaders Book 14)</div>
+                  <div class='cell_text'> Here's how the <b>Roman Catholic Church</b>, as the <b>Mother of Abominations</b> (Rev. 17), caused many wars. Was <b>the Vatican</b> responsible for <b>World Wars</b> I & II? Why did Cardinal Pacelli (later to become <b>Pope Pius VII</b>) make a special treaty with <b>Adolf Hitler</b>?</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto4.pdf'>
+              <div class='cell_mid'>
+                <img src='img0014_chick_tracts_the_crusaders_the_force.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The Force, Alberto Series Part 4 (The Crusaders Book 15)</div>
+                  <div class='cell_text'> Movies/TV have conditioned people to believe that a <b>Catholic priest</b> is required to <b>exorcise demons</b> who have taken control of a person. Is this true, or is it a scheme by Satan to make the people rely more and more on their priest for protection and cost them their souls? Learn how <b>the Vatican</b> is using its <b>occult</b> force to deceive hundreds of millions. It's the <b>habitation of devils</b> described in Rev. 18:2.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto5.pdf'>
+              <div class='cell_mid'>
+                <img src='img0015_chick_tracts_the_crusaders_four_horsemen.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Four Horsemen, Alberto Series Part 5 (The Crusaders Book 16)</div>
+                  <div class='cell_text'> Learn how <b>the papacy</b> fulfills Bible prophecies of the <b>Antichrist</b>. Who are the <b>Four Horsemen</b> of <b>Revelation</b>? Who did Martin Luther and other Reformers insist was the <b>Antichrist</b>? See the chart containing the front organizations through which the <b>Jesuit</b> order seeks to dominate the world economy for the <b>Antichrist</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto6.pdf'>
+              <div class='cell_mid'>
+                <img src='img0016_chick_tracts_the_crusaders_the_prophet.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The Prophet, Alberto Series Part 6 (The Crusaders Book 17)</div>
+                  <div class='cell_text'> Learn how <b>the papacy</b> helped start <b>Islam</b>, only to have this new daughter rebel against her. You'll understand the Arab's place in Bible prophecy. <b>Muslims</b> have been saved by reading this book. See how <b>Rome</b> guided the development of <b>Islam</b>, only to be double-crossed later. Learn how Antichrist's <b>One World Church</b> is forming!</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto7.pdf'>
+              <div class='cell_mid'>
+                <img src='img0017_chick_tracts_the_crusaders_jesuits.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Jesuits, Alberto Series Part 7 (The Crusaders Book 20)</div>
+                  <div class='cell_text'> Who knows more about the <b>Jesuits</b> than the <b>Jesuits</b> themselves? From their own writings, we'll learn that the Jesuits' real goal is to <b>destroy</b> true Christians and make the world <b>submit to the Pope</b>, the successor of the Roman Emperor. So <b>Jesus</b> commanded, "<i>Come out of her, my people, that ye be not partakers of her sins, and that ye receive not of her plagues</i>" (Revelation 18:4).</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' alberto8.pdf'>
+              <div class='cell_mid'>
+                <img src='img0018_chick_tracts_the_crusaders_the_big_betrayal.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The Big Betrayal, Alberto Series Part 8</div>
+                  <div class='cell_text'> The true story of <b>Charles Chiniquy</b>, a former <b>Roman Catholic</b> priest. Chiniquy also reveals how <b>Abraham Lincoln</b>'s legal assistance against the <b>Jesuits</b> set him up for his murder. Originally published in book form as <b>50 Years in the Church of Rome</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img000c_baphomet_fauci_satans_seat.jpg'>
+              <div class='cell_mid'>
+                <img src='img/thumba9_baphomet_fauci_satans_seat.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>I know thy works, and where thou dwellest, even where Satan's seat is (Revelation 2:13)</div>
+                  <div class='cell_text'> <b>Jesuit</b>-trained <b>Anthocy Fauci</b> funded <b>Coronavirus bioweapon</b> research in <b>Wuhan</b>. In 2017, he "predicted" a pandemic under Trump. Now, Fauci wants <b>masks</b> (which weaken the immune system), <b>lockdowns</b> (which cripple the economy), and <b>DNA-altering vaccines</b> for all.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img0009_baphomet_fauci.jpg'>
+              <div class='cell_mid'>
+                <img src='img/thumba8_baphomet_fauci.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>We wrestle not against flesh and blood (Ephesians 6:12)</div>
+                  <div class='cell_text'> <b>Jesuit</b>-trained <b>Anthocy Fauci</b> funded <b>Coronavirus bioweapon</b> research in <b>Wuhan</b>. In 2017, he "predicted" a pandemic under Trump. Now, Fauci wants <b>masks</b> (which weaken the immune system), <b>lockdowns</b> (which cripple the economy), and <b>DNA-altering vaccines</b> for all.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' img000a_baphomet_washington_fauci.jpg'>
+              <div class='cell_mid'>
+                <img src='img/thumba7_baphomet_washington_fauci.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>We wrestle not against flesh and blood (Ephesians 6:12)</div>
+                  <div class='cell_text'> <b>Jesuit</b>-trained <b>Anthocy Fauci</b> funded <b>Coronavirus bioweapon</b> research in <b>Wuhan</b>. In 2017, he "predicted" a pandemic under Trump. Now, Fauci wants <b>masks</b> (which weaken the immune system), <b>lockdowns</b> (which cripple the economy), and <b>DNA-altering vaccines</b> for all.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' doc0004_proofs_in_analysis.pdf'>
+              <div class='cell_mid'>
+                <img src='img/thumba6_proofs_in_analysis.png' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Proofs in Analysis: no step left behind</div>
+                  <div class='cell_text'> A textbook in progress for a first course in Real Analysis.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' set_theory03'>
+              <div class='cell_mid'>
+                <img src='img/thumb06.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The singleton set is unique up to unique set-isomorphism</div>
+                  <div class='cell_text'> A <b>singleton</b> set is a set with one element. There is "<i>essentially just one</i>" singleton set. This a very different situation than that for the empty set, where we know there's <i>precisely one</i> <b>empty set</b>. Why? How?</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' set_theory02'>
+              <div class='cell_mid'>
+                <img src='img/thumb05.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The preimage function is a morphism of Boolean algebras</div>
+                  <div class='cell_text'> Every function between <b>sets</b> gives rise to a function between their <b>power sets</b>, in the <b>opposite direction</b>. Power sets are <b>Boolean algebras</b>, and this function between power sets preserves the Boolean algebra structure: it is a <b>morphism</b> of Boolean algebras. This we explain and prove.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' set_theory01'>
+              <div class='cell_mid'>
+                <img src='img/thumb0a.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The fundamental theorem of equivalence relations</div>
+                  <div class='cell_text'> Every <b>equivalence relation</b> yields a <b>partition</b>. Every <b>partition</b> yields an <b>equivalence relation</b>. This is one of the first things one can prove in math. Here we do just that.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' set_theory00'>
+              <div class='cell_mid'>
+                <img src='img/thumb0b.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Unions and intersections</div>
+                  <div class='cell_text'> From <b>topology</b> to <b>measure theory</b>, being comfortable around <b>unions</b> and <b>intersections</b> is very important. Here we give examples and go over the <b>definitions</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' https://youtu.be/hYPuXCYOH48'>
+              <div class='cell_mid'>
+                <img src='img/thumba3_dot_products.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>Coding a visualization of dot products in GLSL</div>
+                  <div class='cell_text'> <b>Dot products</b> are ubiquitous in math and physics. In this YouTube video, we use dot products to <b>visualize</b>... dot products.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet cell_outer'>
+            <a href=' https://youtu.be/cji445rX9so'>
+              <div class='cell_mid'>
+                <img src='img/thumba2_pidgeonhole_new_york.jpg' class='cell_img'/>
+                <div class='cell_inner'>
+                  <div class='cell_title'>The pigeonhole principle</div>
+                  <div class='cell_text'> The <b>population</b> of New York is larger than the number of hairs on any New Yorker. It follows that there's (at least) two New Yorkers with exactly the same number of hairs. This is the <b>pigeonhole principle</b>.</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class='mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet cell_outer cell_white'></div>
+          <div class='mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet cell_outer cell_white'></div>
+        </div>
+
+        <!-- --------------------- -->
+        <hr>
+
+        <!-- <a id='set_theory'></a>
+        <div class='min_height_75vh bg_set_theory'>
+          <div class='min_height_75vh bg_overlay vcenter_parent'>
+            <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+              <h1 class='title_main'>set theory</h1>
+              <h2 class='subtitle_main'>out of nothing, all</h2>
+              <a href='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Coming soon</a>
+            </div>
+          </div>
+        </div>
+        <div class='vcenter_parent min_height_75vh'>
+          <p class='vcenter_child outer_content hcenter text_center text_main margin_top margin_bottom'>It all begins here. What is the set upon which every set rests? The <strong>empty set</strong><br><br>How many numbers are there? Replying <em>'infinitely many!'</em> would be like asking how many fingers you have, and hearing back <em>'some number!'</em><br><br><strong>Finite numbers</strong> come in different flavors, and <strong>infinite numbers</strong> do as well. What is a number, anyway? The answer depends on what you choose to believe about the <a href='https://en.wikipedia.org/wiki/Large_cardinal'>higher infinite</a></p>
+        </div>
+
+        <a id='analysis'></a>
+        <div class='min_height_75vh bg_analysis'>
+          <div class='min_height_75vh bg_overlay vcenter_parent'>
+            <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+              <h1 class='title_main'>analysis</h1>
+              <h2 class='subtitle_main'>magnificence in the small</h2>
+              <a href='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Coming soon</a>
+            </div>
+          </div>
+        </div>
+        <div class='vcenter_parent min_height_75vh'>
+          <p class='vcenter_child outer_content hcenter text_center text_main margin_top margin_bottom'>Picture a <strong>circle</strong>, and choose a single <strong>point</strong> inside. What's its <strong>area</strong>? <em>Every</em> point inside a circle has area <em>exactly</em> 0 —zero, <em>nada</em>—, and yet, somehow, the <strong>sum</strong> of all those 0's makes up for an area that is <em>not</em> 0?<br><br>How can this be? It took over two thousand years to give a proper —i.e. <strong>rigorous</strong>— answer. It turns out summing 0 + 0 + 0 ... is not enough<br><br>We need to understand the depths of <strong>the Continuum</strong>, which leads us to the limits of reasoning itself</p>
+        </div>
+
+        <a id='algebra'></a>
+        <div class='min_height_75vh bg_algebra'>
+          <div class='min_height_75vh bg_overlay vcenter_parent'>
+            <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+              <h1 class='title_main'>algebra</h1>
+              <h2 class='subtitle_main'>symmetry. structure</h2>
+              <a href='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Coming soon</a>
+            </div>
+          </div>
+        </div>
+        <div class='vcenter_parent min_height_75vh'>
+          <p class='vcenter_child outer_content hcenter text_center text_main margin_top margin_bottom'>There are objects —like a <strong>square</strong>— that don't change appearance when you rotate them by 90 degrees. This invariance is called a <strong>symmetry</strong><br><br>Symmetries, in turn, form <strong>abstract structures</strong> whose study goes to the deepest branches of reason, giving rise to groups, rings, fields, homomorphisms, domains, adeles, ideles...<br><br>Even the fundamental nature of reality exhibits such order</p>
+        </div>
+
+        <a id='topology'></a>
+        <div class='min_height_75vh bg_topology'>
+          <div class='min_height_75vh bg_overlay vcenter_parent'>
+            <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+              <h1 class='title_main'>topology</h1>
+              <h2 class='subtitle_main'>size doesn't matter</h2>
+              <a href='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Coming soon</a>
+            </div>
+          </div>
+        </div>
+        <div class='vcenter_parent min_height_75vh'>
+          <p class='vcenter_child outer_content hcenter text_center text_main margin_top margin_bottom'>Take a cup of Play-Doh and form a square. Now <strong>deform</strong> it to make a circle. In Topology, these two are equal, i.e. they're <strong>homeomorphic</strong> to each other<br><br>While you're at it, make a <strong>sphere</strong>. Can you deform it and make it pass through itself without tearing a hole through it? You may not, but there's a way<br><br>Prepare to delve into higher <strong>dimensions</strong></p>
+        </div>
+
+        <a id='geometry'></a>
+        <div class='min_height_75vh bg_geometry'>
+          <div class='min_height_75vh bg_overlay vcenter_parent'>
+            <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+              <h1 class='title_main'>geometry</h1>
+              <h2 class='subtitle_main'>all is shape</h2>
+              <a href='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Coming soon</a>
+            </div>
+          </div>
+        </div>
+        <div class='vcenter_parent min_height_75vh'>
+          <p class='vcenter_child outer_content hcenter text_center text_main margin_top margin_bottom'>Geometry dominated the minds of <b>Greeks</b> in antiquity. The universe was harmonic, and <b>numbers</b> embodied such essence<br><br>The primitives of existence were special kinds of <b>polyhedra</b>, out of which all beauty took form<br><br>But their dreams of acme were not meant to be</p>
+        </div>
+
+        <a id='category_theory'></a>
+        <div class='min_height_75vh bg_category_theory'>
+          <div class='min_height_75vh bg_overlay vcenter_parent'>
+            <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+              <h1 class='title_main'>category theory</h1>
+              <h2 class='subtitle_main'>it's relative</h2>
+              <a href='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Coming soon</a>
+            </div>
+          </div>
+        </div>
+        <div class='vcenter_parent min_height_75vh'>
+          <p class='vcenter_child outer_content hcenter text_center text_main margin_top margin_bottom'><a href='https://en.wikipedia.org/wiki/Grothendieck%27s_relative_point_of_view'>Grothendieck</a> championed the study not of <strong>objects</strong> themselves, but of <strong>relationships</strong> between objects.<br><br>Such thinking is at the heart of category theory, a language powerful enough to formulate all of mathematics (including set theory!), and then some.<br><br>By studying categories, and categories of categories, and categories of categories of categories, ad infinitum, one arrives at <strong>n-categories</strong> and "higher" versions of classical objects like vector spaces, groups, and rings. This is the <strong><a href='http://www.math.harvard.edu/~lurie/papers/HA.pdf'>higher mathematics</strong></a>.</p>
+        </div> -->
+
+      </main>
+
+    </div>
+
+  </body>
+
+  <script src='material.min.js'></script>
+</html>

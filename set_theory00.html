@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mathIsART | Unions and intersections</title>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/> <!-- Key for responsiveness! -->
+<link href="img/favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Material+Icons" rel="stylesheet"/>
+<link href="material.blue-red.min.css" rel="stylesheet"/>
+<style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#00aaff; }  /* #2196f3 */
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .text_center{ text-align:center; }
+      .text_left{   text-align:left; }
+
+      .vcenter_parent{ display:flex; display:-webkit-flex; display:-moz-box-flex; display:-ms-flexbox; }  /*Just plain flexbox!*/
+      .vcenter_child{  align-self:center; -webkit-align-self:center; }
+
+      .red{    color:#ff8888; }
+      .green{  color:#77ee77; }
+      .blue{   color:#00aaff; }
+      .purple{ color:#8888ff; }
+
+      /*----------------------------------------------------------------------*/
+      .article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000000; }
+      /*.article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; -webkit-text-stroke-width:2px; -webkit-text-stroke-color:#000000; }*/
+      @media screen and (max-width:800px){ .article_headline{ font-size:32px; } }zz
+      #article_text{      padding-bottom:32px; }
+      .article_container{ width:99%; padding:0; width:100%; }
+
+      h1{ padding:16px; font-family:'Montserrat'; font-weight:bold; font-size:32px; }
+      p{  max-width:96%; font-size:14px; margin:0 auto; margin-bottom:16px; }  /*letter-spacing:-1px;*/
+
+      .minilogo{ width:48px; height:48px; background:#f8f8f8 url('img/mathisart_small.png') no-repeat center; background-size:50%; border-radius:24px; margin:0 16px 0 24px; }
+
+      body::before{ background:#080808; background-size:cover; background-attachment:fixed; content:''; will-change:transform; z-index:-1; left:0; right:0; bottom:0; top:0; position:fixed; }
+
+      .btn_back{ position:absolute; color:white; z-index:1; top:16px; left:16px; }
+      .btn_down{ position:absolute; color:white; z-index:1; top:16px; right:16px; }
+
+      .drawer_icon{ width:24px; height:24px; }
+
+      .navigation{ display:flex; display:-webkit-flex; display:-ms-flexbox; -webkit-flex-direction:row; -ms-flex-direction:row; flex-direction:row; -webkit-justify-content:space-between; -ms-flex-pack:justify; justify-content:space-between; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
+
+      /*----------------------------------------------------------------------*/
+      .mdl-layout__content{ padding-top:128px; position: relative; -webkit-overflow-scrolling: touch;  }
+      .mdl-mini-footer{     margin-top:128px; padding:32px; }
+
+      .mdl-card__media{           background:url('img/mathisart_big.png') no-repeat center; height:300px; cursor:pointer; }
+      .mdl-card__supporting-text{ padding:0; margin-top:16px; width:100%; }
+
+      /*----------------------------------------------------------------------*/
+      video{ width:960; height:540; margin:0 auto; display:block; max-width:95%; }
+      .video_controls{ width:960; margin:7px auto 28px auto; display:block; max-width:95%; }
+      .vid{ width:853px; max-width:100%; margin:0 auto; }
+    </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-63802655-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+<script src="material.min.js"></script>
+</head>
+<body>
+<div class="demo-blog--blogpost mdl-layout mdl-js-layout">
+<main class="mdl-layout__content">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_back" href="/#grid" role="button" title="Go back"><i class="material-icons">arrow_back</i></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_down" href="#bottom" role="button" title="Scroll to bottom"><i class="material-icons">arrow_downward</i></a>
+<div class="mdl-grid article_container">
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+<div class="mdl-card__media mdl-color--grey-900 vcenter_parent" style="background:url('img/mathisart_big.png') no-repeat center;">
+<h1 class="mdl-color-text--grey-50 article_headline vcenter_child" id="title_article">Unions and intersections</h1>
+</div>
+<div class="mdl-card__supporting-text vcenter_parent">
+<a href="/#grid"><div class="minilogo inline_block vconter_child"></div></a>
+<div class="text_left inline_block vcenter_child">
+<a href=""><h2 class="mdl-typography--body-2" id="category0">Set theory</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category1">Zermelo-Fraenkel with Choice</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category2">/ Unions and intersections</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category3">/ Unions and intersections</h2></a>
+</div>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+    },
+    MathML: {
+      useMathMLspacing: true
+    },
+    'HTML-CSS': {
+      availableFonts: ["TeX"],
+      styles: {
+        ".MathJax_Display": {"text-align": "left", margin: "0em 0em"},
+        ".MathJax": {padding: '0px 0px 0px 0px', margin: '0px 0px 0px 0px', 'line-height': '0', 'font-size': '50%', color: '#616161'},
+      }
+    },
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css' integrity='sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb' crossorigin='anonymous'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js' integrity='sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h' crossorigin='anonymous'></script>
+-->
+<div class="hide">
+$
+\def \N {{ \mathbb N }}
+\def \Z {{ \mathbb Z }}
+\def \Q {{ \mathbb Q }}
+\def \R {{ \mathbb R }}
+\def \C {{ \mathbb C }}
+\def \H {{ \mathbb H }}
+\def \S {{ \mathbb S }}
+\def \P {{ \mathbb P }}
+
+\def \to      { \longrightarrow }
+\def \mapsto  { \longmapsto }
+
+\def \then    { ~ \Longrightarrow ~ }
+\def \iff     { ~ \Longleftrightarrow ~ }
+\def \and     { ~ \wedge ~ }
+\def \or      { ~ \vee ~ }
+
+\def \d {{~\rm d}}  % We prepend a space to the differential symbol `d`, for good measure!
+
+\def \IFF     {{\hskip4pt \sc iff \hskip2pt}}
+
+\def \Int   {{ \bf Int }}
+\def \Clo   {{ \bf Clo }}
+\def \Lim   {{ \bf Lim }}
+
+\def \Dom   {{ \bf Dom }}
+\def \Cod   {{ \bf Cod }}
+
+\def \Ker   {{ \bf Ker }}
+\def \Img   {{ \bf Img }}
+\def \coKer {{ \bf coKer }}
+\def \coImg {{ \bf coImg }}
+
+\def \rem {{ \hskip4pt \rm rem \hskip4pt }}
+\def \tab {{ \hskip16pt }}
+$
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text" id="article_text">
+<p><span><strong>Unions</strong></span> and <span><strong>intersections</strong></span> of sets are something I find confusing. But they’re super important. For instance, when learning <a href="https://en.wikipedia.org/wiki/General_topology">general topology</a>, we <span><em>must</em></span> become fluent with <span><strong>unions</strong></span>, <span><strong>intersections</strong></span>, and other set-theoretic stuff (like <span><strong>complements</strong></span>, <span><strong>powersets</strong></span>, <span><strong>subsets</strong></span>, <span><strong>functions</strong></span>, <span><strong>covers</strong></span>, <span><strong>uncountability</strong></span>, etc.), because general topology is basically just the <span><em>topology of sets</em></span>, and all the important ideas in general topology (like <span><strong>continuous</strong></span>, <span><strong>compact</strong></span>, <span><strong>metrizable</strong></span>, <span><strong>second-countable</strong></span>, <span><strong>Hausdorff</strong></span>, <span><strong>paracompact</strong></span>, <span><strong>countably locally finite</strong></span>, etc.) are stated in the language of sets.</p>
+<h1 id="union-the-elements-that-are-in-at-least-one-element">Union: the elements that are in at least one element</h1>
+<p>There’s two notations to denote unions (both of which I find useful).<br/>
+One is <span class="math inline">\(\cup A\)</span>. This is a <span><em>unary</em></span> operation.<br/>
+The other is <span class="math inline">\(A \cup B\)</span>. This is a <span><em>binary</em></span> operation.<br/>
+The unary operation <span class="math inline">\(\cup\)</span> takes the set <span class="math inline">\(A\)</span> to the set <span class="math inline">\(\cup A\)</span>. The set <span class="math inline">\(\cup A\)</span> is a new set, made of the elements that are in <span><em>at least one</em></span> element of <span class="math inline">\(A\)</span>.<br/>
+The binary operation <span class="math inline">\(\cup\)</span> takes the sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> to the set <span class="math inline">\(A \cup B\)</span>. The set <span class="math inline">\(A \cup B\)</span> is a new set, made of all the elements in <span class="math inline">\(A\)</span> and all the elements in <span class="math inline">\(B\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. Let <span class="math inline">\(A\)</span> be the set <span class="math inline">\(\{a1, a2, a3\}\)</span>.<br/>
+Then the set <span class="math inline">\(\cup A\)</span> is the set <span class="math inline">\(\cup \{a1, a2, a3\}\)</span>, and this set can also be written as <span class="math inline">\(a1 \cup a2 \cup a3\)</span>. To pin it down explicitly we need more information.<br/>
+Let <span class="math inline">\(a1\)</span> be the set <span class="math inline">\(\{a11, a12\}\)</span>, let <span class="math inline">\(a2\)</span> be the set <span class="math inline">\(\{a21, a22\}\)</span>, let <span class="math inline">\(a3\)</span> be the set <span class="math inline">\(\{a31, a32\}\)</span>.<br/>
+Assume that<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a11 \neq a21\)</span>, and <span class="math inline">\(a11 \neq a22\)</span>, and <span class="math inline">\(a11 \neq a31\)</span>, and <span class="math inline">\(a11 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a12 \neq a21\)</span>, and <span class="math inline">\(a12 \neq a22\)</span>, and <span class="math inline">\(a12 \neq a31\)</span>, and <span class="math inline">\(a12 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a21 \neq a11\)</span>, and <span class="math inline">\(a21 \neq a12\)</span>, and <span class="math inline">\(a21 \neq a31\)</span>, and <span class="math inline">\(a21 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a22 \neq a11\)</span>, and <span class="math inline">\(a22 \neq a12\)</span>, and <span class="math inline">\(a22 \neq a31\)</span>, and <span class="math inline">\(a22 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a31 \neq a11\)</span>, and <span class="math inline">\(a31 \neq a12\)</span>, and <span class="math inline">\(a31 \neq a21\)</span>, and <span class="math inline">\(a31 \neq a22\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a32 \neq a11\)</span>, and <span class="math inline">\(a32 \neq a12\)</span>, and <span class="math inline">\(a32 \neq a21\)</span>, and <span class="math inline">\(a32 \neq a22\)</span>.<br/>
+Now the set <span class="math inline">\(\cup A\)</span> is the set <span class="math inline">\(\cup \{a1, a2, a3\}\)</span>, which is the set <span class="math inline">\(\cup\{\{a11, a12\}, \{a21, a22\}, \{a31, a32\}\}\)</span>, which is the set <span class="math inline">\(\{a11, a12, a21, 22, a31, a32, b11, b12, b21, 22, b31, b32\}\)</span>, by the definition of "*the elements that are in at least one element*".<br/>
+Notice that the set <span class="math inline">\(\cup A\)</span> is the set <span class="math inline">\(\cup \{\{a11, a12\}, \{a21, a22\}, \{a31, a32\}\}\)</span> (in <span><em>unary notation</em></span>) and also the set <span class="math inline">\(\{a11, a12\} \cup \{a21, a22\} \cup \{a31, a32\}\)</span> (in <span><em>binary notation</em></span>).</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. Let <span class="math inline">\(A\)</span> be the set <span class="math inline">\(\{a1, a2, a3\}\)</span>, let <span class="math inline">\(B\)</span> be the set <span class="math inline">\(\{b1, b2, b3\}\)</span>.<br/>
+Then the set <span class="math inline">\(A \cup B\)</span> is the set <span class="math inline">\(\{a1, a2, a3\} \cup \{b1, b2, b3\}\)</span>, and this set can also be written as <span class="math inline">\(\cup\{A, B\}\)</span>, or as <span class="math inline">\(\cup\{ \{a1, a2, a3\}, \{b1, b2, b3\} \}\)</span>. To pin it down explicitly we need more information.<br/>
+Assume that<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a1 \neq b1\)</span>, and <span class="math inline">\(a2 \neq b1\)</span>, and <span class="math inline">\(a3 \neq b1\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a1 \neq b2\)</span>, and <span class="math inline">\(a2 \neq b2\)</span>, and <span class="math inline">\(a3 \neq b2\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a1 \neq b3\)</span>, and <span class="math inline">\(a2 \neq b3\)</span>, and <span class="math inline">\(a3 \neq b3\)</span>.<br/>
+Now the set <span class="math inline">\(A \cup B\)</span> is the set <span class="math inline">\(\{a1, a2, a3\} \cup \{b1, b2, b3\}\)</span>, which is the set <span class="math inline">\(\{a1, a2, a3, b1, b2, b3\}\)</span>, by the definition of "*all the elements in <span class="math inline">\(A\)</span> and all the elements of <span class="math inline">\(B\)</span>*".<br/>
+Notice that the set <span class="math inline">\(A \cup B\)</span> is the set <span class="math inline">\(\cup \{\{a1, a2, a3\}, \{b1, b2, b3\}\}\)</span> (in <span><em>unary notation</em></span>) and also the set <span class="math inline">\(\{a1, a2, a3\} \cup \{b1, b2, b3\}\)</span> (in <span><em>binary notation</em></span>).</p>
+<p>The moral of the story is that we can take the union <span class="math inline">\(\cup A\)</span> of a <span><em>single</em></span> set <span class="math inline">\(A\)</span>, but then we’re seeing <span class="math inline">\(A\)</span> as a <span><em>set of sets</em></span> (because we’re focusing on the elements of its elements).<br/>
+And we can take the union <span class="math inline">\(A \cup B\)</span> of <span><em>two</em></span> sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but then we’re seeing <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as just <span><em>sets</em></span> (because we’re focusing on their elements).<br/>
+But, in <a href="https://www.encyclopediaofmath.org/index.php/ZFC">ZFC</a>, a set can only contain other sets. So the elements of a set <span class="math inline">\(A\)</span> are always sets, which actually makes <span class="math inline">\(A\)</span> a set of sets, and the elements of the elements of <span class="math inline">\(A\)</span> are also sets, which actually makes <span class="math inline">\(A\)</span> a set of sets of sets, and ... It’s sets all the way down (until you reach the empty set). So calling something "a set" or "a set of sets" or "a set of sets of sets of sets ... of sets" is just <span><em>relative</em></span> (to a particular level in this hierarchy). <span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. The <span><strong>union</strong></span> <span class="math inline">\(\cup A\)</span> of a set <span class="math inline">\(A\)</span> is the set of all elements that are in <span><em>at least one</em></span> element of <span class="math inline">\(A\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. The <span><strong>union</strong></span> <span class="math inline">\(A \cup B\)</span> of two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the set of <span><em>all</em></span> elements of <span class="math inline">\(A\)</span> and <span><em>all</em></span> elements <span class="math inline">\(B\)</span>.</p>
+<p>Axiomatically, in ZFC we form the union <span class="math inline">\(\cup A\)</span> of the set <span class="math inline">\(A\)</span> using the <a href="https://en.wikipedia.org/wiki/Axiom_of_union"><strong>axiom of union</strong></a>.<br/>
+And we form the union <span class="math inline">\(A \cup B\)</span> of the sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> using the <a href="https://ncatlab.org/nlab/show/axiom+of+pairing"><strong>axiom of pair</strong></a> and the axiom of union. The axiom of pair yields the <span><strong>pair</strong></span> <span class="math inline">\(\{A, B\}\)</span>, and the axiom of union yields the <span><strong>union</strong></span> <span class="math inline">\(\cup\{A, B\}\)</span>. Then we can define the set <span class="math inline">\(A \cup B\)</span> as the set <span class="math inline">\(\cup\{A, B\}\)</span> (which is confusing because we’re using the same symbol <span class="math inline">\(\cup\)</span> for two different operations: one unary operation and one binary operation).</p>
+<h1 id="intersection-the-elements-that-are-in-every-element">Intersection: the elements that are in every element</h1>
+<p>There’s two notations to denote intersections.<br/>
+One is <span class="math inline">\(\cap A\)</span>. This is a <span><em>unary</em></span> operation.<br/>
+The other is <span class="math inline">\(A \cap B\)</span>. This is a <span><em>binary</em></span> operation.<br/>
+The unary operation <span class="math inline">\(\cap\)</span> takes the set <span class="math inline">\(A\)</span> to the set <span class="math inline">\(\cap A\)</span>. The set <span class="math inline">\(\cap A\)</span> is a new set, made of the elements that are in <span><em>every</em></span> element of <span class="math inline">\(A\)</span>.<br/>
+The binary operation <span class="math inline">\(\cap\)</span> takes the sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> to the set <span class="math inline">\(A \cap B\)</span>. The set <span class="math inline">\(A \cap B\)</span> is a new set, made of the elements that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have in common.</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. Let <span class="math inline">\(A\)</span> be the set <span class="math inline">\(\{a1, a2, a3\}\)</span>.<br/>
+Then the set <span class="math inline">\(\cap A\)</span> is the set <span class="math inline">\(\cap\{a1, a2, a3\}\)</span>, and this set can also be written as <span class="math inline">\(a1 \cap a2 \cap a3\)</span>. To pin it down explicitly we need more information.<br/>
+Let <span class="math inline">\(a1\)</span> be the set <span class="math inline">\(\{a11, a12\}\)</span>, let <span class="math inline">\(a2\)</span> be the set <span class="math inline">\(\{a21, a22\}\)</span>, let <span class="math inline">\(a3\)</span> be the set <span class="math inline">\(\{a31, a32\}\)</span>.<br/>
+Assume that<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a11 \neq a21\)</span>, and <span class="math inline">\(a11 \neq a22\)</span>, and <span class="math inline">\(a11 \neq a31\)</span>, and <span class="math inline">\(a11 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a12 \neq a21\)</span>, and <span class="math inline">\(a12 \neq a22\)</span>, and <span class="math inline">\(a12 \neq a31\)</span>, and <span class="math inline">\(a12 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a21 \neq a11\)</span>, and <span class="math inline">\(a21 \neq a12\)</span>, and <span class="math inline">\(a21 \neq a31\)</span>, and <span class="math inline">\(a21 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a22 \neq a11\)</span>, and <span class="math inline">\(a22 \neq a12\)</span>, and <span class="math inline">\(a22 \neq a31\)</span>, and <span class="math inline">\(a22 \neq a32\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a31 \neq a11\)</span>, and <span class="math inline">\(a31 \neq a12\)</span>, and <span class="math inline">\(a31 \neq a21\)</span>, and <span class="math inline">\(a31 \neq a22\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a32 \neq a11\)</span>, and <span class="math inline">\(a32 \neq a12\)</span>, and <span class="math inline">\(a32 \neq a21\)</span>, and <span class="math inline">\(a32 \neq a22\)</span>.<br/>
+Now the set <span class="math inline">\(\cap A\)</span> is the set <span class="math inline">\(\cap \{a1, a2, a3\}\)</span>, which is the set <span class="math inline">\(\cap\{\{a11, a12\}, \{a21, a22\}, \{a31, a32\}\}\)</span>, which is the set <span class="math inline">\(\{\}\)</span>, by the definition of "*the elements that are in every element*".<br/>
+Notice that the set <span class="math inline">\(\cap A\)</span> is the set <span class="math inline">\(\cap \{\{a11, a12\}, \{a21, a22\}, \{a31, a32\}\}\)</span> (in <span><em>unary notation</em></span>) and also the set <span class="math inline">\(\{a11, a12\} \cap \{a21, a22\} \cap \{a31, a32\}\)</span> (in <span><em>binary notation</em></span>).</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. Let <span class="math inline">\(A\)</span> be the set <span class="math inline">\(\{a1, a2, a3\}\)</span>, let <span class="math inline">\(B\)</span> be the set <span class="math inline">\(\{b1, b2, b3\}\)</span>.<br/>
+Then the set <span class="math inline">\(A \cap B\)</span> is the set <span class="math inline">\(\{a1, a2, a3\} \cap \{b1, b2, b3\}\)</span>, and this set can also be written as <span class="math inline">\(\cap{A, B}\)</span>, or as <span class="math inline">\(\cap\{\{a1, a2, a3\}, \{b1, b2, b3\}\}\)</span>. To pin it down explicitly we need more information. Assume that<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a1 \neq b1\)</span>, and <span class="math inline">\(a2 \neq b1\)</span>, and <span class="math inline">\(a3 \neq b1\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a1 \neq b2\)</span>, and <span class="math inline">\(a2 \neq b2\)</span>, and <span class="math inline">\(a3 \neq b2\)</span>, and<br/>
+<span class="math inline">\(\tab\)</span> <span class="math inline">\(a1 \neq b3\)</span>, and <span class="math inline">\(a2 \neq b3\)</span>, and <span class="math inline">\(a3 \neq b3\)</span>.<br/>
+Now the set <span class="math inline">\(A \cap B\)</span> is the set <span class="math inline">\(\{a1, a2, a3\} \cap \{b1, b2, b3\}\)</span>, which is the set <span class="math inline">\(\{\}\)</span>, by the definition of "*all the elements that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have in common*".<br/>
+Notice that the set <span class="math inline">\(A \cap B\)</span> is the set <span class="math inline">\(\cap \{\{a1, a2, a3\}, \{b1, b2, b3\}\}\)</span> (in <span><em>unary notation</em></span>) and also the set <span class="math inline">\(\{a1, a2, a3\} \cap \{b1, b2, b3\}\)</span> (in <span><em>binary notation</em></span>).</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. The <span><strong>intersection</strong></span> <span class="math inline">\(\cap A\)</span> of a set <span class="math inline">\(A\)</span> is the set of all elements that are in <span><em>every</em></span> element of <span class="math inline">\(A\)</span>.</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. The <span><strong>intersection</strong></span> <span class="math inline">\(A \cap B\)</span> of two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the set of all elements that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have <span><em>in common</em></span>.</p>
+<h1 id="the-fundamental-theorem-of-unions-and-intersections-de-morgans-laws">The fundamental theorem of unions and intersections: de Morgan’s laws</h1>
+<p>After understanding what union and intersections <span><em>do</em></span> (to sets), the next thing is to understand that they’re the same. Well, they’re not <span><em>actually</em></span> the same, but they’re two sides of the same coin: unions are <a href="https://en.wikipedia.org/wiki/Dual_(category_theory)"><strong>dual</strong></a> to intersections. In <a href="https://ncatlab.org/nlab/show/category+theory">category-theoretic</a> language, <span><strong>unions</strong></span> are <a href="https://en.wikipedia.org/wiki/Coproduct"><strong>coproducts</strong></a> and <span><strong>intersections</strong></span> are <a href="https://en.wikipedia.org/wiki/Product_(category_theory)"><strong>products</strong></a>. Also, unions are defined using logical <a href="https://en.wikipedia.org/wiki/Logical_disjunction"><strong>disjunction</strong></a> (ie. logical <span><strong>or</strong></span>), and intersections are defined using logical <a href="https://en.wikipedia.org/wiki/Logical_conjunction"><strong>conjunction</strong></a> (ie. logical <span><strong>and</strong></span>). Disjunctions are products and conjunctions are coproducts, so disjunctions are dual to conjunctions. The duality between unions and intersections is known as <a href="https://en.wikipedia.org/wiki/De_Morgan%27s_laws"><strong>de Morgan’s theorem</strong></a> (or de Morgan’s laws, or de Morgan duality).</p>
+<p>Before stating the fundamental theorem of unions and intersecions (aka. de Morgan’s laws), we need a new operation: <span><strong>complement</strong></span> (aka. <span><strong>set complement</strong></span> or <span><strong>set-theoretic complement</strong></span>).</p>
+<p><span class="math inline">\(\tab\)</span> <span><em>Example</em></span>. Let <span class="math inline">\(A\)</span> be the set <span class="math inline">\(\{a1, a2, a3, a4, a5\}\)</span>, let <span class="math inline">\(A' \subseteq A\)</span> be the set <span class="math inline">\(\{a2, a4, a5\}\)</span>. The <span><strong>complement</strong></span> <span class="math inline">\(\overline{A'}\)</span> of <span class="math inline">\(A'\)</span> (in <span class="math inline">\(A\)</span>), also denoted <span class="math inline">\(A \setminus A'\)</span>, is the set <span class="math inline">\(\{a1, a3\}\)</span>, meaning<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(\overline{A'}\)</span> equals <span class="math inline">\(\{a1, a3\}\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(A \setminus A'\)</span> equals <span class="math inline">\(\{a1, a3\}\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span><strong>Definition</strong></span>. Let <span class="math inline">\(A\)</span> be a set, and let <span class="math inline">\(A' \subseteq A\)</span> be a subset of <span class="math inline">\(A\)</span>.<br/>
+The <span><strong>complement</strong></span> <span class="math inline">\(\overline{A'}\)</span> of <span class="math inline">\(A'\)</span> (in <span class="math inline">\(A\)</span>), also denoted <span class="math inline">\(A \setminus A'\)</span>, is the set of all elements of <span class="math inline">\(A\)</span> that are <span><em>not</em></span> elements of <span class="math inline">\(A'\)</span>. In symbols,<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(\overline{A'} \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt a \notin A' \}\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(A \setminus A' \hskip8pt := \hskip8pt \{a \in A \hskip6pt | \hskip6pt a \notin A' \}\)</span>.<br/>
+We’re ready to state</p>
+<p><span class="math inline">\(\tab\)</span> <span><strong>Theorem (de Morgan’s theorem)</strong></span>. Let <span class="math inline">\(A\)</span> be a set, let <span class="math inline">\(A1\)</span> and <span class="math inline">\(A2\)</span> be subsets of <span class="math inline">\(A\)</span>. Now,<br/>
+<span class="math inline">\(\tab\tab1)\)</span> <span class="math inline">\(\overline{A1 \cup A2} \hskip8pt = \hskip8pt \overline{A1} \cap \overline{A2}\)</span><br/>
+<span class="math inline">\(\tab\tab2)\)</span> <span class="math inline">\(\overline{A1 \cap A2} \hskip8pt = \hskip8pt \overline{A1} \cup \overline{A2}\)</span>.<br/>
+Equivalently,<br/>
+<span class="math inline">\(\tab\tab1')\)</span> <span class="math inline">\(A \setminus (A1 \cup A2) \hskip8pt = \hskip8pt (A \setminus A1) \hskip4pt\cap\hskip4pt (A \setminus A2)\)</span><br/>
+<span class="math inline">\(\tab\tab2')\)</span> <span class="math inline">\(A \setminus (A1 \cap A2) \hskip8pt = \hskip8pt (A \setminus A1) \hskip4pt\cup\hskip4pt (A \setminus A2)\)</span>.<br/>
+<span class="math inline">\(\tab\)</span> <span><em>Proof</em></span>. TODO</p>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+</div> <!-- <div class='mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'> -->
+</div> <!-- <div class='mdl-grid article_container'> -->
+<a id="bottom"></a>
+<footer class="mdl-mini-footer mdl-color--blue">
+<div class="mdl-mini-footer--left-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="/" title="Home"><i class="material-icons">home</i></a>
+<!-- <a href='/#set_theory'      title='Set theory'      class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_set_theory.svg'/></a> -->
+<!-- <a href='/#analysis'        title='Analysis'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>gesture</i></a> -->
+<!-- <a href='/#algebra'         title='Algebra'         class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>ac_unit</i></a> -->
+<!-- <a href='/#topology'        title='Topology'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>all_inclusive</i></a> -->
+<!-- <a href='/#geometry'        title='Geometry'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_geometry.svg'/></a> -->
+<!-- <a href='/#category_theory' title='Category theory' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_category_theory.png'/></a> -->
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://www.youtube.com/c/mathisart" title="YouTube"><img class="drawer_icon" src="img/icon_youtube.svg"/></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://github.com/etale-cohomology" title="GitHub"><img class="drawer_icon" src="img/icon_github.svg"/></a>
+</div>
+<div class="mdl-mini-footer--right-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="https://github.com/etale-cohomology/mathisart-website" title="Source"><i class="material-icons">code</i></a>
+</div>
+</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>mathIsART | Jesus is King of kings</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>  <!-- Key for responsiveness! -->
+
+    <link rel='icon' href='img/favicon.png'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,500,800|Cinzel|Jura|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+
+    <style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#2196f3; }
+
+      /*----------------------------------------------------------------------*/
+      /*--------------------- Change the drawer width! I can't figure out how to make these changes compatible with `mdl-layout--fixed-drawer` for the `mdl-layout`!*/
+      /*.mdl-layout__drawer{ border:none; width:360px; left:-360px; max-width:90%; }*/
+      /*.mdl-layout__drawer.is-visible{ left:0; }*/
+      .mdl-layout__drawer{ border:none; }
+
+      /*---------------------*/
+      .mdl-navigation__link{ font-weight:500!important; padding-left:16px!important; color:white!important;  }
+      .mdl-navigation__link:hover{ background:rgb(0%, 50%, 100%)!important; } /*menu hover!!*/
+
+      .drawer_header{ height:192px; background:url(img/mathisart_big.png) no-repeat center; background-size:150%; }
+      .drawer_icon{   width:24px; height:24px; }
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .outer_content{  width:1280px; max-width:100%; }
+      .text_center{    text-align:center; }
+      .flex{           display:flex; display:-webkit-box; display:-moz-box; display:-webkit-flex; flex-flow:row wrap; justify-content:center; }
+      .hcenter{        margin:0 auto; }
+      .vcenter_parent{ display:flex; }
+      .vcenter_child{  align-self:center; }
+
+      .montserrat{ font-family:'Montserrat'; }
+      .cinzel{     font-family:'Cinzel'; }
+      .jura{       font-family:'Jura'; }
+      .bold{       font-weight:800; }
+
+      .margin_top{    margin-top:64px; }
+      .margin_bottom{ margin-bottom:64px; }
+      .margin_left{   margin-left:8px }
+      .margin_right{  margin-right:8px }
+
+      .margin_bottom_256px{ margin-bottom:256px; }
+
+      .min_height_75vh{  min-height:75vh; }
+      .min_height_50vh{  min-height:50vh; }
+      .min_height_100vh{ min-height:100vh; }
+
+      /*----------------------------------------------------------------------*/
+      .title_mathisart{ font-family:'Cinzel';     font-size:8em; }
+      .title_main{      font-family:'Montserrat'; font-size:8em; font-weight:800; line-height:1; text-transform:uppercase; }
+      .subtitle_main{   font-family:'Jura';       font-size:3em; }
+      .text_main{       font-family:'Montserrat'; font-size:2em; line-height:1.5; font-weight:500; }
+
+      @media (orientation:portrait){  /*screen and (orientation:portrait)*/ /*(max-width:414px) or (orientation:portrait)*/
+        .title_mathisart,.title_main { font-size:4.0em; }
+        .subtitle_main{                font-size:1.8em; }
+        .text_main{                    font-size:1.4em; }
+      }
+
+      /*----------------------------------------------------------------------*/
+      .bg_mathisart{       background:url(img/bg_mathisart.jpg)       no-repeat center; background-size:cover; }
+      .bg_set_theory{      background:url(img/bg_set_theory.jpg)      no-repeat center; background-size:cover; }
+      .bg_analysis{        background:url(img/bg_analysis.jpg)        no-repeat center; background-size:cover; }
+      .bg_algebra{         background:url(img/bg_algebra.jpg)         no-repeat center; background-size:cover; }
+      .bg_topology{        background:url(img/bg_topology.jpg)        no-repeat center; background-size:cover; }
+      .bg_geometry{        background:url(img/bg_geometry.jpg)        no-repeat center; background-size:cover;}
+      .bg_category_theory{ background:url(img/bg_category_theory.jpg) no-repeat center; background-size:cover; }
+      .bg_overlay{         background:rgba(0, 0, 0, .5); }
+
+      /*----------------------------------------------------------------------*/
+      .grid_cells_center{ justify-content:center;  }
+
+      /*Split a 1920x1080 screen in 24:  for i in range(1, 24+1):  print('{:2}  {:4.0f}  {:4.0f}'.format(i, 1920 / 24*i, 1920 / 24*i * 9/16))*/
+      .cell_outer {                  position:relative; background-color:#000000; }
+      .cell_outer:hover .cell_img{   opacity:0.1; }
+      .cell_outer:hover .cell_inner{ opacity:1;   }
+
+      .cell_mid{   overflow:hidden; }
+      .cell_img{   width:100%; height:270px; object-fit:cover; }
+      .cell_inner{ margin:auto; opacity:0; position:absolute; top:0%; }
+      .cell_title{ font-family:'Montserrat'; color:#ffffff; margin:16px 16px 0 16px; font-size:22px; font-weight:800; }  /* CELL title! up-right-bot-left */
+      .cell_text{  font-family:'Montserrat'; color:#ffffff; margin:16px 16px 0 16px; font-size:14px; }                   /* CELL text!  up-right-bot-left */
+      .cell_white{ background:#ffffff; }
+
+      @media (orientation:portrait){
+        .cell_img{   height:240px; }
+        .cell_title{ font-size:16px; margin:12px 12px 0 12px; }  /*up-right-bot-left*/
+        .cell_text{  font-size:10px; margin:12px 12px 0 12px; }  /*up-right-bot-left*/
+      }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-63802655-1'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+  </head>
+
+  <body>
+
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header'>  <!-- 1. mdl-layout! -->  <!-- mdl-layout--fixed-drawer -->
+
+      <!-- ---------------------------------------------------------------------------------------------------- -->
+      <header class='mdl-layout__header mdl-color--grey-900'>  <!-- 1.1 mdl-layout__header! -->
+        <div class='mdl-layout__header-row'><a href='/' class='mdl-color-text--white mdl-typography--title montserrat'>mathIsART</a></div>
+      </header>
+
+      <!-- ---------------------------------------------------------------------------------------------------- -->
+      <div class='mdl-layout__drawer mdl-color--grey-900'>  <!-- 1.2 mdl-layout__drawer! -->
+        <a class='drawer_header' href='/'></a>
+
+        <nav class='mdl-navigation'>
+          <!-- <a href='/#set_theory'      class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_set_theory.svg'/>Set theory</a> -->
+          <!-- <a href='/#analysis'        class='mdl-navigation__link'><i   class='material-icons margin_right'>gesture</i>Analysis</a> -->
+          <!-- <a href='/#algebra'         class='mdl-navigation__link'><i   class='material-icons margin_right'>ac_unit</i>Algebra</a> -->
+          <!-- <a href='/#topology'        class='mdl-navigation__link'><i   class='material-icons margin_right'>all_inclusive</i>Topology</a> -->
+          <!-- <a href='/#geometry'        class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_geometry.svg'/>Geometry</a> -->
+          <!-- <a href='/#category_theory' class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_category_theory.png'/>Category theory</a> -->
+          <a href='https://www.youtube.com/c/mathisart' class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_youtube.svg'/></i>YouTube</a>
+          <a href='https://github.com/etale-cohomology' class='mdl-navigation__link'><img class='drawer_icon margin_right' src='img/icon_github.svg'/>GitHub</a>
+          <hr>
+          <a href='https://github.com/etale-cohomology/mathisart-website' class='mdl-navigation__link'><i class='material-icons margin_right'>code</i>Source</a>
+        </nav>
+      </div>
+
+      <!-- ---------------------------------------------------------------------------------------------------- -->
+      <main class='mdl-layout__content mdl-color--grey-100'> <!-- 1.3 mdl-layout__content! -->
+
+        <!-- ---------------------------------------------------------------------- -->
+        <div class='min_height_100vh bg_mathisart vcenter_parent'>
+          <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+            <h1 class='title_mathisart'>mathIsART</h1>
+            <h2 class='subtitle_main'>Jesus is King of kings</h2>
+            <a href='#love' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top'>Get started</a>
+          </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------------- -->
+        <a id='love'></a>
+        <div class='min_height_100vh mdl-color--blue vcenter_parent'>
+          <div class='vcenter_child hcenter text_center mdl-color-text--white'>
+            <h1 class='title_main'>As I have loved you<br>also ye<br>love one another</h1>
+            <h2 class='subtitle_main'>John 13:34</h2>
+          </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------------- -->
+        <a id='grid'></a>
+        <div id='div_grid' class='mdl-grid mdl-grid--no-spacing grid_cells_center'>  <!-- margin_bottom_256px -->

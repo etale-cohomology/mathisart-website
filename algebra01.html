@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mathIsART | Lagrange's theorem</title>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/> <!-- Key for responsiveness! -->
+<link href="img/favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Material+Icons" rel="stylesheet"/>
+<link href="material.blue-red.min.css" rel="stylesheet"/>
+<style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#00aaff; }  /* #2196f3 */
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .text_center{ text-align:center; }
+      .text_left{   text-align:left; }
+
+      .vcenter_parent{ display:flex; display:-webkit-flex; display:-moz-box-flex; display:-ms-flexbox; }  /*Just plain flexbox!*/
+      .vcenter_child{  align-self:center; -webkit-align-self:center; }
+
+      .red{    color:#ff8888; }
+      .green{  color:#77ee77; }
+      .blue{   color:#00aaff; }
+      .purple{ color:#8888ff; }
+
+      /*----------------------------------------------------------------------*/
+      .article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000000; }
+      /*.article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; -webkit-text-stroke-width:2px; -webkit-text-stroke-color:#000000; }*/
+      @media screen and (max-width:800px){ .article_headline{ font-size:32px; } }zz
+      #article_text{      padding-bottom:32px; }
+      .article_container{ width:99%; padding:0; width:100%; }
+
+      h1{ padding:16px; font-family:'Montserrat'; font-weight:bold; font-size:32px; }
+      p{  max-width:96%; font-size:14px; margin:0 auto; margin-bottom:16px; }  /*letter-spacing:-1px;*/
+
+      .minilogo{ width:48px; height:48px; background:#f8f8f8 url('img/mathisart_small.png') no-repeat center; background-size:50%; border-radius:24px; margin:0 16px 0 24px; }
+
+      body::before{ background:#080808; background-size:cover; background-attachment:fixed; content:''; will-change:transform; z-index:-1; left:0; right:0; bottom:0; top:0; position:fixed; }
+
+      .btn_back{ position:absolute; color:white; z-index:1; top:16px; left:16px; }
+      .btn_down{ position:absolute; color:white; z-index:1; top:16px; right:16px; }
+
+      .drawer_icon{ width:24px; height:24px; }
+
+      .navigation{ display:flex; display:-webkit-flex; display:-ms-flexbox; -webkit-flex-direction:row; -ms-flex-direction:row; flex-direction:row; -webkit-justify-content:space-between; -ms-flex-pack:justify; justify-content:space-between; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
+
+      /*----------------------------------------------------------------------*/
+      .mdl-layout__content{ padding-top:128px; position: relative; -webkit-overflow-scrolling: touch;  }
+      .mdl-mini-footer{     margin-top:128px; padding:32px; }
+
+      .mdl-card__media{           background:url('img/mathisart_big.png') no-repeat center; height:300px; cursor:pointer; }
+      .mdl-card__supporting-text{ padding:0; margin-top:16px; width:100%; }
+
+      /*----------------------------------------------------------------------*/
+      video{ width:960; height:540; margin:0 auto; display:block; max-width:95%; }
+      .video_controls{ width:960; margin:7px auto 28px auto; display:block; max-width:95%; }
+      .vid{ width:853px; max-width:100%; margin:0 auto; }
+    </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-63802655-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+<script src="material.min.js"></script>
+</head>
+<body>
+<div class="demo-blog--blogpost mdl-layout mdl-js-layout">
+<main class="mdl-layout__content">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_back" href="/#grid" role="button" title="Go back"><i class="material-icons">arrow_back</i></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_down" href="#bottom" role="button" title="Scroll to bottom"><i class="material-icons">arrow_downward</i></a>
+<div class="mdl-grid article_container">
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+<div class="mdl-card__media mdl-color--grey-900 vcenter_parent" style="background:url('img/mathisart_big.png') no-repeat center;">
+<h1 class="mdl-color-text--grey-50 article_headline vcenter_child" id="title_article">Lagrange's theorem and the RSA theorem</h1>
+</div>
+<div class="mdl-card__supporting-text vcenter_parent">
+<a href="/#grid"><div class="minilogo inline_block vconter_child"></div></a>
+<div class="text_left inline_block vcenter_child">
+<a href=""><h2 class="mdl-typography--body-2" id="category0">Algebra</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category1">Groups</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category2">/ Finite groups</h2></a>
+<a href=""><h2 class="mdl-typography--body-1 inline_block" id="category3">/ Finite groups</h2></a>
+</div>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+    },
+    MathML: {
+      useMathMLspacing: true
+    },
+    'HTML-CSS': {
+      availableFonts: ["TeX"],
+      styles: {
+        ".MathJax_Display": {"text-align": "left", margin: "0em 0em"},
+        ".MathJax": {padding: '0px 0px 0px 0px', margin: '0px 0px 0px 0px', 'line-height': '0', 'font-size': '50%', color: '#616161'},
+      }
+    },
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css' integrity='sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb' crossorigin='anonymous'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js' integrity='sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h' crossorigin='anonymous'></script>
+-->
+<div class="hide">
+$
+\def \N {{ \mathbb N }}
+\def \Z {{ \mathbb Z }}
+\def \Q {{ \mathbb Q }}
+\def \R {{ \mathbb R }}
+\def \C {{ \mathbb C }}
+\def \H {{ \mathbb H }}
+\def \S {{ \mathbb S }}
+\def \P {{ \mathbb P }}
+
+\def \to      { \longrightarrow }
+\def \mapsto  { \longmapsto }
+
+\def \then    { ~ \Longrightarrow ~ }
+\def \iff     { ~ \Longleftrightarrow ~ }
+\def \and     { ~ \wedge ~ }
+\def \or      { ~ \vee ~ }
+
+\def \d {{~\rm d}}  % We prepend a space to the differential symbol `d`, for good measure!
+
+\def \IFF     {{\hskip4pt \sc iff \hskip2pt}}
+
+\def \Int   {{ \bf Int }}
+\def \Clo   {{ \bf Clo }}
+\def \Lim   {{ \bf Lim }}
+
+\def \Dom   {{ \bf Dom }}
+\def \Cod   {{ \bf Cod }}
+
+\def \Ker   {{ \bf Ker }}
+\def \Img   {{ \bf Img }}
+\def \coKer {{ \bf coKer }}
+\def \coImg {{ \bf coImg }}
+
+\def \rem {{ \hskip4pt \rm rem \hskip4pt }}
+\def \tab {{ \hskip16pt }}
+$
+</div>
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text" id="article_text">
+<h1 id="four-theorems">Four theorems</h1>
+<p><span><strong>Lagrange’s theorem.</strong></span> The order of every <span><strong>subgroup</strong></span> of a finite <span><strong>group</strong></span> <span class="math inline">\(G\)</span> divides the order of the group <span class="math inline">\(G\)</span>.</p>
+<p>Lagrange’s theorem doesn’t seem too impressive. It doesn’t say anything about <span><em>how many</em></span> subgroups of each size there are (only that there <span><em>could</em></span> be). But I just learned of a beautiful application: using Lagrange’s theorem, it’s easy to prove <span><strong>Fermat’s little theorem</strong></span> <span><em>and</em></span> <span><strong>Euler’s theorem</strong></span>. As a kicker, these two are relevant to understanding <span><strong>RSA encryption</strong></span>.</p>
+<p>In every <span><strong>field</strong></span> <span class="math inline">\(\Z / p\Z\)</span>, if <span class="math inline">\(a\)</span> is nonzero then <span class="math inline">\(a^{p-1} =_p 1\)</span>.</p>
+<p>. In every <span><strong>ring</strong></span> <span class="math inline">\(\Z / n\Z\)</span>, if <span class="math inline">\(a\)</span> is nonzero then <span class="math inline">\(a^{\phi[n]} =_n 1\)</span>.</p>
+<p>Using these two results, we can prove what I like to call "the RSA theorem".</p>
+<p>. Let <span class="math inline">\(d, e \in \Z\)</span>, let <span class="math inline">\(\phi: \Z \to \Z^+\)</span> be <span><strong>Euler’s totient function</strong></span>. If <span class="math inline">\(d \cdot e =_{\phi[n]} 1\)</span>, then <span class="math inline">\(m^{d \cdot e} =_n m\)</span>.</p>
+<p>Here, we’ve written <span class="math inline">\(x =_n y\)</span> what is usually written <span class="math inline">\(x \equiv y \pmod n\)</span>. The latter is read "<span class="math inline">\(x\)</span> is <span><strong>congruent</strong></span> to <span class="math inline">\(y\)</span> <span><strong>modulo</strong></span> <span class="math inline">\(n\)</span>", and it means that <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are <span><em>equal</em></span> in the <span><strong>quotient ring</strong></span> <span class="math inline">\(\Z / n\Z\)</span> (they <span><em>represent</em></span> the same <span><strong>equivalence class</strong></span> if you prefer the language of <span><strong>equivalence relations</strong></span>, or they <span><em>belong</em></span> to the same <span><strong>coset</strong></span> of <span class="math inline">\(n\Z\)</span> if you prefer the language of cosets); it also means that <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> leave the same <span><strong>remainder</strong></span> when <span><strong>divided</strong></span> by <span class="math inline">\(n\)</span> if the computations are carried out in the parent ring <span class="math inline">\(\Z\)</span>. The notation <span class="math inline">\(x =_n y\)</span> means the <span><em>same thing</em></span>, but you may read it as "<span class="math inline">\(x\)</span> is <span class="math inline">\(n\)</span>-equal to <span class="math inline">\(y\)</span>" or "<span class="math inline">\(x\)</span> is equal to <span class="math inline">\(y\)</span> over <span class="math inline">\(\Z / n\Z\)</span>".</p>
+<p>The notation <span class="math inline">\(\Z / n\Z\)</span> is read "the <span><strong>quotient ring</strong></span> of the ring <span class="math inline">\(\Z\)</span> by the ideal <span class="math inline">\(n\Z\)</span>", or "the <span><strong>quotient ring</strong></span> of the ring <span class="math inline">\(\Z\)</span> modulo the ideal <span class="math inline">\(n\Z\)</span>". Here, <span class="math inline">\(n\)</span> is taken to be a <span><em>fixed</em></span>, but arbitrary integer. The set <span class="math inline">\(\Z\)</span> is simply the set</p>
+<p><span class="math display">\[\Z := \{\ldots, -3, -2, -1, 0, 1, 2, 3, \ldots\}\]</span></p>
+<p>of all <span><strong>integers</strong></span>.</p>
+<p>For a fixed integer <span class="math inline">\(n\)</span>, the set <span class="math inline">\(n\Z\)</span> is the set</p>
+<p><span class="math display">\[n\Z := \{\ldots, -3 \cdot n, -2 \cdot n, -1 \cdot n, 0 \cdot n, 1 \cdot n, 2 \cdot n, 3 \cdot n, \ldots\}\]</span></p>
+<p>of all <span><strong>integer multiples</strong></span> of <span class="math inline">\(n\)</span>.</p>
+<p>For a fixed integer <span class="math inline">\(n\)</span>, the quotient ring <span class="math inline">\(\Z / n\Z\)</span> arises by <span><strong>gluing</strong></span> the ring <span class="math inline">\(\Z\)</span> "through" the ideal <span class="math inline">\(n\Z\)</span>. The operationg of <span><strong>gluing</strong></span> is realized through the idea of <span><strong>equivalence relations</strong></span> and <span><strong>equivalence classes</strong></span>, and it amounts to <span><em>relaxing</em></span> the notion of <span><strong>equality</strong></span> by considering to be <span><strong>equal</strong></span> in the quotient ring <span class="math inline">\(\Z / n\Z\)</span> elements that were <span><em>not</em></span> equal in the parent ring <span class="math inline">\(\Z\)</span>.</p>
+<p>The fact that you can fix two arbitrary elements <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> of the ring <span class="math inline">\(\Z\)</span> and consider them over multiple quotient rings of <span class="math inline">\(\Z\)</span> is, in my opinion, quite deep. For example, take <span class="math inline">\(5\)</span> and <span class="math inline">\(13\)</span>. They represent <span><em>different elements</em></span> over <span class="math inline">\(\Z\)</span>, but they represent <span><em>the same element</em></span> over the quotient ring <span class="math inline">\(\Z / 4\Z\)</span>. In the language of arithmetic in <span class="math inline">\(\Z\)</span>, <span class="math inline">\(5\)</span> and <span class="math inline">\(13\)</span> are equal over <span class="math inline">\(\Z / 4\Z\)</span> because their difference is <span><strong>divisible</strong></span> by <span class="math inline">\(4\)</span> (their difference is <span class="math inline">\(-8\)</span>), and also because over <span class="math inline">\(\Z\)</span> they leave the same <span><strong>remainder</strong></span> when <span><strong>divided</strong></span> by <span class="math inline">\(4\)</span> (the remainder is <span class="math inline">\(1\)</span>). In the language of rings, <span class="math inline">\(5\)</span> and <span class="math inline">\(13\)</span> are equal over <span class="math inline">\(\Z / 4\Z\)</span> because they belong to the same <span><strong>coset</strong></span> of the <span><strong>ideal</strong></span> <span class="math inline">\(4\Z\)</span>; namely, they belong to the coset <span class="math inline">\(4\Z + 1\)</span>.</p>
+<p>For each positive integer <span class="math inline">\(n\)</span> you can consider the <span><strong>reduction</strong></span> of <span class="math inline">\(\Z\)</span> modulo <span class="math inline">\(n\)</span>, which amounts to taking the quotient ring of <span class="math inline">\(\Z\)</span> by the ideal <span class="math inline">\(n\Z\)</span>. The ring <span class="math inline">\(\Z\)</span> is related to its quotient rings <span class="math inline">\(\Z / n\Z\)</span> by something called <span><strong>canonical epimorphisms</strong></span>. These canonical epimorphisms allow us to take an element of <span class="math inline">\(\Z\)</span>, say <span class="math inline">\(5\)</span>, and consider <span class="math inline">\(5\)</span> over multiple quotient rings of <span class="math inline">\(\Z\)</span>. In order to go from <span class="math inline">\(5\)</span> as an element of <span class="math inline">\(\Z\)</span> to <span class="math inline">\(5\)</span> as an element of, say, <span class="math inline">\(\Z / 4\Z\)</span>, we apply the canonical epimorphism</p>
+<p><span class="math display">\[\phi_4 : \Z \to \Z / 4\Z\]</span></p>
+<p>to <span class="math inline">\(5\)</span>, which maps <span class="math inline">\(5 \in \Z\)</span> to <span class="math inline">\(5 \in \Z / 4\Z\)</span>.</p>
+<p>Reduction modulo <span class="math inline">\(n\)</span> is particularly important when <span class="math inline">\(n\)</span> is a <span><strong>prime</strong></span>, in which case we call it <span class="math inline">\(p\)</span>. Reduction modulo a <span><strong>prime ideal</strong></span> yields a <span><strong>field</strong></span>, and every field arises as the <span><strong>quotient</strong></span> of some ring by some prime ideal. The <span><strong>localization</strong></span> of a <span><strong>commutative ring</strong></span> at a <span><strong>prime ideal</strong></span> <span class="math inline">\(P\)</span> yields something called a <span><strong>local ring</strong></span> <span class="math inline">\(R^*\)</span> (which is a ring with a unique <span><strong>maximal ideal</strong></span>), and the <span><strong>maximal ideal</strong></span> of the local ring <span class="math inline">\(R^*\)</span> is the ideal <span><strong>generated</strong></span> by <span class="math inline">\(P\)</span> inside of <span class="math inline">\(R^*\)</span>.</p>
+<p>At every ring <span class="math inline">\(R\)</span>, the <span><strong>prime ideals</strong></span> of <span class="math inline">\(R\)</span> form a weird space called the <span><strong>prime spectrum</strong></span> of <span class="math inline">\(R\)</span>, denoted <span class="math inline">\({\rm Spec}[R]\)</span>. In the ring <span class="math inline">\(\Z\)</span>, each prime ideal is generated by a single prime <span class="math inline">\(p\)</span> (but, in general, prime ideals need more than one generator), and so the prime spectrum of <span class="math inline">\(\Z\)</span> arises from the prime numbers. I call <span class="math inline">\({\rm Spec}[R]\)</span> "weird" because its topology deviates substantially from the topology of more familiar spaces like <span class="math inline">\(3\)</span>-dimensional Euclidean space <span class="math inline">\({\mathbb R}^3\)</span>: <span class="math inline">\({\rm Spec}[R]\)</span> is almost never <span><strong>Hausdorff</strong></span>! Non-Hausdorf spaces are rarely studied in analysis, even in topology itself, but they seem quite common in algebraic geometry. Moreover, the <span><strong>topology</strong></span> that comes with <span class="math inline">\({\rm Spec}[R]\)</span>, called the <span><strong>Zariski topology</strong></span>, is riddled with technical deficiencies (I often read that it "doesn’t have enough <span><strong>open sets</strong></span>", but I don’t know what this means). What you can do to get around the weakness of the Zariski topology is replace it with a much more powerful notion of topology: a <span><strong>Grothendieck topology</strong></span> called the <span><strong>étale topology</strong></span>. Under the étale topology, the set of all prime ideals of <span class="math inline">\(R\)</span> becomes the <span><strong>étale spectrum</strong></span> of <span class="math inline">\(R\)</span>.</p>
+<p>Understanding a bit about rings, ideals, and quotient rings is important because it’s a segway into deeper mathematics, and also because it provides a more abstract, general, and ultimately simpler language to talk about results in number theory, like Fermat’s little theorem and Euler’s theorem.</p>
+<p>Euler’s theorem is a generalization of Fermat’s little theorem: every field <span class="math inline">\(\Z / p\Z\)</span> is also a ring <span class="math inline">\(\Z / n\Z\)</span>, because <span class="math inline">\(n\)</span> stands for an arbitrary integer, and every prime <span class="math inline">\(p\)</span> is an integer. Both results are important in <span><strong>cryptography</strong></span>, specifically for RSA encryption.</p>
+<h1 id="what-is-a-coset">What is a coset?</h1>
+<p>In group theory, <span><strong>cosets</strong></span> are some of the most important objects. A <span><strong>coset</strong></span> is a special <span><strong>subset</strong></span> of a group that <span><em>arises</em></span> from a <span><strong>subgroup</strong></span>. To every subgroup <span class="math inline">\(H\)</span> of a group we can associate <span><strong>the set of all cosets</strong></span> of <span class="math inline">\(H\)</span>. You can think of the cosets of the subgroup <span class="math inline">\(H\)</span> as "logically attached" to <span class="math inline">\(H\)</span>. That is: every time you think of a particular group <span class="math inline">\(G\)</span>, you can immediately think of the subgroups of <span class="math inline">\(G\)</span>; and every time you think of a particular subgroup <span class="math inline">\(H\)</span>, you can immediately think of the cosets of <span class="math inline">\(H\)</span>.</p>
+<p>If you see the word <span><strong>coset</strong></span> in the wild, you need 3 pieces of data to specify the coset: <span class="math inline">\(1)\)</span> a <span><strong>group</strong></span> <span class="math inline">\(G\)</span>, a <span><strong>subgroup</strong></span> <span class="math inline">\(H\)</span>, and an <span><strong>element</strong></span> <span class="math inline">\(g\)</span> of <span class="math inline">\(G\)</span>. Then, the coset that these data specify is written as <span class="math inline">\(gH\)</span>. Every element <span class="math inline">\(g\)</span> of <span class="math inline">\(G\)</span> yields one coset <span class="math inline">\(gH\)</span>, but not all of these cosets will be different! If each element <span class="math inline">\(g\)</span> of <span class="math inline">\(G\)</span> were to generate a different coset <span class="math inline">\(gH\)</span>, then every subgroup <span class="math inline">\(H\)</span> would have as many cosets as <span class="math inline">\(G\)</span> has elements (one for each element of <span class="math inline">\(g\)</span>), but this is not the case.</p>
+<p>For <span class="math inline">\(G\)</span> take the additive group of integers <span class="math inline">\(\Z\)</span>. [...]</p>
+<p>In symbols, we can denote <span><strong>the set of all cosets</strong></span> of a subgroup <span class="math inline">\(H\)</span> as <span class="math inline">\({\rm Cosets}[H]\)</span>, and we can write the set of all cosets of <span class="math inline">\(H\)</span> as</p>
+<p><span class="math display">\[{\rm Cosets}[H] := \{ gH\ |\ g \in G\}\]</span></p>
+<p>which reads "<span class="math inline">\({\rm Cosets}[H]\)</span> is <span><strong>defined</strong></span> as the set of all sets of the form <span class="math inline">\(gH\)</span>, as <span class="math inline">\(g\)</span> ranges over <span class="math inline">\(G\)</span>". We can also build the set of all cosets of all subgroups of <span class="math inline">\(G\)</span>, but let’s not get too carried away.</p>
+<p>Sometimes <span class="math inline">\({\rm Cosets}[H]\)</span> will form a <span><strong>group</strong></span> under the operation it inherits from the parent group <span class="math inline">\(G\)</span>, in which case the group <span class="math inline">\({\rm Cosets}[H]\)</span> is written <span class="math inline">\(G / H\)</span>, which reads "<span class="math inline">\(G\)</span> modulo <span class="math inline">\(H\)</span>". The group <span class="math inline">\(G / H\)</span> is then called "the quotient group of <span class="math inline">\(G\)</span> by <span class="math inline">\(H\)</span>", or the "quotient group of <span class="math inline">\(G\)</span> modulo <span class="math inline">\(H\)</span>". Whether <span class="math inline">\({\rm Cosets}[H]\)</span> is a group or not hinges on a particular property that <span class="math inline">\(H\)</span> must satisfy.</p>
+<h1 id="three-lemmas">Three lemmas</h1>
+<p>So, how do we prove Lagrange’s theorem? We’ll be using a few technical lemmas.</p>
+<p>Let <span class="math inline">\(G\)</span> be a group, let <span class="math inline">\(H \subseteq G\)</span> be a subgroup. The cosets of <span class="math inline">\(H\)</span> form a <span><strong>partition</strong></span> of <span class="math inline">\(G\)</span>.</p>
+<p>Let <span class="math inline">\(G\)</span> be a group, let <span class="math inline">\(H \subseteq G\)</span> be a subgroup, let <span class="math inline">\(g \in G\)</span>. If <span class="math inline">\(g \notin H\)</span>, then <span class="math inline">\(H\)</span> is <span><strong>disjoint</strong></span> from the coset <span class="math inline">\(gH\)</span>.</p>
+<p>What is... a <span><strong>group</strong></span>?</p>
+<p>What is... a <span><strong>field</strong></span>?</p>
+<p>What is... a <span><strong>ring</strong></span>?</p>
+<p>What is... a <span><strong>proof</strong></span>?</p>
+</div>
+<!-- ---------------------------------------------------------------------- -->
+</div> <!-- <div class='mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'> -->
+</div> <!-- <div class='mdl-grid article_container'> -->
+<a id="bottom"></a>
+<footer class="mdl-mini-footer mdl-color--blue">
+<div class="mdl-mini-footer--left-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="/" title="Home"><i class="material-icons">home</i></a>
+<!-- <a href='/#set_theory'      title='Set theory'      class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_set_theory.svg'/></a> -->
+<!-- <a href='/#analysis'        title='Analysis'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>gesture</i></a> -->
+<!-- <a href='/#algebra'         title='Algebra'         class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>ac_unit</i></a> -->
+<!-- <a href='/#topology'        title='Topology'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><i class='material-icons'>all_inclusive</i></a> -->
+<!-- <a href='/#geometry'        title='Geometry'        class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_geometry.svg'/></a> -->
+<!-- <a href='/#category_theory' title='Category theory' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img class='drawer_icon' src='img/icon_category_theory.png'/></a> -->
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://www.youtube.com/c/mathisart" title="YouTube"><img class="drawer_icon" src="img/icon_youtube.svg"/></a>
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="https://github.com/etale-cohomology" title="GitHub"><img class="drawer_icon" src="img/icon_github.svg"/></a>
+</div>
+<div class="mdl-mini-footer--right-section">
+<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="https://github.com/etale-cohomology/mathisart-website" title="Source"><i class="material-icons">code</i></a>
+</div>
+</footer>
+</main>
+</div>
+</body>
+</html>

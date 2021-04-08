@@ -1,0 +1,87 @@
+
+A {\bf singleton set} (or just a {\bf singleton}) is a set with {\it exactly one} element. There is "essentially just one" singleton set.
+This a very different situation than that for the {\bf empty set}, where we know there's {\it exactly one} empty set.
+Why does this happen? How does this happen? We try to explain this.
+
+\section{Any two singleton sets are "essentially the same"}
+
+$\tab$ {\bf Definition}. A {\bf set-isomorphism} is a
+\href{https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection}{{\bf bijection}}
+between sets.
+
+$\tab$ {\bf Theorem}. There exists a unique set-isomorphism between any two singleton sets.
+There's "exactly one" singleton set, not necessarily because any two singleton sets have the same elements
+(which is how {\bf equality} of sets is defined),
+but because, given any two singleton sets, there's exactly one set-isomorphism (ie. a bijection) between the two.
+This allows us to say there's "exactly one" singleton set even when there {\it really} isn't exactly one singleton set.
+In other words, this allows us to say there's a {\it unique} singleton set,
+provided we're willing to consider two singletons sets "the same" whenever there exists a unique set-isomorphism between the two.
+The jargon for this is: there's a unique singleton set,
+\href{https://en.wikipedia.org/wiki/Up_to}{up to}
+unique set-isomorphism.
+
+$\tab$ {\it Proof}. Why do we talk about "the" singleton set? Is there {\it only one} singleton set?
+For instance, using the
+\href{https://en.wikipedia.org/wiki/Axiom_of_extensionality}{{\bf axiom of extension}}
+(aka. the axiom of extensionality), we can prove that there's only one empty set.
+This is because the axiom of extension says that {\it equality of sets} is
+\href{https://en.wikipedia.org/wiki/If_and_only_if}{{\bf materially equivalent}}
+to {\it equality of their elements}. More precisely, two sets are equal
+\href{https://en.wikipedia.org/wiki/Logical_biconditional}{{\bf IFF}}
+they have exactly the same elements.
+If there were two empty sets, then for them to be not equal they'd have to differ by (at least) one element:
+one of the two empty sets would have to have an element that is not in the other.
+But this can't happen because an empty set has, by definition, no elements.
+
+So, what about singleton sets? There's certainly more than one,
+because, for instance, the singleton set $\{0\}$ is not the same as the singleton set $\{1\}$:
+the set $\{0\}$ has the one element $0$, and the set $\{1\}$ has the one element $1$;
+and $0$ is {\it not} equal to $1$, under {\it most} reasonable interpretations of the symbol $0$ and the symbol $1$
+(for example, in the
+\href{https://ncatlab.org/nlab/show/trivial+ring}{zero ring},
+$0$ {\it does} equal $1$).
+
+But these two sets are {\bf set-isomorphic}: there exists a {\bf set-isomorphism} (ie. a {\bf bijection}) between the two.
+What does a bijection between $\{0\}$ and $\{1\}$ look like?
+Well, for starters, what does a {\bf function} between $\{0\}$ and $\{1\}$ look like?
+Consider a function $f: \{0\} \to \{1\}$ from $\{0\}$ to $\{1\}$.
+By definition, the function $f$ must map each element of $\{0\}$ to exactly one element of $\{1\}$.
+But $\{0\}$ has exactly one element, namely $0$, so all we need to decide is: what is the image of $0$ under $f$?
+In other words, what is $f[0]$? Well, how many choices do we have?
+For each element of $\{1\}$ we have one choice, and each choice leads to a different function.
+But $\{1\}$ only has one elements, namely $1$, so there's only one choice:
+the only possible answer is that $f$ must map $0$ to $1$, meaning $f: 0 \mapsto 1$ or equivalently $f[0] = 1$.
+
+So, there's only one function from $\{0\}$ to $\{1\}$. And this function $f$ is very special: it's a {\it bijection}.
+Why is $f$ a bijection? Because $f$ is an {\bf injection} (distinct elements of $\{0\}$ go to distinct elements of $\{1\}$),
+and because $f$ is a {\bf surjection} (every element of $\{1\}$ is the image of at least one element of $\{0\}$).
+So, $f$ is an {\bf isomorphism of sets}.
+
+And, since there's {\it only one} function from $\{0\}$ to $\{1\}$, this bijection/set-isomorphism is {\it unique}.
+This is very important, so let's say it again: {\it there's a unique set-isomorphism from $\{0\}$ to $\{1\}$}.
+But when arguing this way we never used any specific properties of $0$ or of $1$.
+All we used was the fact that the sets $\{0\}$ and $\{1\}$ have {\it exactly one} element.
+So, the same argument applies to any two sets with exactly one element (any two {\bf singleton} sets). How?
+
+Well, let $A$ be an arbitrary (but fixed) singleton set, and let $B$ be an arbitrary (but fixed) singleton set. \\
+Since $A$ is a singleton set, we can write $A$ as $\{a\}$, where the symbol $a$ is an arbitrary label for whatever element the singleton set $A$ happens to contain. \\
+Since $B$ is a singleton set, we can write $B$ as $\{b\}$, where the symbol $b$ is an arbitrary label for whatever element the singleton set $B$ happens to contain. \\
+
+If it happens that $a$ equals $b$, then $\{a\}$ and $\{b\}$ have exactly the same elements, and
+it follows that $\{a\}$ equals $\{b\}$ (by the {\bf axiom of extension}).
+
+If it happens that $a$ does {\it not} equal $b$, then $\{a\}$ and $\{b\}$ don't have exactly the same elements,
+and it follows that $\{a\}$ does {\it not} equal $\{b\}$ (by the {\bf axiom of extension}).
+Still, we claim there's a unique set-isomorphism between $\{a\}$ and $\{b\}$.
+To see this, let $f: \{a\} \to \{b\}$ be a {\bf function} from $\{a\}$ to $\{b\}$.
+By the definition of function, $f$ must map each element of $\{a\}$ to exactly one element of $\{b\}$.
+But $\{a\}$ has exactly one element (namely, $a$) and $\{b\}$ has exactly one element (namely, $b$), so the only possible function is $f : a \mapsto b$,
+which is the function that maps $a$ to $b$.
+This function is both an {\bf injection} (distinct elements of $\{a\}$ go to distinct elements of $\{b\}$) and
+a {\bf surjection} (every element of $\{b\}$ is the image of at least one element of $\{a\}$).
+So, it turns out that $f: a \mapsto b$ is a {\bf bijection}.
+Single $f$ is the only possible function from $\{a\}$ to $\{b\}$, this bijection is {\it unique}.
+But a bijection is, by definition, a {\bf set-isomorphism} (aka. an isomorphism of sets).
+So, {\it there's a unique set-isomorphism} from $\{a\}$ to $\{b\}$.
+Since $\{a\}$ and $\{b\}$ are arbitrary singleton sets, it follows that there's a unique set-isomorphism between any two singleton sets. \\
+$\tab$ $\square$

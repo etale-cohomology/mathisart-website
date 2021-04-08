@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>mathIsART | </title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>  <!-- Key for responsiveness! -->
+
+    <link rel='icon' href='img/favicon.png'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,800|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+
+    <style>
+      html,body,div,span,a,h1,h2,h3,h4,h5,h6,p,code,ol,ul,li,form,canvas,embed,header,footer{ margin:0; padding:0; border:0; line-height:1; -webkit-text-size-adjust:100%; }
+      *, *:before, *:after{ box-sizing:border-box; box-sizing:inherit; }
+      *,html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
+      a{ text-decoration:none; color:#00aaff; }  /* #2196f3 */
+
+      /*----------------------------------------------------------------------*/
+      .block{        display:block; }
+      .inline{       display:inline; }
+      .inline_block{ display:inline-block; }
+      .none{         display:none; }
+      .hide{         display:none; }
+
+      .text_center{ text-align:center; }
+      .text_left{   text-align:left; }
+
+      .vcenter_parent{ display:flex; display:-webkit-flex; display:-moz-box-flex; display:-ms-flexbox; }  /*Just plain flexbox!*/
+      .vcenter_child{  align-self:center; -webkit-align-self:center; }
+
+      .red{    color:#ff8888; }
+      .green{  color:#66ee66; }
+      .blue{   color:#00aaff; }
+      .purple{ color:#8888ff; }
+
+      /*----------------------------------------------------------------------*/
+      .article_headline{ font-family:'Montserrat'; font-weight:bold; font-size:64px; margin-left:16px; }
+      @media screen and (max-width:800px){ .article_headline{ font-size:32px; } }
+
+      #article_text{      padding-bottom:32px; }
+      .article_container{ width:99%; padding:0; width:100%; }
+
+      h1{ padding:16px; font-family:'Montserrat'; font-weight:bold; font-size:32px; }
+      p{  max-width:96%; font-size:14px; margin:0 auto; margin-bottom:16px; }  /*letter-spacing:-1px;*/
+
+      .minilogo{ width:48px; height:48px; background:#f8f8f8 url('img/mathisart_small.png') no-repeat center; background-size:50%; border-radius:24px; margin:0 16px 0 24px; }
+
+      body::before{ background:#080808; background-size:cover; background-attachment:fixed; content:''; will-change:transform; z-index:-1; left:0; right:0; bottom:0; top:0; position:fixed; }
+
+      .btn_back{ position:absolute; color:white; z-index:1; top:16px; left:16px; }
+      .btn_down{ position:absolute; color:white; z-index:1; top:16px; right:16px; }
+
+      .drawer_icon{ width:24px; height:24px; }
+
+      .navigation{ display:flex; display:-webkit-flex; display:-ms-flexbox; -webkit-flex-direction:row; -ms-flex-direction:row; flex-direction:row; -webkit-justify-content:space-between; -ms-flex-pack:justify; justify-content:space-between; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
+
+      /*----------------------------------------------------------------------*/
+      .mdl-layout__content{ padding-top:128px; position: relative; -webkit-overflow-scrolling: touch;  }
+      .mdl-mini-footer{     margin-top:128px; padding:32px; }
+
+      .mdl-card__media{           background:url('img/mathisart_big.png') no-repeat center; height:300px; cursor:pointer; }
+      .mdl-card__supporting-text{ padding:0; margin-top:16px; width:100%; }
+
+      /*----------------------------------------------------------------------*/
+      video{ width:960; height:540; margin:0 auto; display:block; max-width:95%; }
+      .video_controls{ width:960; margin:7px auto 28px auto; display:block; max-width:95%; }
+      .vid{ width:853px; margin:0 auto; max-width:100%; }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-63802655-1'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-63802655-1');
+    </script>
+<!-- 
+    <script type='text/x-mathjax-config'>
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+        },
+        MathML: {
+          useMathMLspacing: true
+        },
+        'HTML-CSS': {
+          availableFonts: ["TeX"],
+          styles: {
+            ".MathJax_Display": {"text-align": "left", margin: "0em 0em"},
+            ".MathJax": {padding: '0px 0px 0px 0px', margin: '0px 0px 0px 0px', 'line-height': '0', 'font-size': '50%', color: '#616161'},
+          }
+        },
+      });
+    </script>
+ -->
+    <script src='material.min.js'></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script> -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full'></script> -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML'></script> -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script> -->
+
+    <!--
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css' integrity='sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb' crossorigin='anonymous'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js' integrity='sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h' crossorigin='anonymous'></script>
+    -->
+  </head>
+
+  <body>
+<!-- 
+    <div class='hide'>
+    $
+\def \N {{ \mathbb N }}
+\def \Z {{ \mathbb Z }}
+\def \Q {{ \mathbb Q }}
+\def \R {{ \mathbb R }}
+\def \C {{ \mathbb C }}
+\def \H {{ \mathbb H }}
+\def \S {{ \mathbb S }}
+\def \P {{ \mathbb P }}
+
+\def \to      { \longrightarrow }
+\def \mapsto  { \longmapsto }
+
+\def \then    { ~ \Longrightarrow ~ }
+\def \iff     { ~ \Longleftrightarrow ~ }
+\def \and     { ~ \wedge ~ }
+\def \or      { ~ \vee ~ }
+
+\def \d {{~\rm d}}  % We prepend a space to the differential symbol `d`, for good measure!
+
+\def \IFF     {{\hskip4pt \sc iff \hskip2pt}}
+
+\def \Int   {{ \bf Int }}
+\def \Clo   {{ \bf Clo }}
+\def \Lim   {{ \bf Lim }}
+
+\def \Dom   {{ \bf Dom }}
+\def \Cod   {{ \bf Cod }}
+
+\def \Ker   {{ \bf Ker }}
+\def \Img   {{ \bf Img }}
+\def \coKer {{ \bf coKer }}
+\def \coImg {{ \bf coImg }}
+
+\def \rem {{ \hskip4pt \rm rem \hskip4pt }}
+\def \tab {{ \hskip16pt }}
+    $
+    </div>
+ -->
+    <div class='demo-blog--blogpost mdl-layout mdl-js-layout'>
+
+      <main class='mdl-layout__content'>
+
+        <a href='/#grid' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_back' title='Go back' role='button'><i class='material-icons'>arrow_back</i></a>
+        <a href='#bottom' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn_down' title='Scroll to bottom' role='button'><i class='material-icons'>arrow_downward</i></a>
+
+        <div class='mdl-grid article_container'>
+          <div class='mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-card__media mdl-color--grey-900 vcenter_parent'>
+              <h1 id='title_article' class='mdl-color-text--grey-50 article_headline vcenter_child'></h1>
+            </div>
+
+            <div class='mdl-card__supporting-text vcenter_parent'>
+              <a href='/#grid'><div class='minilogo inline_block vconter_child'></div></a>
+              <div class='text_left inline_block vcenter_child'>
+                <a href=''><h2 id='category0' class='mdl-typography--body-2'></h2></a>
+                <a href=''><h2 id='category1' class='mdl-typography--body-1 inline_block'></h2></a>
+                <a href=''><h2 id='category2' class='mdl-typography--body-1 inline_block'></h2></a>
+                <a href=''><h2 id='category3' class='mdl-typography--body-1 inline_block'></h2></a>
+              </div>
+            </div>

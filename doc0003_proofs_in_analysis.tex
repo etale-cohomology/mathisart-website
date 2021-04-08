@@ -1,0 +1,1847 @@
+% t tex proofs_in_analysis.tex  &&  sheaf proofs_in_analysis.dvi
+% t tex proofs_in_analysis.tex  &&  t dvipdfm -p letter -m 0.956 -x 0.95in -y 0.95in proofs_in_analysis.dvi  &&  mupdf-gl proofs_in_analysis.pdf
+
+% mupdf-gl  proofs_in_analysis.pdf
+% mupdf-x11 proofs_in_analysis.pdf
+% xpdf      proofs_in_analysis.pdf
+
+% `aka` should go *without* parentheses!
+
+% TeXBook p71
+% TeX recognizes several kinds of infinity, some of which are “more infinite” than others.
+% You can say both \vfil and \vfill; the second is stronger than the first.
+% In other words, if no other infinite stretchability is present, \vfil will expand to fill the remaining space;
+% but, if both \vfil and \vfill are present simultaneously, the \vfill effectively prevents \vfil from stretching.
+% You can think of it as if \vfil has one mile of stretchability, while \vfill has a trillion miles.
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\nonstopmode
+\parindent=0pt
+
+\magnification1000  % Global font size! Activate mag@960 when rendering to PDF!  BUG in TeX/DVI? This needs to go BEFORE hsize/vsize, for some reason!
+\hsize  = 8.7in  % Dimension of the TEXT BLOCK! Default vals are \hsize=6.5in, \vsize=8.9in
+\vsize  =11.0in  % Dimension of the TEXT BLOCK! Default vals are \hsize=6.5in, \vsize=8.9in
+\hoffset=-0.9in  % Position  of the TEXT BLOCK! Default vals are 1 inch in from the left (\hoffset=0pt) and 1 inch from the top (\voffset=0pt). We need this for dvipdfm (whose output goes to chrome/xpdf) and xdvi!
+\voffset=-0.9in  % Position  of the TEXT BLOCK! Default vals are 1 inch in from the left (\hoffset=0pt) and 1 inch from the top (\voffset=0pt). We need this for dvipdfm (whose output goes to chrome/xpdf) and xdvi!
+\def\makeheadline{\vbox to 0pt{\vskip-22.5pt \line{\vbox to8.5pt{}\the\headline}\vss}\nointerlineskip}  % Set the spacing between the HEADER and the TEXT BLOCK!
+\def\makefootline{\baselineskip24pt\lineskiplimit0pt\line{\the\footline}}                               % Set the spacing between the FOOTER and the TEXT BLOCK!
+
+% \magnification1000  % Global font size! Activate mag@960 when rendering to PDF!  BUG in TeX/DVI? This needs to go BEFORE hsize/vsize, for some reason!
+% \hsize  = 8.3in  % Dimension of the TEXT BLOCK! Default vals are \hsize=6.5in, \vsize=8.9in
+% \vsize  =10.5in  % Dimension of the TEXT BLOCK! Default vals are \hsize=6.5in, \vsize=8.9in
+% \hoffset=-0.9in  % Position  of the TEXT BLOCK! Default vals are 1 inch in from the left (\hoffset=0pt) and 1 inch from the top (\voffset=0pt). We need this for dvipdfm (whose output goes to chrome/xpdf) and xdvi!
+% \voffset=-0.9in  % Position  of the TEXT BLOCK! Default vals are 1 inch in from the left (\hoffset=0pt) and 1 inch from the top (\voffset=0pt). We need this for dvipdfm (whose output goes to chrome/xpdf) and xdvi!
+% \def\makeheadline{\vbox to 0pt{\vskip-22.5pt \line{\vbox to8.5pt{}\the\headline}\vss}\nointerlineskip}  % Set the spacing between the HEADER and the TEXT BLOCK!
+% \def\makefootline{\baselineskip24pt\lineskiplimit0pt\line{\the\footline}}                               % Set the spacing between the FOOTER and the TEXT BLOCK!
+
+% \magnification1000  % Global font size! Activate mag@960 when rendering to PDF!  BUG in TeX/DVI? This needs to go BEFORE hsize/vsize, for some reason!
+% \hsize  = 8.1in  % Dimension of the TEXT BLOCK! Default vals are \hsize=6.5in, \vsize=8.9in
+% \vsize  =11.5in  % Dimension of the TEXT BLOCK! Default vals are \hsize=6.5in, \vsize=8.9in
+% \hoffset=-0.9in  % Position  of the TEXT BLOCK! Default vals are 1 inch in from the left (\hoffset=0pt) and 1 inch from the top (\voffset=0pt). We need this for dvipdfm (whose output goes to chrome/xpdf) and xdvi!
+% \voffset=-0.9in  % Position  of the TEXT BLOCK! Default vals are 1 inch in from the left (\hoffset=0pt) and 1 inch from the top (\voffset=0pt). We need this for dvipdfm (whose output goes to chrome/xpdf) and xdvi!
+% \def\makeheadline{\vbox to -5pt{\vskip-22.5pt \line{\vbox to8.5pt{}\the\headline}\vss}\nointerlineskip}  % Set the spacing between the HEADER and the TEXT BLOCK!
+% \def\makefootline{\baselineskip10pt\lineskiplimit0pt\line{\the\footline}}                                % Set the spacing between the FOOTER and the TEXT BLOCK!
+
+\special{background rgb 0.0313 0.0313 0.0313}  % Background color!
+\special{color push rgb 1.0000 1.0000 1.0000}  % Foreground color! IF we don't PUSH the foreground color, THEN the color functions (eg. `\red{}`) don't work!
+
+% -----------------------------------------------------------------------------------------------------------------------------#
+\font\tensc=cmcsc10 at 10pt % small-caps  {\sc *}  % NOTE! `\tensc` is not a TeX command!
+\def\sc {\tensc}  % Define a new {\sc *} command, much like {\bf *} and {\it *}. DON'T put spaces!!
+
+% Load bigger fonts!
+\font\titlefont     =cmb10 at 50pt
+\font\subtitlefont  =cmr10 at 20pt
+\font\chapterfont   =cmssbx10 at 13pt
+\font\sectionfont   =cmssbx10 at 12pt
+\font\subsectionfont=cmssbx10 at 10pt
+
+% -----------------------------------------------------------------------------------------------------------------------------#
+% \def\l    #1{{\special{color push rgb 1.0000 1.0000 1.0000}#1\special{color pop}}}  % WARN! \l is TAKEN BY TEX!!
+% \def\d    #1{{\special{color push rgb 0.0313 0.0313 0.0313}#1\special{color pop}}}  % WARN! \d is TAKEN BY TEX!!
+\def\r    #1{{\special{color push rgb 1.0000 0.4000 0.4000}#1\special{color pop}}}
+\def\g    #1{{\special{color push rgb 0.3000 0.7000 0.6000}#1\special{color pop}}}
+\def\b    #1{{\special{color push rgb 0.0000 0.6000 1.0000}#1\special{color pop}}}  % WARN! \b is TAKEN BY TEX!!
+\def\p    #1{{\special{color push rgb 0.5000 0.4000 0.9000}#1\special{color pop}}}
+\def\a    #1{{\special{color push rgb 1.0000 0.2000 0.4000}#1\special{color pop}}}
+\def\y    #1{{\special{color push rgb 1.0000 1.0000 0.4000}#1\special{color pop}}}  % 0.900 0.900 0.500
+\def\pk   #1{{\special{color push rgb 1.0000 0.7000 0.7000}#1\special{color pop}}}
+% WARN! \u is TAKEN BY TEX!!
+% WARN! \v is TAKEN BY TEX!!
+% WARN! \t is TAKEN BY TEX!!
+% WARN! \c is TAKEN BY TEX!!
+
+% \def\lbf  #1{{\special{color push rgb 1.0000 1.0000 1.0000}{\bf #1}\special{color pop}}}
+% \def\dbf  #1{{\special{color push rgb 0.0313 0.0313 0.0313}{\bf #1}\special{color pop}}}
+\def\rbf  #1{{\special{color push rgb 1.0000 0.4000 0.4000}{\bf #1}\special{color pop}}}
+\def\gbf  #1{{\special{color push rgb 0.3000 0.7000 0.6000}{\bf #1}\special{color pop}}}
+\def\bbf  #1{{\special{color push rgb 0.0000 0.6000 1.0000}{\bf #1}\special{color pop}}}
+\def\pbf  #1{{\special{color push rgb 0.5000 0.4000 0.9000}{\bf #1}\special{color pop}}}
+\def\abf  #1{{\special{color push rgb 1.0000 0.2000 0.4000}{\bf #1}\special{color pop}}}
+\def\ybf  #1{{\special{color push rgb 1.0000 1.0000 0.4000}{\bf #1}\special{color pop}}}  % 0.900 0.900 0.500
+\def\pkbf #1{{\special{color push rgb 1.0000 0.7000 0.7000}{\bf #1}\special{color pop}}}
+
+% \def\lsc  #1{{\special{color push rgb 1.0000 1.0000 1.0000}{\sc #1}\special{color pop}}}
+% \def\dsc  #1{{\special{color push rgb 0.0313 0.0313 0.0313}{\sc #1}\special{color pop}}}
+\def\rsc  #1{{\special{color push rgb 1.0000 0.4000 0.4000}{\sc #1}\special{color pop}}}
+\def\gsc  #1{{\special{color push rgb 0.3000 0.7000 0.6000}{\sc #1}\special{color pop}}}
+\def\bsc  #1{{\special{color push rgb 0.0000 0.6000 1.0000}{\sc #1}\special{color pop}}}
+\def\psc  #1{{\special{color push rgb 0.5000 0.4000 0.9000}{\sc #1}\special{color pop}}}
+\def\asc  #1{{\special{color push rgb 1.0000 0.2000 0.4000}{\sc #1}\special{color pop}}}
+\def\ysc  #1{{\special{color push rgb 1.0000 1.0000 0.4000}{\sc #1}\special{color pop}}}  % 0.900 0.900 0.500
+\def\pksc #1{{\special{color push rgb 1.0000 0.7000 0.7000}{\sc #1}\special{color pop}}}
+
+% -----------------------------------------------------------------------------------------------------------------------------#
+\def\N {{\bf N}}
+\def\Z {{\bf Z}}
+\def\Q {{\bf Q}}
+\def\R {{\bf R}}
+\def\C {{\bf C}}
+% \def \H {{\bf H}}  % WARN! \H is TAKEN BY TEX!!
+\def\S {{\bf S}}
+\def\P {{\bf P}}
+
+% -----------------------------------------------------------------------------------------------------------------------------#
+\def\hs {\hskip10pt}  % hspace!
+\def\vs {\vskip8pt}   % vspace!
+\def\pagenumbers {\footline{\hss\tenrm\folio\hss}}
+
+\def\center     #1{{\leftskip=0pt plus 1fil \rightskip=\leftskip \parfillskip=0pt #1 \par}}
+\def\chapter    #1{{\vfill\break             \chapterfont \center{(\a{Chapter})   \hskip16pt #1} \vskip4pt}}
+\def\section    #1{{\hskip8pt\hrule\vskip1pt \sectionfont         (\a{Section})   \hskip16pt #1  \vskip4pt}}
+\def\subsection #1{{\hskip4pt                \subsectionfont      (\a{subsection})\hskip16pt #1  \vskip4pt}}
+
+\def\definition  {\par\asc{DEFINITION}. \hskip4pt}
+\def\theorem     {\par\asc{THEOREM}.    \hskip4pt}
+\def\lemma       {\par\asc{LEMMA}.      \hskip4pt}
+\def\proposition {\par\asc{PROPOSITION}.\hskip4pt}
+\def\corollary   {\par\asc{COROLLARY}.  \hskip4pt}
+\def\axiom       {\par\asc{AXIOM}.      \hskip4pt}
+\def\proof       {\par\asc{proof}.      \hskip4pt}
+\def\remark      {\par\asc{remark}.     \hskip4pt}
+\def\example     {\par\asc{example}.    \hskip4pt}
+
+% -----------------------------------------------------------------------------------------------------------------------------#
+% NOTE! It's best to use as few custom commands as possible, particularly when they're simple!
+\def\to     {\p\longrightarrow}
+\def\from   {\p\longleftarrow}
+\def\mapsto {\p\longmapsto}
+
+\def\equals  {\hskip1pt \a{=}  \hskip1pt}
+\def\pipe    {\hskip4pt \a{|}  \hskip4pt}
+
+\def\lthen  {\Longrightarrow}                                  % Logical implication!
+\def\liff   {\Longleftrightarrow}                              % Logical biconditional!
+\def\lnthen {{\Relbar{\mkern-11mu}/{\mkern-11mu}\Rightarrow}}  % Logical non-implication!
+
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\nopagenumbers
+
+\topglue 0pt plus 2fill  % Vertically center text?
+{\titlefont \center{Proofs in Analysis}}
+{\subtitlefont \center{no step left behind}}
+
+\topglue 0pt plus 4fill  % Vertically center text?
+{\center{Diego Cortez}}
+{\center{diego@mathisart.org}}
+{\center{mathisart.org}}
+
+\vfill\break
+\pagenumbers
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{Preface}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf What is mathematics?}
+
+Mathematics is the \abf{exercise} of \abf{reason}. (And the study of reason itself.) \par
+% Mathematics is the \a{\bf exercise} of reason, the exploration of the mathematical realm, the search for truth, the study of reason itself.
+
+\vs
+{\bf To do} mathematics is {\bf to exercise} our reason. \par
+{\bf To exercise} our reason is {\bf to do} mathematics. \par
+
+\vs
+Mathematics is (also) the exploration of the \abf{math realm}.
+
+% NOTE! I don't like including the next 2 lines here, because: 0) math is about TRUTH (not ideas), 1) it overcrowds on otherwise pristine and clear section
+% \vs
+% Mathematics is {\it not} about numbers. \par
+% Mathematics is about {\bf ideas}.
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf The cornerstone of mathematics}
+
+\a{\bf Truth} is the cornerstone of mathematics. Without truth, there is no mathematics. \par
+
+\vs
+I like to think that the ``goal'' of mathematics is {\bf to find truths}. Or to find beautiful truths. Or something. \par
+How do we go from one truth to the next? Via {\bf proof}. \par
+
+\vs
+\a{\bf Proof} is the lifeblood of mathematics, connecting truth to truth. \par  % conectando verdad a verdad
+
+\vs
+Come to think of it, maybe the ``goal'' of math is {\it not} to find truths, but {\bf to find proofs}...
+since {\bf truth} is often inaccessible to math (in part due to incompleteness, nonconstructibility, uncertainty, undecidability, incomputability, ...). \par
+\halign{#\hfil & #\hfil & #\hfil \cr
+    \hs  {\it Not all that is {\bf true}   can be {\bf proven}},   & \hs ({\bf incompleteness}) \cr
+    \hs  {\it not all that    {\bf exists} can be {\bf shown}}.    & \hs ({\bf nonconstructibility}) \cr
+    % \hs not all that    unfolds      can be forecast, & ({\it uncertainty}) \cr
+    % \hs not all those who wander are lost. \cr
+    % \hs not all that we exists can be reasoned, \cr
+    % \hs not all those who wander are lost. \cr
+    % \hs not everything that {\it is true} can {\it be proven} to be {\bf true},  \cr
+    % \hs not everything that {\it exists}  can {\it be proven} to {\bf exist}, \cr
+}
+
+% If you believe that {\bf math is about truth}, then you also believe that {\bf math is about proofs}. This book is about proofs. In {\bf analysis}.
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% Understanding math ideas is hard. \par
+% Explaining    math ideas in writing is harder. \par
+% Understanding math ideas in writing is even harder. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf Two kinds of proof}
+
+There are two kinds of proofs: {\bf formal proofs} and {\bf``social'' proofs}. \par
+
+\vs
+A {\bf formal proof} is a mechanical {\it tree} of (logical) {\bf sentences}. \par % Each {\bf sentence} is an {\bf axiom}, a {\bf hypothesis}, or a {\bf theorem}. \par
+The {\it nodes} of the tree (ie. the sentences) are connected by {\bf deduction}. \par
+The {\it root} of the tree is the sentence that we're proving. \par
+Formal proofs are {\bf rigorous}. \par
+
+\vs
+A {\bf ``social'' proof} is a flabby argument for why a (logical) sentence {\it may} be {\bf true}. \par
+``Social'' proofs give us a {\bf rough idea} of why a sentence {\it may} be {\bf true}. \par
+``Social'' proofs {\it rarely} give us a {\bf good idea} in practice, since most of them {\bf skip lots of steps} (or worse: they leave them as ``{\it exercise}''). \par
+``Social'' proofs are what we find in most textbooks (like this one). \par
+``Social'' proofs are {\bf not rigorous}, by their vagueness and incompleteness. \par
+
+\vs
+Formal     proofs are the {\bf machine code}     of mathematics. \par
+``Social'' proofs are the {\bf natural language} of mathematics. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf Skipping steps is evil}
+
+There's {\it exactly one} trivial thing in math: {\bf skipping steps}. \par
+
+\vs
+It's easy to ``prove'' something when we {\bf skip steps}. For example, \par
+
+\vs
+\theorem The Riemann hypothesis. \par
+\proof   Exercise. \par
+
+\vs
+A proof that skips steps is {\bf no proof at all}.
+Just as the mathematics community shouldn't accept proofs with holes, a math student should {\it never} accept a proof with holes.
+% (In particular, a math student should never {\it pay} for a textbook whose proofs have holes or whose exercises have no solutions.
+% Heck, if my doctor told me go to cure myself, I'd realize he's a sham and pay that sucker no dime.)
+\par
+
+\vs
+Yet, my experience is that proofs in textbooks are often full of holes: \par
+  \hs stuff that is assumed, \par
+  \hs stuff that is ambiguous, \par
+  \hs stuff that is unclear, \par
+  \hs stuff that is left to the reader, \par
+  \hs stuff that is left as ``exercise'', \par
+  \hs stuff that is left to context, \par
+  \hs stuff that depends on stuff that hasn't been proved, \par
+  \hs stuff that depends on itself (circularity), \par
+  \hs stuff that is simply ignored. \par
+All this makes for bad explanations. Good mathematics is pristine, precise. Bad explanations are bad mathematics.
+
+\vs
+It takes intelligence to communicate clearly. It's trivial to speak gobbledygook that others don't understand. \par
+
+\vs
+The {\bf burden of explanation} is on the teacher/writer, {\it not} on the student/reader! \par
+A good doctor doesn't tell patients to ``treat themselves''. A student's job is {\it not} to ``convince himself''. \par
+It's the {\it responsibility} of the teacher/writer to make himself understood. If he's not understood, then {\bf he has failed}. Badly. \par
+
+% % ------------------------------------------------------------------------------------------------------------------------------
+% \vs\hrule\vskip1pt
+% \subsection{\bf Communication is not for everyone}
+
+% It takes intelligence to communicate clearly. It's easy to speak gobbledygook that others don't understand. It's hard to be articulate.
+
+% \vs
+% If a student doesn't understand something, it's {\it because} the teacher has {\bf failed} to explain it. \par
+% That's understandable. {\bf Explaining stuff} is not for everyone. \par
+
+% \vs
+% Explaining stuff is only for {\it smart} people. \par
+% Explaining {\it hard} stuff... is only for the smartest. (I'm {\it not} smart.)
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf Proofs: the good, the bad, and the awesome}
+
+A {\bf good proof} is a proof where {\bf every step is ``easy'' to follow}, {\it and} {\bf no step is skipped}. \par
+
+\vs
+A {\bf bad proof} is a proof where {\bf some steps are hard to follow}, {\it or} {\bf some steps are skipped}. \par
+
+\vs
+The {\it hallmark} of a {\bf good proof} is that {\bf the reader doesn't need to do any work} to follow the proof. \par
+In particular, the {\bf reader doesn't need to stop and think} about some step, {\it and} he {\bf doesn't need pen and paper to follow the proof} (the {\bf writer} has supplied all steps/calculations).
+
+\vs
+The {\it hallmark} of a {\bf bad proof} is that {\bf the reader needs to do some work} to follow the proof. \par
+In particular, the {\bf reader needs to stop and think} about some step, {\it or} he {\bf needs pen and paper to follow the proof} (the {\bf writer} has skipped some steps/calculations).
+
+\vs
+An {\bf awesome proof} is a {\it good proof} that's also {\bf at the right level of abstraction}. \par
+If the proof is too low-level, it'll be hard to {\it aggregate the details} into the high-level ideas of the proof. \par
+If the proof is too abstract,  it'll be hard to {\it specialize the generalities} into the details of the proof. \par
+
+\vs
+Reading and understanding {\bf awesome proofs} is hard. \par
+Reading and understanding {\bf good    proofs} is very hard. \par
+Reading and understanding {\bf bad     proofs}... is near-impossible. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf The proofs in this book}
+
+The proofs in this book are {\it not} {\bf good}, let alone {\bf awesome}. \par
+All I promise is that I'm not actively trying to make them {\bf bad}. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% \vs\hrule\vskip1pt
+% \subsection{\bf What the hay is this}
+
+% This book isn't an enlightening, crystal-clear intro to analysis. \par
+% It will not ``make you understand'' analysis. \par
+% That's too hard for me. \par
+
+% This book is just a compendium of proofs in analysis, as {\bf awesome} (in the sense above) as I could make them (which isn't saying much).
+
+% The proofs in this book may still suck, though.
+
+% \vs
+% I don't know of any books that do it. \par
+% Lara Alcock's {\it How To Think About Analysis} comes close. \par
+% Daniel Velleman's {\it How To Prove It} is also very good. \par
+% The proofs in those books are {\it good}. Sadly, there's {\it too few} of them! \par
+% So I thought I'd compile detailed proofs of important/interesting results in analysis.
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{No logic, no proof}
+
+Mathematics is the exercise of reason. \par
+When exercising our reason, we use {\bf logic}. \par
+So, when doing math, we use logic. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\axiom Creating new propositions from old propositions via logical connectives. \par
+  \halign{#\hfil & #\hfil & #\hfil \cr
+    \hs \hs For any propositions $P,Q \a\langle$\asc{not} $P$  &     & is a proposition$\a\rangle$, \cr
+    \hs \hs For any propositions $P,Q \a\langle$$P$ \asc{and}  & $Q$ & is a proposition$\a\rangle$, \cr
+    \hs \hs For any propositions $P,Q \a\langle$$P$ \asc{or}   & $Q$ & is a proposition$\a\rangle$, \cr
+    \hs \hs For any propositions $P,Q \a\langle$$P$ \asc{then} & $Q$ & is a proposition$\a\rangle$, \cr
+    \hs \hs For any propositions $P,Q \a\langle$$P$ \asc{iff}  & $Q$ & is a proposition$\a\rangle$, \cr
+    % \hs\hs $\a\neg P$     & is a proposition, \cr
+    % \hs\hs $P \p\land  Q$ & is a proposition, \cr
+    % \hs\hs $P \p\lor   Q$ & is a proposition, \cr
+    % \hs\hs $P \p\lthen Q$ & is a proposition, \cr
+    % \hs\hs $P \p\liff  Q$ & is a proposition, \cr
+    \hs $\a\rangle$ \cr
+  }
+\halign{#\hfil & #\hfil & #\hfil \cr
+  \axiom The law of the & \abf{excluded middle}.  & For every proposition $P \a\langle$the proposition $P \p\lor  \a\neg P$ is \g{true}$\a\rangle$. \cr
+  \axiom The law of     & \abf{noncontradiction}. & For every proposition $P \a\langle$the proposition $P \p\land \a\neg P$ is \r{false}$\a\rangle$. \cr
+  \axiom The law of the & \abf{excluded middle}.  & $\a\forall P \a\langle$\asc{if} $P$ is proposition, \asc{then} $ P \p\lor \a\neg P \a\rangle$. \cr
+  \axiom The law of     & \abf{noncontradiction}. & $\a\forall P \a\langle$\asc{if} $P$ is proposition, \asc{then} $ \a\neg\a(P \p\land \a\neg P\a) \a\rangle$. \cr
+}
+
+\vs
+\theorem The law of the {\bf excluded middle} and the law of {\bf noncontradiction} are equivalent. \par
+
+\proof \par
+\a{C0}) \psc{Show}: the law of the {\bf excluded middle} is equivalent to the law of {\bf noncontradiction}. \par
+
+\halign{#\hfil & #\hfil \cr
+  $|$\hs \psc{Since}: & by definition, the law of the {\bf excluded middle}  is equivalent to $\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$, \cr
+  $|$\hs \psc{since}: & by definition, the law of     {\bf noncontradiction} is equivalent to $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle$, \cr
+  $|$\hs \psc{then}:  & by equivalence, \cr
+  $|$\hs              & showing that the law of the {\bf excluded middle} is equivalent to the law of {\bf noncontradiction} \cr
+  $|$\hs              & is equivalent to \cr
+  $|$\hs              & showing that $\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$ \asc{iff} $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle$. \cr
+}
+
+$|$\hs \par
+$|$\hs \a{C1}) \psc{Show}: $\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$ \asc{iff} $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle$. \par
+
+$|$\hs$|$\hs \par
+$|$\hs$|$\hs By $\a\forall$-hoisting, $\a\langle\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$ \asc{iff} $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$ is equivalent to $\a\langle\a\forall P \a\langle P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$. (\a{C8}) \par
+
+\halign{#\hfil & #\hfil & #\hfil & #\hfil & #\hfil \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{C8}),     &         & $\a\langle\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$ \asc{iff} $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$ is equivalent to         & $\a\langle\a\forall P \a\langle P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$, \cr
+  $|$\hs$|$\hs \psc{then}:  & by equivalence, & showing & $\a\langle\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$ \asc{iff} $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$ is equivalent to showing & $\a\langle\a\forall P \a\langle P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$. \cr
+}
+
+$|$\hs$|$\hs \par
+$|$\hs$|$\hs \a{C2}) \psc{Show}: $\a\langle\a\forall P \a\langle P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$. \par
+
+\halign{#\hfil & #\hfil \cr
+  $|$\hs$|$\hs$|$\hs \cr
+  $|$\hs$|$\hs$|$\hs \a{H0}) \psc{Let}:  & $P$ is a proposition. \cr
+  $|$\hs$|$\hs$|$\hs \a{C3}) \psc{Show}: & $P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a)$. \cr
+}
+
+\halign{#\hfil & #\hfil & #\hfil & #\hfil \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs By the duality of conjuction and disjuction, & $\a\neg\a(P \p\land \a\neg P\a)$ & \asc{iff} $\a\neg P \p\lor \a\neg\a\neg P$. & (\a{C4}) \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs By \asc{not-not}-elimination,                & $\a\neg P \p\lor \a\neg\a\neg P$ & \asc{iff} $\a\neg P \p\lor P$. & (\a{C5}) \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs By the commutativity of disjunction,         & $\a\neg P \p\lor P$              & \asc{iff} $P \p\lor \a\neg P$. & (\a{C6}) \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \cr
+}
+\halign{#\hfil & #\hfil & #\hfil & #\hfil \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since}: & by (\a{C4}),                        & $\a\neg\a(P \p\land \a\neg P\a)$ & \asc{iff} $\a\neg P \p\lor \a\neg\a\neg P$, \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \psc{since}: & by (\a{C5}),                        & $\a\neg P \p\lor \a\neg\a\neg P$ & \asc{iff} $\a\neg P \p\lor P$, \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \psc{since}: & by (\a{C6}),                        & $\a\neg P \p\lor P$              & \asc{iff} $P \p\lor \a\neg P$, \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \psc{then}:  & by the transitivity of equivalence, & $\a\neg\a(P \p\land \a\neg P\a)$ & \asc{iff} $P \p\lor \a\neg P$. (\a{C7}) \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \cr
+}
+\halign{#\hfil & #\hfil & #\hfil & #\hfil \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since}: & by (\a{C7}),                         & $\a\neg\a(P \p\land \a\neg P\a)$ & \asc{iff} $P \p\lor \a\neg P$, \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \psc{then}:  & by the commutativity of equivalence, & $P \p\lor \a\neg P$              & \asc{iff} $\a\neg\a(P \p\land \a\neg P\a)$. (\a{C3}) \cr
+  $|$\hs$|$\hs$|$\hs$|$\hs \cr
+}
+$|$\hs$|$\hs$|$\hs \psc{Shown} \a{C3}): $P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a)$. \par
+$|$\hs$|$\hs$|$\hs \par
+
+$|$\hs$|$\hs \psc{Shown} \a{C2}): $\a\langle\a\forall P \a\langle P \p\lor \a\neg P$ \asc{iff} $\a\neg\a(P \p\land \a\neg P\a) \a\rangle\a\rangle$. \par
+$|$\hs$|$\hs \par
+
+$|$\hs \psc{Shown} \a{C1}): $\a\forall P \a\langle P \p\lor \a\neg P \a\rangle$ \asc{iff} $\a\forall P \a\langle \a\neg\a(P \p\land \a\neg P\a) \a\rangle$. \par
+$|$\hs \par
+
+\psc{Shown} \a{C0}): the law of the {\bf excluded middle} is equivalent to the law of {\bf noncontradiction}. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+
+\definition The fundamental abstraction of $\a\exists$-syntax. The fundamental abstraction of $\a\forall$-syntax. \par
+Let $x$ be a {\bf variable}. \par
+Let $\g\varphi[x]$ be an {\bf open sentence} in $x$ (ie. $x$ is a free variable in $\g\varphi[x]$). \par
+Let $X$ be a set. \par
+\halign{#\hfil & #\hfil \cr
+  \hs{\bf 0)}  & $\a\exists x \p\in X \a\langle$ $\g\varphi[x]$ $\a\rangle$ is \asc{defined} as $\a\exists x \a\langle$ $x \p\in X$ \asc{and} $\g\varphi[x]$ $\a\rangle$. \cr
+  \hs{\bf 1)}  & $\a\forall x \p\in X \a\langle$ $\g\varphi[x]$ $\a\rangle$ is \asc{defined} as $\a\forall x \a\langle$ \asc{if} $x \p\in X$, \asc{then} $\g\varphi[x]$ $\a\rangle$. \cr
+  \hs{\bf 0')} & $\a\exists x \p\in X \a\langle$ $\g\varphi[x]$ $\a\rangle$ is \asc{defined} as $\a\exists x \a\langle$ $x \p\in X$ $\a\land$ $\g\varphi[x]$ $\a\rangle$. \cr
+  \hs{\bf 1')} & $\a\forall x \p\in X \a\langle$ $\g\varphi[x]$ $\a\rangle$ is \asc{defined} as $\a\forall x \a\langle$          $x \p\in X$  $\a\lthen$ $\g\varphi[x]$ $\a\rangle$. \cr
+}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+
+\definition $\exists$-elimination, aka {\bf existential elimination}, aka existential instantiation. \par
+TODO
+
+\vs
+\definition $\forall$-elimination, aka {\bf universal elimination}, aka universal instantiation. \par
+TODO
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem There exists a {\bf unicorn}. \par
+Let $\a\langle$every lemon is yellow$\a\rangle$ be a proposition. \par
+Let $\a\langle$there exists a unicorn$\a\rangle$ be a proposition. \par
+  \hs{\bf 0)} \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \par
+  \hs\hs\asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \par
+
+% ----------------------------------------------------------------
+\vs
+\proof \par
+\halign{#\hfil & #\hfil \cr
+  \a{H0}) \psc{Let}:  & $\a\langle$every lemon is yellow$\a\rangle$ is a proposition. \cr
+  \a{H1}) \psc{Let}:  & $\a\langle$there exists a unicorn$\a\rangle$ is a proposition. \cr
+  \a{C0}) \psc{Show}: & \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \cr
+}
+
+\halign{#\hfil & #\hfil \cr
+  $|$\hs \cr
+  $|$\hs \a{H2}) \psc{Let}:  & $\a\langle$every lemon is yellow$\a\rangle$. \cr
+  $|$\hs \a{H3}) \psc{Let}:  & \asc{not}$\a\langle$every lemon is yellow$\a\rangle$. \cr
+  $|$\hs \a{C1}) \psc{Show}: & $\a\langle$there exists a unicorn$\a\rangle$. \cr
+}
+
+\halign{#\hfil & #\hfil & #\hfil \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{H1}),               & $\a\langle$there exists a unicorn$\a\rangle$ is a proposition, \cr
+  $|$\hs$|$\hs \psc{since}: & by \a{H2}),               & $\a\langle$every lemon is yellow$\a\rangle$, \cr
+  $|$\hs$|$\hs \psc{then}:  & by \asc{or}-introduction, & $\a\langle$there exists a unicorn$\a\rangle$ \asc{or} $\a\langle$every lemon is yellow$\a\rangle$. (\a{C2}) \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{H1}),               & $\a\langle$there exists a unicorn$\a\rangle$ is a proposition, \cr
+  $|$\hs$|$\hs \psc{since}: & by \a{H3}),               & \asc{not}$\a\langle$every lemon is yellow$\a\rangle$, \cr
+  $|$\hs$|$\hs \psc{then}:  & by \asc{or}-introduction, & $\a\langle$there exists a unicorn$\a\rangle$ \asc{or} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$. (\a{C3}) \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{C2}), & $\a\langle$there exists a unicorn$\a\rangle$ \asc{or} $\a\langle$every lemon is yellow$\a\rangle$, \cr
+  $|$\hs$|$\hs \psc{since}: & by \a{C3}), & $\a\langle$there exists a unicorn$\a\rangle$ \asc{or} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$, \cr
+  $|$\hs$|$\hs \psc{then}:  & by ???,     & $\a\langle$there exists a unicorn$\a\rangle$. (\a{C1})\cr
+  $|$\hs$|$\hs \cr
+}
+
+$|$\hs \psc{Shown}: \a{C1}) $\a\langle$there exists a unicorn$\a\rangle$. \par
+$|$\hs \par
+\psc{Shown}: \a{C0}) \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \par
+
+% ----------------------------------------------------------------
+\vs
+\proof \par
+\halign{#\hfil & #\hfil \cr
+  \a{H0}) \psc{Let}:  & $\a\langle$every lemon is yellow$\a\rangle$ is a proposition. \cr
+  \a{H1}) \psc{Let}:  & $\a\langle$there exists a unicorn$\a\rangle$ is a proposition. \cr
+  \a{C0}) \psc{Show}: & \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \cr
+}
+
+\halign{#\hfil & #\hfil \cr
+  $|$\hs \cr
+  $|$\hs \a{H2}) \psc{Let}:  & $\a\langle$every lemon is yellow$\a\rangle$ is \g{true}. \cr
+  $|$\hs \a{H3}) \psc{Let}:  & \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ is \g{true}. \cr
+  $|$\hs \a{C1}) \psc{Show}: & $\a\langle$there exists a unicorn$\a\rangle$ is \g{true}. \cr
+}
+
+\halign{#\hfil & #\hfil & #\hfil \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{H2}),               & $\a\langle$every lemon is yellow$\a\rangle$ is \g{true}, \cr
+  $|$\hs$|$\hs \psc{since}: & by \a{H1}),               & $\a\langle$there exists a unicorn$\a\rangle$ is a proposition, \cr
+  $|$\hs$|$\hs \psc{then}:  & by \asc{or}-introduction, & $\a\langle$every lemon is yellow \asc{or} there exists a unicorn$\a\rangle$ is \g{true}. (\a{C1}) \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{H3}),                   & \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ is \g{true}, \cr
+  $|$\hs$|$\hs \psc{then}:  & by negation,                  & $\a\langle$\asc{not not} every lemon is yellow$\a\rangle$ is \r{false}. (\a{C2}) \cr
+  $|$\hs$|$\hs \psc{Since}: & by (\a{C2}),                  & $\a\langle$\asc{not not} every lemon is yellow$\a\rangle$ is \r{false}, \cr
+  $|$\hs$|$\hs \psc{then}:  & by \asc{not-not}-elimination, & $\a\langle$every lemon is yellow$\a\rangle$ is \r{false}. (\a{C3}) \cr
+  $|$\hs$|$\hs \cr
+  $|$\hs$|$\hs \psc{Since}: & by \a{C1}),              & $\a\langle$every lemon is yellow \asc{or} there exists a unicorn$\a\rangle$ is \g{true}, \cr
+  $|$\hs$|$\hs \psc{since}: & by \a{C3}),              & $\a\langle$every lemon is yellow$\a\rangle$ is \r{false}, \cr
+  $|$\hs$|$\hs \psc{then}:  & by \asc{or}-elimination, & $\a\langle$there exists a unicorn$\a\rangle$ is \g{true}. (\a{C1}) \cr
+  $|$\hs$|$\hs \cr
+}
+
+$|$\hs \psc{Shown}: \a{C1}) $\a\langle$there exists a unicorn$\a\rangle$ is \g{true}. \par
+$|$\hs \par
+\psc{Shown}: \a{C0}) \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \par
+
+% ----------------------------------------------------------------
+\vs
+\proof \par
+\halign{#\hfil & #\hfil \cr
+  \a{H0}) \psc{Let}:  & $\a\langle$every lemon is yellow$\a\rangle$ is a proposition. \cr
+  \a{H1}) \psc{Let}:  & $\a\langle$there exists a unicorn$\a\rangle$ is a proposition. \cr
+  \a{C0}) \psc{Show}: & \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \cr
+}
+
+\halign{#\hfil & #\hfil & #\hfil \cr
+  $|$\hs \cr
+  $|$\hs \psc{Since}: & by \a{H0}),                           & $\a\langle$every lemon is yellow$\a\rangle$ is a proposition, \cr
+  $|$\hs \psc{then}:  & by {\bf the law of noncontradiction}, & \asc{not} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$. (\a{C1}) \cr
+  $|$\hs \cr
+  $|$\hs \psc{Since}: & by \a{C1}),                           & \asc{not} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \cr
+  $|$\hs \psc{then}:  & by {\bf the law of false antecedent}, & \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \cr
+  $|$\hs \cr
+}
+
+\psc{Shown}: \a{C0}) \asc{if} $\a\langle$ $\a\langle$every lemon is yellow$\a\rangle$ \asc{and} \asc{not}$\a\langle$every lemon is yellow$\a\rangle$ $\a\rangle$, \asc{then} $\a\langle$there exists a unicorn$\a\rangle$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The principle of explosion. \par
+Let $P$ be a proposition. \par
+Let $Q$ be a proposition. \par
+  \hs{\bf 0)} \asc{if} $P$ is \g{true} \asc{and} $\neg P$ is \g{true}, \asc{then} $Q$ is \g{true}. \par
+
+\vs
+\proof \par
+\psc{Let} $P$ be a proposition. \par
+\psc{Let} $Q$ be a proposition. \par
+\psc{Let} $P$      be \g{true}. \par
+\psc{Let} $\neg P$ be \g{true}. \par
+\psc{We show} that $Q$ is \g{true}. \par
+
+  $|$\hs \par
+  $|$\hs \psc{Since} $P$ is \g{true}, \psc{and} $Q$ is a proposition, \par
+  $|$\hs \psc{then}, by \asc{or}-introduction, $P$ \asc{or} $Q$ is \g{true}. \par
+  $|$\hs \par
+  $|$\hs \psc{Since} $\neg P$ is \g{true}, \par
+  $|$\hs \psc{then}, by negation, $\neg\neg P$ is \r{false}, \par
+  $|$\hs \psc{Since} $\neg\neg P$ is \r{false}, \par
+  $|$\hs \psc{then}, by $\neg\neg$-elimination, $P$ is \r{false}. \par
+  $|$\hs \par
+  $|$\hs \psc{Since} $P$ is \r{false}, \psc{and} $P$ \asc{or} $Q$ is \g{true}, \par
+  $|$\hs \psc{then}, by \asc{or}-elimination, $Q$ is \g{true}. \par
+  $|$\hs \par
+
+\psc{This shows} that $Q$ is \g{true}. \par
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{Sets and functions, a language for mathematics}
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\section{Sets}
+
+TODO
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\section{Functions}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\definition {\bf Images} and {\bf preimages} of functions. \par
+Let $X,Y$ be sets. \par
+Let $f: X \to Y$ be a function. \par
+Let $\g A \p\subseteq X$ be a subset of $X$. \par
+Let $\b B \p\subseteq Y$ be a subset of $Y$. \par
+\halign{#\hfil & #\hfil & #\hfil \cr
+  \hs{\bf 0)} The \abf{image}    & of $\g A \p\subseteq X$, denoted $f_*[\g A]$, is the set $\a\{y \p\in Y \pipe \a\exists a_y \p\in \g A \a\langle$ $f: a_y \mapsto y$   $\a\rangle \a\}$. (Images    & \abf{can't be large}.) \cr
+  \hs{\bf 1)} The \abf{preimage} & of $\b B \p\subseteq Y$, denoted $f^*[\b B]$, is the set $\a\{x \p\in X \pipe \a\exists b_x \p\in \b B \a\langle$ $f: x   \mapsto b_x$ $\a\rangle \a\}$. (Preimages & \abf{can't be small}.) \cr
+}
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The fundamental lemma of functions. \par
+Let $X,Y$ be sets. \par
+Let $f: X \to Y$ be a function. \par
+\halign{#\hfil & #\hfil \cr
+  \hs{\bf 0)}  For every $\g A \p\subseteq X$ and $x \p\in X \a\langle$ \asc{if} $x \p\in \g A$,         & \asc{then} $f[x] \p\in f_*[\g A]$ $\a\rangle$. \cr
+  \hs{\bf 1)}  For every $\g A \p\subseteq X$ and $x \p\in X \a\langle$ \asc{if} $f[x] \p\in f_*[\g A]$, & \asc{maybe not then} $x \p\in \g A$ $\a\rangle$. \cr
+  % \hs{\bf 1')} For every $\g A \p\subseteq X$ and $x \p\in X \a\langle$ \asc{if} $f[x] \p\in f_*[\g A]$, & \asc{then} $x \p\in f^*[f_*[\g A]]$ $\a\rangle$. \cr
+  \hs{\bf 2)}  For every $\b B \p\subseteq Y$ and $x \p\in X \a\langle$ \asc{if} $x \p\in f^*[\b B]$,    & \asc{then} $f[x] \p\in \b B$ $\a\rangle$. \cr
+  \hs{\bf 3)}  For every $\b B \p\subseteq Y$ and $x \p\in X \a\langle$ \asc{if} $f[x] \p\in \b B$,      & \asc{then} $x \p\in f^*[\b B]$ $\a\rangle$. \cr
+}
+\halign{#\hfil & #\hfil \cr
+  \hs{\bf 4)} For every $A_0,A_1 \p\subseteq X \a\langle$ \asc{if} $A_0 \p\subseteq A_1$, \asc{then} $f_*[A_0] \p\subseteq f_*[A_1]$ $\a\rangle$. (Images    & {\bf preserve subsets}.) \cr
+  \hs{\bf 5)} For every $B_0,B_1 \p\subseteq Y \a\langle$ \asc{if} $B_0 \p\subseteq B_1$, \asc{then} $f^*[B_0] \p\subseteq f^*[B_1]$ $\a\rangle$. (Preimages & {\bf preserve subsets}.) \cr
+}
+  \hs{\bf 6)} For every $A \p\subseteq X$ and $B \p\subseteq Y \a\langle$ $A \p\subseteq f^*[B]$ \asc{iff} $f_*[A] \p\subseteq B$ $\a\rangle$. ({\bf Duality} of images and preimages.) \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 0)}. \par
+\psc{Let} $X,Y$ be sets. \par
+\psc{Let} $f: X \to Y$ be a function. \par
+\psc{Let} $\g A \p\subseteq Y$ be a subset of $X$. \par
+\psc{We show} that for every $x \p\in X \a\langle$ \asc{if} $x \p\in \g A$, \asc{then} $f[x] \p\in f_*[\g A]$ $\a\rangle$. \par
+
+  $|$\hs \par
+  $|$\hs \psc{Let} $x \p\in X$ be an element of $X$. \par
+  $|$\hs \psc{Let} $x \p\in \g A$ be an element of $\g A$. \par
+  $|$\hs \psc{We show} that $f[x] \p\in f_*[\g A]$. \par
+
+    $|$\hs$|$\hs \par
+    $|$\hs$|$\hs By the image definition, $f_*[\g A]$ is the set $\a\{y \p\in Y \pipe \a\exists a_y \p\in \g A \a\langle$ $f: a_y \mapsto y$ $\a\rangle \a\}$. \par
+    $|$\hs$|$\hs \psc{Since} \psc{We show} that $f[x] \p\in f_*[\g A]$, \par
+    $|$\hs$|$\hs \psc{then}, by the image definition, \psc{We show} that there exists $a_y \p\in \g A$ so that $f: a_y \mapsto f[x]$. \par
+    $|$\hs$|$\hs \psc{We show} that there exists $a_y \p\in \g A$ so that $f: a_y \mapsto f[x]$. \par
+
+      $|$\hs$|$\hs$|$\hs \par
+      $|$\hs$|$\hs$|$\hs \psc{Since} $x \p\in \g A$, \psc{and} $f: x \mapsto f[x]$, \psc{then} there exists $a_y \p\in \g A$ so that $f: a_y \mapsto f[x]$. \par
+      $|$\hs$|$\hs$|$\hs \par
+
+    $|$\hs$|$\hs \psc{This shows} that there exists $a_y \p\in \g A$ so that $f: a_y \mapsto f[x]$. \par
+    $|$\hs$|$\hs \par
+
+  $|$\hs \psc{This shows} that $f[x] \p\in f_*[\g A]$. \par
+  $|$\hs \par
+
+\psc{This shows} that for every $x \p\in X \a\langle$ \asc{if} $x \p\in \g A$, \asc{then} $f[x] \p\in f_*[\g A]$ $\a\rangle$. \par
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 1)}. \par
+TODO
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 2)}. \par
+\psc{Let} $X,Y$ be sets. \par
+\psc{Let} $f: X \to Y$ be a function. \par
+\psc{Let} $\b B \p\subseteq Y$ be a subset of $Y$. \par
+\psc{We show} that for every $x \p\in X \a\langle$ \asc{if} $x \p\in f^*[\b B]$, \asc{then} $f[x] \p\in \b B$ $\a\rangle$. \par
+
+  $|$\hs \par
+  $|$\hs \psc{Let} $x \p\in X$ be an element of $X$. \par
+  $|$\hs \psc{Let} $x \p\in f^*[\b B]$ be an element of the preimage $f^*[\b B]$. \par
+  $|$\hs \psc{We show} that $f[x] \p\in \b B$. \par
+
+    $|$\hs$|$\hs \par
+    $|$\hs$|$\hs By the preimage definition, $f^*[\b B]$ is the set $\a\{x \p\in X \pipe \a\exists b_x \p\in \b B \a\langle$ $f: x \mapsto b_x$ $\a\rangle \a\}$. \par
+    $|$\hs$|$\hs \psc{Since} $f:X \to Y$ is a function, \par
+    $|$\hs$|$\hs \psc{then}, by the function definition, for every $x \p\in X$ and $y_0,y_1 \p\in Y \a\langle$ \asc{if} $f: x \mapsto y_0$ \asc{and} $f: x \mapsto y_1$, \asc{then} $y_0 \p= y_1$ $\a\rangle$. \par
+    $|$\hs$|$\hs \psc{Since} $x \p\in f^*[\b B]$, \psc{then}, by the preimage definition, there exists $b_x  \p\in \b B$ so that $f: x \mapsto b_x$. \par
+    $|$\hs$|$\hs \psc{Since} $x \p\in X$,         \psc{then}, by the function definition, there exists $f[x] \p\in Y$    so that $f: x \mapsto f[x]$. \par
+    $|$\hs$|$\hs \psc{Since} $x \p\in X, b_x,f[x] \p\in Y$, \par
+    $|$\hs$|$\hs \psc{and}   $f: x \mapsto b_x$, \par
+    $|$\hs$|$\hs \psc{and}   $f: x \mapsto f[x]$, \par
+    $|$\hs$|$\hs \psc{and}   for every $x \p\in X$ and $y_0,y_1 \p\in Y \a\langle$ \asc{if} $f: x \mapsto y_0$ \asc{and} $f: x \mapsto y_1$, \asc{then} $y_0 \p= y_1$ $\a\rangle$, \par
+    $|$\hs$|$\hs \psc{then}, by setting $x \p\leftarrow x$ and $y_0 \p\leftarrow b_x$ and $y_1 \p\leftarrow f[x]$, $b_x$ is equal $f[x]$. \par
+    $|$\hs$|$\hs \psc{Since} $b_x \p= f[x]$, \psc{and} $b_x \p\in \b B$, then, by replacement, $f[x] \p\in \b B$. \par
+    $|$\hs$|$\hs \par
+
+  $|$\hs \psc{This shows} that $f[x] \p\in \b B$.
+  $|$\hs \par
+
+\psc{This shows} that for every $x \p\in X \a\langle$ \asc{if} $x \p\in f^*[\b B]$, \asc{then} $f[x] \p\in \b B$ $\a\rangle$. \par
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 3)}. \par
+\psc{Let} $X,Y$ be sets. \par
+\psc{Let} $f: X \to Y$ be a function. \par
+\psc{Let} $\b B \p\subseteq Y$ be a subset of $Y$. \par
+\psc{We show} that for for every $x \p\in X \a\langle$ \asc{if} $f[x] \p\in \b B$, \asc{then} $x \p\in f^*[\b B]$ $\a\rangle$. \par
+
+  $|$\hs \par
+  $|$\hs \psc{Let} $x \p\in X$ be an element of $X$. \par
+  $|$\hs \psc{Let} $f[x] \p\in \b B$ be an element of $\b B$. \par
+  $|$\hs \psc{We show} that $x \p\in f^*[\b B]$. \par
+
+    $|$\hs$|$\hs \par
+    $|$\hs$|$\hs By the preimage definition, $f^*[\b B]$ is the set $\a\{x \p\in X \pipe \a\exists b_x \p\in \b B \a\langle$ $f: x \mapsto b_x$ $\a\rangle \a\}$. \par
+    $|$\hs$|$\hs \psc{Since} \psc{We show} that $x \p\in f^*[\b B]$, \par
+    $|$\hs$|$\hs \psc{then}, by the preimage definition, \psc{We show} that there exists $b_x \p\in \b B$ so that $f: x \mapsto b_x$. \par
+    $|$\hs$|$\hs \psc{We show} that there exists $b_x \p\in \b B$ so that $f: x \mapsto b_x$. \par
+
+      $|$\hs$|$\hs$|$\hs \par
+      $|$\hs$|$\hs$|$\hs \psc{Since} $f[x] \p\in \b B$, \psc{and} $f: x \mapsto f[x]$, \psc{then} there exists $b_x \p\in \b B$ so that $f: x \mapsto b_x$. \par
+      $|$\hs$|$\hs$|$\hs \par
+
+    $|$\hs$|$\hs \psc{This shows} that there exists $b_x \p\in \b B$ so that $f: x \mapsto b_x$. \par
+    $|$\hs$|$\hs \par
+
+  $|$\hs \psc{This shows} that $x \p\in f^*[\b B]$. \par
+  $|$\hs \par
+
+\psc{This shows} that for for every $x \p\in X \a\langle$ \asc{if} $f[x] \p\in \b B$, \asc{then} $x \p\in f^*[\b B]$ $\a\rangle$. \par
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 4)}. \par
+TODO
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 5)}. \par
+TODO
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 6)}. \par
+TODO
+\fi
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The fundamental theorem of functions. \par
+Let $X,Y$ be sets. \par
+Let $f: X \to Y$ be a function. \par
+\halign{#\hfil & #\hfil \cr
+  \hs{\bf 0)} For every $\g A \p\subseteq X \a\langle$ $f^*[f_*[\g A]] \p\supseteq \g A$ $\a\rangle$. ({\bf Preimages} of images    {\bf can't be small}.) \cr
+  \hs{\bf 1)} For every $\b B \p\subseteq Y \a\langle$ $f_*[f^*[\b B]] \p\subseteq \b B$ $\a\rangle$. ({\bf Images}    of preimages {\bf can't be large}.) \cr
+}
+\halign{#\hfil & #\hfil & #\hfil & #\hfil \cr
+  \hs{\bf 2)} $f$ is {\bf injective}  & \asc{iff} for every $\g A \p\subseteq X \a\langle$ $f^*[f_*[\g A]] \p\subseteq \g A$ $\a\rangle$. ({\bf Preimages} & of injections  & are {\bf as small as possible}.) \cr
+  \hs{\bf 3)} $f$ is {\bf surjective} & \asc{iff} for every $\b B \p\subseteq Y \a\langle$ $f_*[f^*[\b B]] \p\supseteq \b B$ $\a\rangle$. ({\bf Images}    & of surjections & are {\bf as large as possible}.) \cr
+}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 0)}. \par
+\psc{Let} $X,Y$ be sets. \par
+\psc{Let} $f: X \to Y$ be a function. \par
+\psc{Let} $\g A \p\subseteq X$ be a subset of $X$. \par
+\psc{We show} that $f^*[f_*[\g A]] \p\supseteq \g A$. \par
+
+$|$\hs \par
+$|$\hs By the superset definition, $f^*[f_*[\g A]] \p\supseteq \g A$ is equivalent to $\a\langle$ for every $x \p\in \g A \a\langle$ $x \p\in f^*[f_*[\g A]]$ $\a\rangle$ $\a\rangle$. \par
+$|$\hs \psc{Since} \psc{We show} that $f^*[f_*[\g A]] \p\supseteq \g A$, \par
+$|$\hs \psc{and} $f^*[f_*[\g A]] \p\supseteq \g A$ is equivalent to $\a\langle$ for every $x \p\in \g A \a\langle$ $x \p\in f^*[f_*[\g A]]$ $\a\rangle$ $\a\rangle$, \par
+$|$\hs \psc{then}, by replacement, \psc{We show} that for every $x \p\in \g A \a\langle$ $x \p\in f^*[f_*[\g A]]$ $\a\rangle$. \par
+$|$\hs \psc{We show} that for every $x \p\in \g A \a\langle$ $x \p\in f^*[f_*[\g A]]$ $\a\rangle$. \par
+
+$|$\hs$|$\hs \par
+$|$\hs$|$\hs \psc{Let} $x \p\in \g A$ be an element of $\g A$. \par
+$|$\hs$|$\hs \psc{We show} that $x \p\in f^*[f_*[\g A]]$. \par
+
+$|$\hs$|$\hs$|$\hs \par
+$|$\hs$|$\hs$|$\hs By the preimage definition, $f^*[f_*[\g A]]$ is the set $\a\{x \p\in X \pipe \a\exists b_x \p\in f_*[\g A] \a\langle$ $f: x   \mapsto b_x$ $\a\rangle \a\}$. \par
+$|$\hs$|$\hs$|$\hs \psc{Since} \psc{We show} that $x \p\in f^*[f_*[\g A]]$, \par
+$|$\hs$|$\hs$|$\hs \psc{then}, by the preimage definition, \psc{We show} that there exists $b_x \p\in f_*[\g A]$ so that $f: x \mapsto b_x$. \par
+$|$\hs$|$\hs$|$\hs \psc{We show} that there exists $b_x \p\in f_*[\g A]$ so that $f: x \mapsto b_x$. \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs \par
+$|$\hs$|$\hs$|$\hs$|$\hs By the fundamental abstraction of $\a\exists$-syntax, \par
+$|$\hs$|$\hs$|$\hs$|$\hs the sentence $\a\langle$ there exists $b_x \p\in f_*[\g A]$ so that $f: x \mapsto b_x$ $\a\rangle$ is equivalent to the sentence $\a\exists b_x \a\langle$ $b_x \p\in f_*[\g A]$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} \psc{We show} that $\a\langle$ there exists $b_x \p\in f_*[\g A]$ so that $f: x \mapsto b_x$ $\a\rangle$, \par
+$|$\hs$|$\hs$|$\hs$|$\hs \psc{and} the sentence $\a\langle$ there exists $b_x \p\in f_*[\g A]$ so that $f: x \mapsto b_x$ $\a\rangle$ is equivalent to the sentence $\a\exists b_x \a\langle$ $b_x \p\in f_*[\g A]$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$, \par
+$|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by replacement, \psc{We show} that $\a\exists b_x \a\langle$ $b_x \p\in f_*[\g A]$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs \psc{We show} that $\a\exists b_x \a\langle$ $b_x \p\in f_*[\g A]$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs By the image definition, $f_*[\g A]$ is the set $\a\{y \p\in Y \pipe \a\exists a_y \p\in \g A \a\langle$ $f: a_y \mapsto y$ $\a\rangle \a\}$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} \psc{must show} that $\a\exists b_x \a\langle$ $b_x \p\in f_*[\g A]$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$, \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by the image definition, \psc{We show} that $\a\exists b_x \a\langle$ $\a\exists a_y \p\in A \a\langle f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{We show} that $\a\exists b_x \a\langle$ $\a\exists a_y \p\in A \a\langle f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs By the fundamental abstraction of $\a\exists$-syntax, \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs the sentence $\a\exists a_y \p\in A \a\langle f: a_y \mapsto b_x \a\rangle$ is equivalent to the sentence $\a\exists a_y \a\langle a_y \p\in A$ \asc{and} $f: a_y \mapsto b_x \a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} \psc{We show} that $\a\exists b_x \a\langle$ $\a\exists a_y \p\in A \a\langle f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$, \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{and} the sentence $\a\exists a_y \p\in A \a\langle f: a_y \mapsto b_x \a\rangle$ is equivalent to the sentence $\a\exists a_y \a\langle a_y \p\in A$ \asc{and} $f: a_y \mapsto b_x \a\rangle$, \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by replacement, \psc{We show} that $\a\exists b_x \a\langle$ $\a\exists a_y \a\langle a_y \p\in A$ \asc{and} $f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{We show} that $\a\exists b_x \a\langle$ $\a\exists a_y \a\langle a_y \p\in A$ \asc{and} $f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x \p\in \g A$, \psc{and} $f: x \mapsto f[x]$, \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by setting $a_y \p\leftarrow x$ and $b_x \p\leftarrow f[x]$, we get that $\a\exists b_x \a\langle$ $\a\exists a_y \a\langle a_y \p\in A$ \asc{and} $f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{This shows} that $\a\exists b_x \a\langle$ $\a\exists a_y \a\langle a_y \p\in A$ \asc{and} $f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \psc{This shows} that $\a\exists b_x \a\langle$ $\a\exists a_y \p\in A \a\langle f: a_y \mapsto b_x \a\rangle$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs$|$\hs \par
+
+$|$\hs$|$\hs$|$\hs$|$\hs \psc{This shows} that $\a\exists b_x \a\langle$ $b_x \p\in f_*[\g A]$ \asc{and} $f: x \mapsto b_x$ $\a\rangle$. \par
+$|$\hs$|$\hs$|$\hs$|$\hs \par
+
+$|$\hs$|$\hs$|$\hs \psc{This shows} that there exists $b_x \p\in f_*[\g A]$ so that $f: x \mapsto b_x$. \par
+$|$\hs$|$\hs$|$\hs \par
+
+$|$\hs$|$\hs \psc{This shows} that $x \p\in f^*[f_*[\g A]]$. \par
+$|$\hs$|$\hs \par
+
+$|$\hs \psc{This shows} that for every $x \p\in \g A \a\langle$ $x \p\in f^*[f_*[\g A]]$ $\a\rangle$. \par
+$|$\hs \par
+
+\psc{This shows} that $f^*[f_*[\g A]] \p\supseteq \g A$. \par
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 1)}. \par
+TODO
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 2)}, only if. \par
+\psc{Let} $X,Y$ be sets. \par
+\psc{Let} $f: X \to Y$ be a function. \par
+\psc{Let} $f: X \to Y$ be injective. \par
+\psc{We show} that for every $\g A \p\subseteq X \a\langle$ $f^*[f_*[\g A]] \p\subseteq \g A$ $\a\rangle$.
+
+  $|$\hs \par
+  $|$\hs \psc{Let} $\g A \p\subseteq X$ be a subset of $X$. \par
+  $|$\hs \psc{We show} that $f^*[f_*[\g A]] \p\subseteq \g A$. \par
+
+    $|$\hs$|$\hs \par
+    $|$\hs$|$\hs By the subset definition, $f^*[f_*[\g A]] \p\subseteq \g A$ is equivalent to $\a\langle$ for every $x \p\in f^*[f_*[\g A]] \a\langle$ $x \p\in \g A$ $\a\rangle$ $\a\rangle$. \par
+    $|$\hs$|$\hs \psc{Since} \psc{We show} that $f^*[f_*[\g A]] \p\subseteq \g A$, \par
+    $|$\hs$|$\hs \psc{and} $f^*[f_*[\g A]] \p\subseteq \g A$ is equivalent to $\a\langle$ for every $x \p\in f^*[f_*[\g A]] \a\langle$ $x \p\in \g A$ $\a\rangle$ $\a\rangle$, \par
+    $|$\hs$|$\hs \psc{then}, by replacement, \psc{We show} that for every $x \p\in f^*[f_*[\g A]] \a\langle$ $x \p\in \g A$ $\a\rangle$. \par
+    $|$\hs$|$\hs \psc{We show} that for every $x \p\in f^*[f_*[\g A]] \a\langle$ $x \p\in \g A$ $\a\rangle$. \par
+
+      $|$\hs$|$\hs$|$\hs \par
+      $|$\hs$|$\hs$|$\hs \psc{Let} $x \p\in \g A$ be an element of $f^*[f_*[\g A]]$. \par
+      $|$\hs$|$\hs$|$\hs \psc{We show} that $x \p\in \g A$. \par
+
+        $|$\hs$|$\hs$|$\hs$|$\hs \par
+        $|$\hs$|$\hs$|$\hs$|$\hs By the preimage definition, $f^*[f_*[\g A]]$ is the set $\a\{x \p\in X \pipe \a\exists b_x \p\in f_*[\g A] \a\langle$ $f: x   \mapsto b_x$ $\a\rangle \a\}$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs By the image definition,        $f_*[\g A]$  is the set $\a\{y \p\in Y \pipe \a\exists a_y \p\in     \g A  \a\langle$ $f: a_y \mapsto y$   $\a\rangle \a\}$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $f: X \to Y$ is an injection, \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by the injection definition, for every $x_0,x_1 \p\in X$ and $y \p\in Y \a\langle$ \asc{if} $f:x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$ $\a\rangle$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x$   is in $f^*[f_*[\g A]]$, \psc{then}, by the preimage definition, there exists $b_x \p\in f_*[\g A]$ so that $f: x   \mapsto b_x$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $b_x$ is in     $f_*[\g A]$,  \psc{then}, by the image definition,    there exists $a_y \p\in     \g A$  so that $f: a_y \mapsto b_x$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x,a_y \p\in X$, \psc{and} $b_x \p\in Y$ \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{and}   $f: x   \mapsto b_x$, \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{and}   $f: a_y \mapsto b_x$, \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{and}   for every $x_0,x_1 \p\in X$ and $y \p\in Y \a\langle$ \asc{if} $f:x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$ $\a\rangle$, \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by setting $x_0 \p\leftarrow x$ and $x_1 \p\leftarrow a_y$ and $y \p\leftarrow b_x$, $x$ is equal to $a_y$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x \p= a_y$, \psc{and} $a_y \p\in \g A$ \psc{then}, by replacement, $x \p\in \g A$. \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \par
+
+      $|$\hs$|$\hs$|$\hs \psc{This shows} that $x \p\in \g A$. \par
+      $|$\hs$|$\hs$|$\hs \par
+
+    $|$\hs$|$\hs \psc{This shows} that for every $x \p\in f^*[f_*[\g A]] \a\langle$ $x \p\in \g A$ $\a\rangle$. \par
+    $|$\hs$|$\hs \par
+
+  $|$\hs \psc{This shows} that $f^*[f_*[\g A]] \p\subseteq \g A$. \par
+  $|$\hs \par
+
+\psc{This shows} that for every $\g A \p\subseteq X \a\langle$ $f^*[f_*[\g A]] \p\subseteq \g A$ $\a\rangle$.
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 2)}, if. \par
+\psc{Let} $X,Y$ be sets. \par
+\psc{Let} $f: X \to Y$ be a function. \par
+\psc{Let} $f: X \to Y$ satisfy $\a\langle$ for every $\g A \p\subseteq X \a\langle$ $f^*[f_*[\g A]] \p\subseteq \g A$ $\a\rangle$ $\a\rangle$. \par
+\psc{We show} that $f: X \to Y$ is injective. \par
+
+  $|$\hs \par
+  $|$\hs \psc{Since} \psc{We show} that $f$ is injective, \par
+  $|$\hs \psc{then}, by the injective definition, \psc{We show} that for every $x_0,x_1 \p\in X$ and $y \p\in Y \a\langle$ \asc{if} $f: x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$ $\a\rangle$. \par
+  $|$\hs \psc{We show} that for every $x_0,x_1 \p\in X$ and $y \p\in Y \a\langle$ \asc{if} $f: x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$ $\a\rangle$. \par
+
+    $|$\hs$|$\hs \par
+    $|$\hs$|$\hs \psc{Let} $x_0,x_1 \p\in X$. \par
+    $|$\hs$|$\hs \psc{Let} $y \p\in Y$. \par
+    $|$\hs$|$\hs \psc{We show} that \asc{if} $f: x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$. \par
+
+      $|$\hs$|$\hs$|$\hs \par
+      $|$\hs$|$\hs$|$\hs \psc{Let} $f: x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$. \par
+      $|$\hs$|$\hs$|$\hs \psc{We show} that $x_0 \p= x_1$. \par
+        
+        $|$\hs$|$\hs$|$\hs$|$\hs \par
+        $|$\hs$|$\hs$|$\hs$|$\hs TODO
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $\g A \p\subseteq X \a\langle$ $f^*[f_*[\g A]] \p\subseteq \g A$ $\a\rangle$, \psc{and} $X \p\subseteq X$, \psc{then}, by setting $A \p\leftarrow X$,  $f^*[f_*[X]] \p\subseteq X$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs By the image definition,        $f_*[\g X]$  is the set $\a\{y \p\in Y \pipe \a\exists x_y \p\in     X \a\langle$ $f:x_y \mapsto y$   $\a\rangle \a\}$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs By the preimage definition, $f^*[f_*[\g X]]$ is the set $\a\{x \p\in X \pipe \a\exists y_x \p\in f_*[X] \a\langle$ $f:x   \mapsto y_x$ $\a\rangle \a\}$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs By the fundamental theorem of preimages, $f^*[f_*[X]] \p\supseteq X$. \par
+
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $f^*[f_*[X]] \p\supseteq X$, \psc{and} $x_0 \p\in X$, \psc{then} $x_0 \p\in f^*[f_*[X]]$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $f^*[f_*[X]] \p\supseteq X$, \psc{and} $x_1 \p\in X$, \psc{then} $x_1 \p\in f^*[f_*[X]]$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x_0 \p\in f^*[f_*[X]]$, \psc{then}, by the preimage definition, there exists $y_0    \p\in f_*[X] \a\langle$ $f: x_0    \mapsto y_0$ $\a\rangle$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x_1 \p\in f^*[f_*[X]]$, \psc{then}, by the preimage definition, there exists $y_1    \p\in f_*[X] \a\langle$ $f: x_1    \mapsto y_1$ $\a\rangle$. \par
+
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $f: x_0 \mapsto y_0$, \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{and}   $f: x_1 \mapsto y_1$, \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{and}   $f: x_0 \mapsto y$, \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{and}   $f: x_1 \mapsto y$, \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{then}, by the uniqueness of images, $y_0 \p= y \p= y1$. \par
+
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $y \p\in f_*[X]$,  \psc{then}, by the image definition, there exists $x_{00} \p\in X \a\langle$ $f: x_{00} \mapsto y$ $\a\rangle$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $y \p\in f_*[X]$,  \psc{then}, by the image definition, there exists $x_{11} \p\in X \a\langle$ $f: x_{11} \mapsto y$ $\a\rangle$. \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x_{00} \p\in X$ and . \par
+        % $|$\hs$|$\hs$|$\hs$|$\hs \psc{Since} $x_{11} \p\in X$ and . \par
+        $|$\hs$|$\hs$|$\hs$|$\hs \par
+
+      $|$\hs$|$\hs$|$\hs \psc{This shows} that $x_0 \p= x_1$. \par
+      $|$\hs$|$\hs$|$\hs \par
+
+    $|$\hs$|$\hs \psc{This shows} that \asc{if} $f: x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$. \par
+    $|$\hs$|$\hs \par
+
+  $|$\hs \psc{This shows} that for every $x_0,x_1 \p\in X$ and $y \p\in Y \a\langle$ \asc{if} $f: x_0 \mapsto y$ \asc{and} $f: x_1 \mapsto y$, \asc{then} $x_0 \p= x_1$ $\a\rangle$. \par
+
+\vs
+\psc{This shows} that $f: X \to Y$ is injective. \par
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 3)}, only if. \par
+TODO
+\fi
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\ifnum 1=1
+\vs
+\asc{proof} of {\bf 3)}, if. \par
+TODO
+\fi
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The fundamental meta-theorem of equations. \par
+Let $A$ be a ``math expression''. \par
+Let $B$ be a ``math expression''. \par
+Let $f$ be a function from ``math expressions'' to ``math expressions'' (ie. the image under $f$ of each ``math expression'' is unique). \par
+  \hs{\bf 0)} \asc{If} $A$ {\bf equals} $B$, \asc{then} $f[A]$ {\bf equals} $f[B]$. \par
+
+\ifnum 1=1
+\asc{proof}. I don't know.
+\fi
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{Convergence, pillar of analysis}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+{\bf Limits} are the workhorse of {\bf analysis}. In analysis, ``everything is a limit``. Or something.
+
+\vs
+{\bf Derivatives} are limits. {\bf Integrals} are limits. {\bf Continuity} is defined using limits. Even {\bf equality} can be defined using limits (kinda).
+
+\vs
+But we'll prefer a different language: that of {\bf convergence}. Limits and convergence are the same idea. \par
+You can say that analysis is built on {\bf limits}. \par
+You can say that analysis is built on {\bf convergence}. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\definition {\bf Limits} and {\bf convergence} of sequences. \par  % precision/accuracy --> wiggle/threshold/tolerance
+Let $f: \N \to \R$ be a sequence. \par
+Let $L \p\in \R$   be a real number in the codomain of $f$. \par
+  \hs{\bf 0)} $f$ has \abf{limit} $L$ (at {\it infinity}), denoted $f \to L$, \asc{iff} \par
+      \hs\hs\hs for every precision $\epsilon \p\in \R^+$ \par
+      \hs\hs\hs\hs there exists a threshold $N_\epsilon \p\in \N$ so that \par
+      \hs\hs\hs\hs\hs for every $x \p\in \N$ in the domain $\a\langle$ \par
+      \hs\hs\hs\hs\hs\hs \asc{if} $x$ is in the $\infty$-ball $\a(N_\epsilon \a{..} \infty\a)_\N$, \asc{then} $f[x]$ is in the $\epsilon$-ball $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+      \hs\hs\hs\hs\hs $\a\rangle$. \par
+  \hs{\bf 1)} $f$ \abf{converges} to $L$ (at {\it infinity}), denoted $f \to L$, \asc{iff} \par
+      \hs\hs\hs for every precision $\epsilon \p\in \R^+$ \par
+      \hs\hs\hs\hs there exists a threshold $N_\epsilon \p\in \N$ so that \par
+      \hs\hs\hs\hs\hs for every $x \p\in \N$ in the domain $\a\langle$ \par
+      \hs\hs\hs\hs\hs\hs \asc{if} $x$ is in the $\infty$-ball $\a(N_\epsilon \a{..} \infty\a)_\N$, \asc{then} $f[x]$ is in the $\epsilon$-ball $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+      \hs\hs\hs\hs\hs $\a\rangle$. \par
+  \hs{\bf 2)} $f$ has \abf{limit} $L$ (at {\it infinity}) \asc{iff} $f$ \abf{converges} to $L$ (at {\it infinity}). \par
+
+\vs
+\definition {\bf Limits} and {\bf convergence} of functions. \par  % precision/accuracy --> wiggle/threshold/tolerance
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+  \hs{\bf 0)} $f$ has \abf{limit} $L$ at $a$, denoted $f \to L \p@ a$, \asc{iff} \par
+      \hs\hs\hs for every precision $\epsilon \p\in \R^+$ \par
+      \hs\hs\hs\hs there exists a threshold $\delta_\epsilon \p\in \R^+$ so that \par
+      \hs\hs\hs\hs\hs for every $x \p\in A$ in the domain $\a\langle$ \par
+      \hs\hs\hs\hs\hs\hs \asc{if} $x$ is in the $\delta$-ball $\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $f[x]$ is in the $\epsilon$-ball $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+      \hs\hs\hs\hs\hs $\a\rangle$. \par
+  \hs{\bf 1)} $f$ \abf{converges} to $L$ at $a$, denoted $f \to L \p@ a$, \asc{iff} \par
+      \hs\hs\hs for every precision $\epsilon \p\in \R^+$ \par
+      \hs\hs\hs\hs there exists a threshold $\delta_\epsilon \p\in \R^+$ so that \par
+      \hs\hs\hs\hs\hs for every $x \p\in A$ in the domain $\a\langle$ \par
+      \hs\hs\hs\hs\hs\hs \asc{if} $x$ is in the $\delta$-ball $\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $f[x]$ is in the $\epsilon$-ball $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+      \hs\hs\hs\hs\hs $\a\rangle$. \par
+  \hs{\bf 2)} $f$ has \abf{limit} $L$ at $a$ \asc{iff} $f$ \abf{converges} to $L$ at $a$. \par
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\section{Open sets, a language for convergence}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\theorem {\bf Convergence} via open sets. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+  \hs{\bf 0)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A$ in the domain $\a\langle$ \par
+      \hs\hs\hs \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+    \hs\hs $\a\rangle$. \par
+  \hs{\bf 1)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A$ in the domain $\a\langle$ \par
+      \hs\hs\hs \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ \par
+    \hs\hs $\a\rangle$. \par
+  \hs{\bf 2)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+      \hs\hs\hs $\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\p\subseteq$ $f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ \par
+    \hs\hs $\a\rangle$. \par
+  % \hs{\bf 3)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+  %     \hs\hs\hs $f_*[\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R]$ $\p\subseteq$ $f_*[f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]]$ \par
+  %   \hs\hs $\a\rangle$. \par
+  % \hs{\bf 4)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+  %     \hs\hs\hs $f_*[\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R]$ $\p\subseteq$ $f_*[f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]]$ $\p\subseteq$ $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+  %   \hs\hs $\a\rangle$. \par
+  \hs{\bf 3)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+      \hs\hs\hs $f_*[\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R]$ $\p\subseteq$ $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+    \hs\hs $\a\rangle$. \par
+  % \hs{\bf 6)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+  %     \hs\hs\hs $f^*[f_*[\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R]]$ $\p\subseteq$ $f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ \par
+  %   \hs\hs $\a\rangle$. \par
+  % \hs{\bf 7)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+  %     \hs\hs\hs $\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\p\subseteq$ $f^*[f_*[\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R]]$ $\p\subseteq$ $f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ \par
+  %   \hs\hs $\a\rangle$. \par
+  % \hs{\bf 8)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+ \a\langle$ \par
+  %     \hs\hs\hs $\a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\p\subseteq$ $f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ \par
+  %   \hs\hs $\a\rangle$. \par
+
+  \hs{\bf 4)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every open ball $B[L,\epsilon]$ at $L$, there exists an open ball $B[a,\delta_\epsilon]$ at $a \a\langle$ \par
+      \hs\hs\hs $B[a,\delta_\epsilon]$ $\p\subseteq$ $f^*[B[L,\epsilon]]$ \par
+    \hs\hs $\a\rangle$. \par
+  \hs{\bf 5)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every open ball $B[L,\epsilon]$ at $L$, there exists an open ball $B[a,\delta_\epsilon]$ at $a \a\langle$ \par
+      \hs\hs\hs $f_*[B[a,\delta_\epsilon]]$ $\p\subseteq$ $B[L,\epsilon]$ \par
+    \hs\hs $\a\rangle$. \par
+
+  \hs{\bf 6)} $f$ \abf{converges} to $L$ at $a$ \asc{iff} for every open ball $B[L,\epsilon]$ at $L \a\langle$ \par
+      \hs\hs\hs $f^*[B[L,\epsilon]]$ is open \par
+    \hs\hs $\a\rangle$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 0)}. \par
+This is just the convergence definition, for reference $\p{=)}$
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 1)}, only if. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+Let $f$ \abf{converge} to $L$ at $a$. \par
+\psc{We show} that for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A \a\langle$ \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$. \par
+
+  \vs
+  \hs By the fundamental lemma of functions, for every subset $B \p\subseteq {\bf Cod}[f]$, for every $x \p\in {\bf Dom}[f] \a\langle$ $f[x] \p\in B$ \asc{iff} $x \p\in f^*[B]$ $\a\rangle$. \par
+  \hs \psc{Since} $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ is a subset of ${\bf Cod}[f]$, \psc{and} $x$ is in ${\bf Dom}[f]$, \par
+  \hs \psc{then}, by the fundamental lemma of functions and setting $B \p\leftarrow \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$, we get that $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \asc{iff} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+
+  \vs
+  \hs \psc{Since} $f$ \abf{converges} to $L$ at $a$, \par
+  \hs \psc{then}, by the convergence definition, \par
+  \hs for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A \a\langle$ \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\N$, \asc{then} $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$. \par
+
+  \vs
+  \hs \psc{Since} $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \asc{iff} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$, \par
+  \hs \psc{and}   for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A \a\langle$ \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\N$, \asc{then} $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$, \par
+  \hs \psc{then}, by replacing $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ with $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$, \par
+  \hs for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A \a\langle$ \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$. \par
+
+\vs
+\psc{This shows} that for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A \a\langle$ \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 1)}, if. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+Let $\a\langle$ for every $\epsilon \p\in \R^+$, there exists $\delta_\epsilon \p\in \R^+$ so that, for every $x \p\in A \a\langle$ \asc{if} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$, \asc{then} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+\psc{We show} that  $f$ \abf{converges} to $L$ at $a$. \par
+
+\hs \par
+\hs TODO
+
+\vs
+\psc{This shows} that  $f$ \abf{converges} to $L$ at $a$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 1)}, direct. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+\psc{We show} that $\a\langle$ $f \to L \p@ a$ $\a\rangle$ \asc{iff} $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+
+\hs \par
+\hs By the convergence definition, \par
+\hs $\a\langle$ $f \to L \p@ a$ $\a\rangle$ is equivalent to $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$ $\a\rangle$. \par
+\hs \psc{Since} $\a\langle$ $f \to L \p@ a$ $\a\rangle$ is equivalent to $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$ $\a\rangle$, \par
+\hs \psc{and} \psc{We show} that $\a\langle$ $f \to L \p@ a$ $\a\rangle$ \asc{iff} $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$, \par
+\hs \psc{then}, by replacement, \psc{We show} that \par
+\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$ $\a\rangle$ \par
+\hs \asc{iff} \par
+\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+\hs \psc{We show} that \par
+\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$ $\a\rangle$ \par
+\hs \asc{iff} \par
+\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+
+\hs\hs \par
+\hs\hs \psc{Since} \psc{We show} that \par
+\hs\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$ $\a\rangle$ \par
+\hs\hs \asc{iff} \par
+\hs\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+\hs\hs \psc{then}, by the fundamental lemma of first-order classical logic, we can peel the outer quantifier layers that are equal, so \par
+\hs\hs \psc{We show} that \par
+\hs\hs $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+\hs\hs \asc{iff} \par
+\hs\hs $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+\hs\hs \psc{We show} that \par
+\hs\hs $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+\hs\hs \asc{iff} \par
+\hs\hs $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+
+\hs\hs\hs \par
+\hs\hs\hs \psc{Let} $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$. \par
+\hs\hs\hs \psc{We show} that \par
+\hs\hs\hs $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+\hs\hs\hs \asc{iff} \par
+\hs\hs\hs $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+
+\hs\hs\hs\hs \par
+\hs\hs\hs\hs By the fundamental lemma of functions, setting $B$ to $\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$, we get that \par
+\hs\hs\hs\hs $f[x] \p\in B$ \asc{iff} $x \p\in f^*[B]$, meaning \par
+\hs\hs\hs\hs $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \asc{iff} $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+
+\hs\hs\hs \par
+\hs\hs\hs \psc{This shows} that \par
+\hs\hs\hs $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+\hs\hs\hs \asc{iff} \par
+\hs\hs\hs $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+
+\hs\hs \par
+\hs\hs \psc{This shows} that \par
+\hs\hs $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ \par
+\hs\hs \asc{iff} \par
+\hs\hs $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$. \par
+
+\hs \par
+\hs \psc{This shows} that \par
+\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $f[x] \p\in \a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R$ $\a\rangle$ $\a\rangle$ \par
+\hs \asc{iff} \par
+\hs $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+
+\vs
+\psc{This shows} that $\a\langle$ $f \to L \p@ a$ $\a\rangle$ \asc{iff} $\a\langle$ $\a\forall \epsilon \p\in \R^+$ $\a\exists \delta_\epsilon \p\in \R^+$ $\a\forall x \p\in A \a\langle$ $x \p\in \a(a\p-\delta_\epsilon \a{..} a\p+\delta_\epsilon\a)_\R$ $\a\lthen$ $x \p\in f^*[\a(L\p-\epsilon \a{..} L\p+\epsilon\a)_\R]$ $\a\rangle$ $\a\rangle$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 2)}. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+TODO
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 3)}. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+TODO
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 4)}. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+TODO
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 5)}. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+TODO
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\asc{proof} of {\bf 6)}. \par
+Let $f: A\p\subseteq\R \to \R$ be function. \par
+Let $a \p\in A$  be a real number in the domain   of $f$. \par
+Let $L \p\in \R$ be a real number in the codomain of $f$. \par
+TODO
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\section{The fundamental theorem of $\epsilon$-equality}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\definition Let $a,b \p\in \R$ be real numbers. \par
+\halign{#\hfil & #\hfil \cr
+  \hs{\bf 0)} $a$ is {\bf under}    & $b$ \asc{iff} $a \p< b$. \cr
+  \hs{\bf 1)} $a$ is {\bf over}     & $b$ \asc{iff} $a \p> b$. \cr
+  \hs{\bf 2)} $a$ is {\bf at most}  & $b$ \asc{iff} $a \p\leq b$. \cr
+  \hs{\bf 3)} $a$ is {\bf at least} & $b$ \asc{iff} $a \p\geq b$. \cr
+}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\lemma Let $a,b \p\in \R$ be real numbers. \par
+  \hs{\bf 0)} \asc{if} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \asc{then} $\a|a \p- b\a| \p\leq 0$. \par
+  \hs{\bf 1)} \asc{if} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \asc{then} $\a|a \p- b\a| \p\notin \R^+$. \par
+  \hs{\bf 2)} \asc{if} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| - \epsilon \p\in \R^-$, \asc{then} $\a|a \p- b\a| \p\notin \R^+$. \par
+    % \hs\hs By the law of the excluded middle, $\a\forall \epsilon \p\in \R^+ \a\langle \a|a \p- b\a| \a\rangle$ is {\bf equivalent} to its double negation $\neg\neg\a\forall \epsilon \p\in \R^+ \a\langle \a|a \p- b\a| \p< \epsilon \a\rangle$. \par
+    % \hs\hs By the rules of classical logic, $\neg\neg\a\forall \epsilon \p\in \R^+ \a\langle \a|a \p- b\a| \p< \epsilon \a\rangle$ is equivalent to $\neg\a\exists \epsilon \p\in \R^+ \neg\a\langle \a|a \p- b\a| \p< \epsilon \a\rangle$. \par
+    % \hs\hs By the $\p<$ relation definition, the negation of $\a|a \p- b\a| \p< \epsilon$ is $\a|a \p- b\a| \p\geq \epsilon$. \par
+    % \hs\hs \psc{Since} the negation of $\a|a \p- b\a| \p< \epsilon$ is $\a|a \p- b\a| \p\geq \epsilon$, \psc{then} $\neg\a\exists \epsilon \p\in \R^+ \neg\a\langle \a|a \p- b\a| \p< \epsilon \a\rangle$ is equivalent to $\neg\a\exists \epsilon \p\in \R^+ \a\langle \a|a \p- b\a| \p\geq \epsilon \a\rangle$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\theorem The fundamental theorem of $\epsilon$-equality, aka the fundamental theorem of analytic equality. \par
+Let $a,b \p\in \R$ be real numbers. \par
+  \hs{\bf 0)} $a$ {\bf equals} $b$ \asc{iff} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$. \par
+In symbols, \par
+
+  \hs for every $a,b \p\in \R \a\langle$ \par
+    \hs\hs $a\p=b$ \asc{iff} for every $\epsilon \p\in \R^+ \a\langle$ \par
+      \hs\hs\hs $\a|a \p- b\a| \p< \epsilon$ \par
+    \hs\hs $\a\rangle$ \par
+  \hs $\a\rangle$. \par
+
+\asc{proof}. \par
+\a{H0)} \psc{Let} $a,b \p\in \R$ be real numbers. \par
+\psc{We show} that $a$ {\bf equals} $b$ \asc{iff} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$. \par
+\a{C0)} By the absolute value definition, $\a|0\a| \p= 0$. \par
+
+  \vs
+  \hs \psc{We show} that \asc{if} $a$ {\bf equals} $b$, \asc{then} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$. \par
+    \hs\hs\a{H1)} \psc{Let} $a$ {\bf equal} $b$. \par
+    \hs\hs\a{H2)} \psc{Let} $\epsilon \p\in \R^+$. \par
+    \hs\hs \psc{We show} that $\a|a \p- b\a| \p< \epsilon$. \par
+      \hs\hs\hs\psc{Since}, by \a{H1)}, $a \p= b$,        \psc{then}, by the existence of additive inverses for reals, \a{C1)} $a \p- b \p= 0$. \par
+      \hs\hs\hs\psc{Since}, by \a{C1)}, $a \p- b \p = 0$, \psc{then}, by the fundamental meta-theorem of equations, \a{C2)} $\a|a \p- b\a| \p= \a|0\a|$. \par
+      \hs\hs\hs\psc{Since}, by \a{C2)}, $\a|a \p- b\a| \p= \a|0\a|$, \psc{and}, by \a{C0)} $\p|0\p|\p = 0$, \psc{then}, by replacement, \a{C3)} $\a|a \p- b\a| \p= 0$. \par
+
+      \hs\hs\hs\psc{Since}, by the $\R$ axioms, $0$ is under every positive real,
+      \psc{and},  by \a{H2)}, $\epsilon$ is positive,
+      \psc{then}, by replacement, \a{C4)} $0$ is under $\epsilon$. \par
+
+      \hs\hs\hs\psc{Since}, by \a{C3)}, $\a|a \p- b\a| \p=  0$,
+      \psc{and},  by \a{C4)}, $0 \p< \epsilon$,
+      \psc{then}, by replacement, $\a|a \p- b\a| \p<  \epsilon$. \par
+
+    \hs\hs \psc{This shows} that $\a|a \p- b\a| \p< \epsilon$. \par
+  \hs\psc{This shows} that \a{C5)} \asc{if} $a$ {\bf equals} $b$, \asc{then} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$.
+
+  \vs
+  \hs \psc{We show} that \asc{if} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \asc{then} $a$ {\bf equals} $b$. \par
+    \hs\hs\a{H3)} \psc{Let} $\epsilon \p\in \R^+$. \par
+    \hs\hs\a{H4)} \psc{Let} $\a|a \p- b\a| \p< \epsilon$. \par
+    \hs\hs\a{H5)} \psc{Let} $a$ {\bf not equal} $b$, for \psc{contradiction}. \par
+    \hs\hs We must find a contradiction. \par
+      \hs\hs\hs\psc{Since}, by \a{H5)},  $a \p{\not=} b$, \psc{then}, by the existence of additive inverses for reals, \a{C6)} $a \p- b \p{\not=} 0$. \par
+      \hs\hs\hs\psc{Since}, by \a{C6)},  $a \p- b \p{\not=} 0$, \psc{then}, by the fundamental meta-theorem of equations, \a{C7)} $\a|a \p- b\a| \p{\not=} \a|0\a|$. \par
+      \hs\hs\hs\psc{Since}, by \a{C7)},  $\a|a \p- b\a| \p{\not=} \a|0\a|$, \psc{and}, by \a{C0)}, $\p|0\p|\p = 0$, \psc{then}, by replacement, \a{C8)} $\a|a \p- b\a| \p{\not=} 0$. \par
+      \hs\hs\hs\psc{Since}, by \a{C8)},  $\a|a \p- b\a| \p{\not=} 0$, \psc{then}, by the trichomotoy of reals, \a{C9)} $\a|a \p- b\a| \p< 0$ or $\a|a \p- b\a| \p> 0$. \par
+      \hs\hs\hs\psc{Since}, by \a{C9)}, $\a|a \p- b\a| \p< 0$ or $\a|a \p- b\a| \p> 0$, \psc{and} absolute values are always nonnegative, \psc{then} by $\p\lor$-elimination, \a{C10)} $\a|a \p- b\a| \p> 0$. \par
+      \hs\hs\hs\psc{Since}, by \a{C10)}, $\a|a \p- b\a| \p> 0$, \psc{then}, by the positive reals definition $\R^+$, \a{C11)} $\a|a \p- b\a| \p\in \R^+$. \par
+      \hs\hs\hs\psc{Since}, by \a{H3)} and \a{H4)}, for every $\epsilon \p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \psc{then}, by the previous lemma, \a{C12)} $\a|a \p- b\a| \p\notin \R^+$. \par
+      \hs\hs\hs\psc{Since}, by \a{C11)}, $\a|a \p- b\a| \p\in \R^+$, \psc{and}, by \a{C12)}, $\a|a \p- b\a| \p\notin \R^+$, \psc{then} there's a \psc{contradiction}. \par
+    \hs\hs \psc{This shows} that $a$ {\bf equals} $b$, by the law of non-contradiction. \par
+  \hs\psc{This shows} that \a{C13)} \asc{if} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \asc{then} $a$ {\bf equals} $b$. \par
+
+  \vs
+  \hs\psc{Since}, by \a{C5)}, \asc{if} $a$ {\bf equals} $b$, \asc{then} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \par
+  \hs\psc{and},   by \a{C13)}, \asc{if} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$, \asc{then} $a$ {\bf equals} $b$, \par
+  \hs\psc{then},  by the \asc{iff} definition, $a$ {\bf equals} $b$ \asc{iff} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$. \par
+
+\vs
+\psc{This shows} that $a$ {\bf equals} $b$ \asc{iff} for every positive $\epsilon\p\in \R^+$ it's true that $\a|a \p- b\a| \p< \epsilon$.
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\theorem The triangle inequality for $\R$. \par
+Let $a,b \p\in \R$ be real numbers. \par
+  \hs{\bf 0)} $\a|a \p+ b\a|$ is at most $\a|a\a| \p+ \a|b\a|$. \par
+In symbols, \par
+
+  \hs for every $a,b \p\in \R \a\langle$ \par
+  \hs\hs $\a|a \p+ b\a| ~\p\leq~ \a|a\a| \p+ \a|b\a|$ \par
+  \hs $\a\rangle$. \par
+
+\proof TODO
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{The three fundamental theorems of calculus}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The {\bf first fundamental lemma of calculus}, aka {\bf the mean value theorem for derivatives}, aka the {\bf local-to-global principle} of differential calculus. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The {\bf second fundamental lemma of calculus}, aka {\bf the mean value theorem for integrals}, aka the {\bf local-to-global principle} of integral calculus. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The {\bf first fundamental theorem of calculus}, aka the differential of the {\bf area function of a function} is the differential of the {\bf function}. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The {\bf second fundamental theorem of calculus}, (high-dimensional) integration on a (high-dimensional) interior is (low-dimensional) integration on a (low-dimensional) boundary. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\theorem The {\bf third fundamental theorem of calculus}, aka {\bf Taylor's differential expansion}, aka Taylor's analytic approximation, aka Taylor's theorem. \par
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{The Riemann integral}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+By the {\bf First Fundamental Theorem of Calculus}, if a function is {\bf Riemann integrable} and {\bf continuous},
+then it has an {\bf antiderivative}. Also, the antiderivative is {\bf continuous}.
+
+\vs
+More specifically, by the First Fundamental Theorem of Calculus,
+if a function $f$ is Riemann integrable and continuous,
+then it has an antiderivative $F$, and the antiderative is precisely the (continuous) function $F: x \mapsto \int_{\a[a..x\a]} f$.
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{Topology}
+
+\vs
+Topology is the study of \abf{continuous functions}. \par
+To talk about continuous functions, we must talk about \abf{open sets}. \par
+Open sets are {\it not} defined {\it directly}, but indirectly in terms of their set-theoretic {\it behavior}: how they behave under \abf{unions} and \abf{intersections}. \par
+So, I can never tell you what an open set {\it is}, only {\it how it behaves}. It's its {\it behavior} that defines it. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\theorem The fundamental duality of {\bf open topologies} and {\bf closed topologies}. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\lemma The fundamental lemma of continuity and compacteness. \par
+Images of continuous functions on compact sets are compact. \par
+If the domain of a continuous function is compact, then its image is compact. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\lemma \par
+Let $X$ be a totally-ordered topological space. \par
+  \hs{\bf 0)} \asc{if} $X$ has no min,  \asc{then} the 2-set of $\infty$-balls $\a\{B \p\subseteq X \pipe \a\exists a \p\in X \a\langle~ B \p= \a(a         \a{..} \p+\infty\a) ~\a\rangle \a\}$ is an open cover of $X$. \par
+  \hs{\bf 1)} \asc{if} $X$ has no max,  \asc{then} the 2-set of $\infty$-balls $\a\{B \p\subseteq X \pipe \a\exists a \p\in X \a\langle~ B \p= \a(\p-\infty \a{..}         a\a) ~\a\rangle \a\}$ is an open cover of $X$. \par
+  \hs{\bf 2)} \asc{if} $X$ has min $m$, \asc{then} the 2-set of $\infty$-balls $\a\{B \p\subseteq X \pipe \a\exists a \p\in X \a\langle~ B \p= \a(a         \a{..} \p+\infty\a) ~\a\rangle \a\}$ is an open cover of $X \p- \a\{m\a\}$. \par
+  \hs{\bf 3)} \asc{if} $X$ has max $M$, \asc{then} the 2-set of $\infty$-balls $\a\{B \p\subseteq X \pipe \a\exists a \p\in X \a\langle~ B \p= \a(\p-\infty \a{..}         a\a) ~\a\rangle \a\}$ is an open cover of $X \p- \a\{M\a\}$. \par
+
+\asc{proof} of {\bf 1)}. \par
+\psc{Let} $X$ be a totally-ordered topological space. \par
+\psc{Let} $X$ have no max. \par
+\psc{Let} ${\cal B}$ be the 2-set of $\infty$-balls $\a\{B \p\subseteq X \pipe \a\exists a \p\in X \a\langle~ B \p= \a(\p-\infty \a{..} a\a) ~\a\rangle \a\}$. \par
+
+\psc{We show} that ${\cal B}$ is an open cover of $X$. \par
+\psc{Since} \psc{We show} that ${\cal B}$ is an open cover of $X$, \psc{then}, by the open cover definition, \psc{We show} that $X$ is a subset of $\p\cup{\cal B}$. \par
+
+  \hs \psc{We show} that $x$ is an element of $\p\cup{\cal B}$. \par
+    \hs\hs \psc{Let} $x$ {\bf not} be an element of $\p\cup{\cal B}$, for \psc{contradiction}. \par
+    \hs\hs \psc{Since} $x$ is {\bf not} in $\p\cup{\cal B}$, \psc{then}, by negating the union definition, there doesn't exist $B \p\in {\cal B}$ so that $x \p\in B$. \par
+    \hs\hs \psc{Since} $\neg\a\exists B \p\in \cal B \a\langle$ $x \p\in B$ $\a\rangle$, \psc{then}, by the rules of classical logic, $\a\forall B \p\in {\cal B} \a\langle$ $x \p\notin B$ $\a\rangle$. \par
+
+    \vs
+    \hs\hs \psc{Since} $X$ has no max, \psc{then}, by negating the max definition, there doesn't exist $M \p\in X$ so that for all $y \p\in X$ it's true that $y \p\leq M$. \par
+    \hs\hs \psc{Since} $\neg\a\exists M \p\in X$  $\a\forall y \p\in X \a\langle$ $y \p\leq M$ $\a\rangle$, \psc{then}, by the rules of classical logic, $\a\forall M \p\in X$ $\a\exists y \p\in X \a\langle$ $y \p> M$ $\a\rangle$. \par
+    \hs\hs \psc{Since} $\a\forall M \p\in X$ $\a\exists y \p\in X \a\langle$ $y \p> M$ $\a\rangle$, \psc{and} $x \p\in X$, \psc{then}, by plugging $M \p{:=} x$, there exists $x' \p\in X$ so that $x' \p> x$. \par
+    \hs\hs \psc{Since} $x \p< x'$, \psc{and} $x \p\in X$, \psc{and} $x' \p\in X$, \psc{then}, by the ball definition, $x$ is in the ball $\a(\p-\infty \a{..} x'\a)$. \par
+    \hs\hs \psc{Since} $x' \p\in X$, \psc{then}, by the ${\cal B}$ definition, the ball $\a(\p-\infty \a{..} x'\a)$ is in ${\cal B}$. \par
+    \hs\hs \psc{Since} $\a(\p-\infty \a{..} x'\a) \p\in {\cal B}$, \psc{and} $x \p\in \a(\p-\infty \a{..} x'\a)$, \psc{then} there exists $B \p\in {\cal B}$ so that $x \p\in B$. \par
+
+    \vs
+    \hs\hs \psc{Since} $\a\forall B \p\in {\cal B} \a\langle$ $x \p\notin B$ $\a\rangle$, \psc{and} $\a\exists B \p\in {\cal B} \a\langle$ $x \p\in B$ $\a\rangle$, \psc{then} there's a \psc{contradiction}.
+
+  \hs \psc{This shows} that $x$ is an element of $\p\cup{\cal B}$, by the law of non-contradiction. \par
+
+\psc{This shows} that $X$ is a subset of $\p\cup{\cal B}$. \par
+\psc{This shows} that $\p\cup{\cal B}$ is an open cover of $X$. \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\theorem The extreme value theorem for topological spaces. \par
+Let $X$ be a {\bf compact}         topological space. \par
+Let $Y$ be a {\bf totally-ordered} topological space. \par
+Let $f: X \to Y$ be continuous. \par
+  \hs{\bf 0)} There exist $a,b \p\in X$ so that for every $x \p\in X$ it's true that $f[x] \p\in \a[f[a] \a{..} f[b]\a]$. \par
+The point $f[a] \p\in X$ is called the \bbf{min}    of $f$. \par
+The point $f[b] \p\in X$ is called the \bbf{max}    of $f$. \par
+The point $a    \p\in X$ is called the \bbf{argmin} of $f$. \par
+The point $b    \p\in X$ is called the \bbf{argmax} of $f$. \par
+
+\proof \par
+\psc{Let} $X$ be a {\bf compact}         topological space. \par
+\psc{Let} $Y$ be a {\bf totally-ordered} topological space. \par
+\psc{Let} $f: X \to Y$ be continuous. \par
+\psc{We show} that there exist $a,b \p\in X$ so that for every $x \p\in X$ it's true that $f[x] \p\in \a[f[a] \a{..} f[b]\a]$. \par
+
+\vs
+\psc{Since} $X$ is compact \psc{and} $f$ is continuous,
+\psc{then}, by the fundamental lemma of continuity and compactness, the image $f_*[X]$ is compact.
+
+\vs
+\psc{Let} $m$ be the min of $f_*[X]$. (Why does this exist? This is what we want to proof!) \par
+\psc{Let} $M$ be the max of $f_*[X]$. (Why does this exist? This is what we want to proof!) \par
+\psc{Since} $m$ is the min of $f_*[X]$, \psc{then}, by the min definition, $m$ is in $f_*[X]$. \par
+\psc{Since} $M$ is the max of $f_*[X]$, \psc{then}, by the max definition, $M$ is in $f_*[X]$. \par
+\psc{Since} $m \p\in f_*[X]$, \psc{then}, by the $f_*[X]$ definition, there exists $a \p\in X$ so that $f: a \mapsto m$. \par
+\psc{Since} $M \p\in f_*[X]$, \psc{then}, by the $f_*[X]$ definition, there exists $a \p\in X$ so that $f: b \mapsto M$. \par
+
+\vs
+\psc{Let} $f_*[X]$ have no max, for \psc{contradiction}. \par
+\psc{Let} ${\cal B}$ be the 2-set of $\infty$-balls $\a\{B \p\subseteq f_*[X] \pipe \a\exists y \p\in f_*[X] \a\langle~ B \p= \a(\p-\infty \a{..} y\a) ~\a\rangle \a\}$. \par
+\psc{Since} the domain of $X$, \psc{and} the codomain of $f$ is $Y$, \psc{then} by the image definition, the image $f_*[X]$ is a subset of $Y$. \par
+\psc{Since} $f_*[X]$ is a subset of $Y$, and $Y$ is totally-ordered, \psc{then}, by XX, $f_*[X]$ is totally ordered. \par
+\psc{Since} $f_*[X]$ has no max, \psc{and} $f_*[X]$ is totally-ordered,
+\psc{then}, by lemma XX, the 2-set ${\cal B}$ is an open cover of $f_*[X]$. \par
+\psc{Since} the 2-set ${\cal B}$ is an open cover of $f_*[X]$, \psc{and} $f_*[X]$ is compact, \par
+\psc{then}, by the compactness definition, it has a finite subcover $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$. \par
+\psc{Since} the cover $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$ is finite, \psc{then} the set $\a\{y_0, y_1, \ldots, y_n\a\}$ of boundary points is finite. \par
+\psc{Since} the set $\a\{y_0, y_1, \ldots, y_n\a\}$ is finite, \psc{then}, by XX, it has a maximum $M$. \par
+\psc{Since} $M$ is the max of $\a\{y_0, y_1, \ldots, y_n\a\}$, \psc{then}, by the max definition, $M$ is an element of $\a\{y_0, y_1, \ldots, y_n\a\}$. \par
+\psc{Since} $M$ is an element of $\a\{y_0, y_1, \ldots, y_n\a\}$, \psc{and} $\a\{y_0, y_1, \ldots, y_n\a\}$ is a subset of $f_*[X]$, \par
+\psc{then} by the properties of subsets, $M$ is an element of $f_*[X]$. \par
+\psc{Since} $M$ is an element of $f_*[X]$, \psc{and} $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$ covers $f_*[X]$, \par
+\psc{then}, by the cover definition, $M$ is an element of the union $\p\cup \a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$. \par
+\psc{Since} $M$ is an element of the union $\p\cup \a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$, \par
+\psc{then}, by the union definition, there exists $\a(\p-\infty \a{..} y_i\a) \p\in \a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$ so that $M \p\in \a(\p-\infty \a{..} y_i\a)$. \par
+\psc{Since} $M$ is an element of $\a(\p-\infty \a{..} y_i\a)$, \psc{and} $\a(\p-\infty \a{..} y_i\a)$ in an element of $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$, \par
+\psc{then} $M \p\in \a(\p-\infty\a{..}y_0\a)$ or $M \p\in \a(\p-\infty\a{..}y_1\a)$ or $\ldots$ $M \p\in \a(\p-\infty\a{..}y_n\a)$. \par
+
+\vs
+\psc{Since} $M$ is an element of $\a\{y_0, y_1, \ldots, y_n\a\}$, \par
+\psc{and} every element of $\a\{y_0, y_1, \ldots, y_n\a\}$ is a boundary point of an element of $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$, \par
+\psc{then} $M$ is a boundary point of an element of $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$. \par
+\psc{Since} $M$ is a boundary point of an element of $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$, \par
+\psc{and} every element of $\a\{\a(\p-\infty\a{..}y_0\a), \a(\p-\infty\a{..}y_1\a), \ldots, \a(\p-\infty\a{..}y_n\a)\a\}$ is an open ball, \par
+\psc{and} open balls don't contain boundary points, \par
+\psc{then} $M \p\notin \a(\p-\infty\a{..}y_0\a)$ or $M \p\notin \a(\p-\infty\a{..}y_1\a)$ or $\ldots$ $M \p\notin \a(\p-\infty\a{..}y_n\a)$. \par
+
+\vs
+\psc{Since} $M \p\notin \a(\p-\infty\a{..}y_0\a)$ or $M \p\notin \a(\p-\infty\a{..}y_1\a)$ or $\ldots$ $M \p\notin \a(\p-\infty\a{..}y_n\a)$, \par
+\psc{and}   $M \p\in \a(\p-\infty\a{..}y_0\a)$ or $M \p\in \a(\p-\infty\a{..}y_1\a)$ or $\ldots$ $M \p\in \a(\p-\infty\a{..}y_n\a)$, \par
+\psc{then}  there's a \psc{contradiction}. \par
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\subsection{\bf [...]}
+
+[...]
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{Category theory}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+A \abf{category} is \abf{dots}, \abf{arrows} (between {\bf dots}), and \abf{gluing conditions} (between {\bf arrows}). \par
+The {\bf dots} and {\bf arrows} {\it can} be explicitly visualized (they're concrete {\it things}). \par
+The {\bf gluing conditions} {\it can't} be explicitly visualized (they're abstract {\it meta-things}, or something). \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\example {\bf The two-equals-one axiom}. \par
+I used to think that the arrows \par
+\halign{#\hfil & #\hfil & #\hfil & #\hfil \cr
+  \hs $f$   & $: X$ & $\to$ & $Y$ \cr
+  \hs $g$   & $: Y$ & $\to$ & $Z$ \cr
+  \hs $h$   & $: X$ & $\to$ & $Z$ \cr
+  \hs $1_X$ & $: X$ & $\to$ & $X$ \cr
+  \hs $1_Y$ & $: Y$ & $\to$ & $Y$ \cr
+  \hs $1_Z$ & $: Z$ & $\to$ & $Z$ \cr
+}
+formed a category. But they don't. {\bf Dots} and {\bf arrows} alone don't make a category. We need \abf{gluing conditions}, too. \par
+
+\vs
+Trick question: {\it how many} {\bf arrows} does this category have? \par
+I used to think it had $6$: $f,g,h,1_X,1_Y,1_Z$. But it doesn't. \par
+It has $7$ arrows: \psc{since} the target of $f$ \asc{equals} the source of $g$, \psc{then}, by the category axioms, there exists a arrow $gf$. \par
+So our collection of arrows grows by $1$: $f,g,h,1_X,1_Y,1_Z,gf$. \par
+Or does it? \par
+Notice that the target of $1_X$ equals the source of $f$, so we also get the arrow $f1_X$. \par
+For analogous reasons, we also get the arrows $1_Yf,g1_Y,1_Zg,h1_X,1_Zh$. \par
+So our collection of arrows grows to: $f,g,h,1_X,1_Y,1_Z,gf,f1_X,1_Yf,g1_Y,1_Zg,h1_X,1_Zh$. \par
+Or does it? \par
+The collection of arrows $f,g,h,1_X,1_Y,1_Z,gf,f1_X,1_Yf,g1_Y,1_Zg,h1_X,1_Zh$ on its own doesn't form a category: it's missing {\bf gluing conditions}.
+And we can't just go about choosing any old {\bf gluing conditions} that we please; nope. Our {\bf gluing conditions} must satisfy the {\bf category axioms}. The following set of gluing conditions does the trick: \par
+\halign{# & # & # \cr
+  \hs $gf$   & $\p=$ & $h$ \cr
+  \hs $f1_X$ & $\p=$ & $f$ \cr
+  \hs $1_Yf$ & $\p=$ & $f$ \cr
+  \hs $g1_Y$ & $\p=$ & $g$ \cr
+  \hs $1_Zg$ & $\p=$ & $g$ \cr
+  \hs $h1_X$ & $\p=$ & $h$ \cr
+  \hs $1_Zh$ & $\p=$ & $h$ \cr
+}\par
+Aha! So under these {\bf gluing conditions}, the arrow $gf$ ``{\it equals}'' the arrow $h$ (whatever ``{\it equals}'' means), and similarly for other arrows. \par
+This means that our collection of $6\p+7$ arrows \par
+  \hs $f,g,h,1_X,1_Y,1_Z,gf,f1_X,1_Yf,g1_Y,1_Zg,h1_X,1_Zh$ \par
+``{\it collapses down}'' to the original $6$ arrows \par
+  \hs $f,g,h,1_X,1_Y,1_Z$. \par
+
+\vs
+\abf{Objects} and \abf{morphisms} can be {\it visualized} as {\bf dots} and {\bf arrows}. \par
+But how do we {\it visualize} the fact that (for instance) $gf \p= h$? \par
+I don't know, and I suspect we can't (it's a {\it meta-thing}...), because $gf$ is the composition of $f$ with $g$ (so $gf$ is a path of length $2$), but $h$ is a single arrow (it's a path of length $1$)! \par
+How {\it can} the {\it two} arrows $f$ and $g$ {\it equal} the {\it one} arrow $h$? I don't know. It's just an axiom for this category. And I don't know how to visualize it. But I think of it as the axiom $2 \p= 1$: {\bf two arrows equal one arrow}. \par
+
+\vs
+So, for this collection of arrows, under these gluing conditions, the arrows $f,g,h$ satisfy the $2 \p= 1$ axiom. (And other arrows do as well.) \par
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+When thinking about {\bf categories}: \par
+  \hs we {\it try} to ``forget'' about the {\it internal structure} of {\bf objects}, and think of objects as {\it structureless point-particles}, \par
+  \hs we {\it try} to ``forget'' about the {\bf objects} altogether, and think only in terms of the {\bf arrows}. \par
+
+\vs
+\abf{Categories} are \abf{posets} in the next dimension. \par
+\abf{$\infty$-groupoids} are \abf{sets} in the next dimension.
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\definition {\bf Categories}. The category axioms. \par
+A \abf{category} ${\cal C}$ satisfies the following sentences. \par
+  \hs{\bf 0)} {\it Existence of arrows}: \par
+    \hs\hs there exists a class ${\bf Hom}[{\cal C}]$ of ${\cal C}$-{\bf arrows}. \par
+
+  \hs{\bf 1)} {\it Existence of source-arrows and target-arrows}: \par
+    \hs\hs for every ${\cal C}$-arrow $f \p\in {\bf Hom}[{\cal C}] \a\langle$ \par
+    \halign{#\hfil&#\hfil&#\hfil\cr
+      \hs\hs$|$\hs there exists a ${\cal C}$-arrow ${\bf S}f \p\in {\bf Hom}[{\cal C}]$ & (aka the \abf{source-arrow} of $f$) so that $\a\langle$ ${\bf S}{\bf S}f \p= {\bf S}f$ & \asc{and} ${\bf T}{\bf S}f \p= {\bf S}f$ $\a\rangle$ \asc{and} \cr
+      \hs\hs$|$\hs there exists a ${\cal C}$-arrow ${\bf T}f \p\in {\bf Hom}[{\cal C}]$ & (aka the \abf{target-arrow} of $f$) so that $\a\langle$ ${\bf S}{\bf T}f \p= {\bf T}f$ & \asc{and} ${\bf T}{\bf T}f \p= {\bf T}f$ $\a\rangle$ \cr
+    }
+    \hs\hs $\a\rangle$.
+
+  \hs{\bf 2)} {\it Existence of identity-arrows}: \par
+    \hs\hs for every ${\cal C}$-arrow $f \p\in {\bf Hom}[{\cal C}]$ \par
+    \halign{#\hfil&#\hfil&#\hfil\cr
+      \hs\hs$|$\hs there exists a ${\cal C}$-arrow $1_{{\bf S}f} \p\in {\bf Hom}[{\cal C}]$ & (aka the \abf{identity-arrow} of ${\bf S}f$) so that $\a\langle$ ${\bf S}1_{{\bf S}f} \p= {\bf S}f$ & \asc{and} ${\bf T}1_{{\bf S}f} \p= {\bf S}f$ $\a\rangle$ \asc{and} \cr
+      \hs\hs$|$\hs there exists a ${\cal C}$-arrow $1_{{\bf T}f} \p\in {\bf Hom}[{\cal C}]$ & (aka the \abf{identity-arrow} of ${\bf T}f$) so that $\a\langle$ ${\bf S}1_{{\bf T}f} \p= {\bf T}f$ & \asc{and} ${\bf T}1_{{\bf T}f} \p= {\bf T}f$ $\a\rangle$ \cr
+    }
+    \hs\hs $\a\rangle$.
+
+  \hs{\bf 3)} {\it Existence of composite-arrows}: \par  % \hs\hs For every $f,g \p\in {\bf Hom}[{\cal C}] \a\langle$ \par
+    \hs\hs for every ${\cal C}$-arrow $f \p\in {\bf Hom}[{\cal C}]$ and \par
+    \hs\hs for every ${\cal C}$-arrow $g \p\in {\bf Hom}[{\cal C}] \a\langle$ \par
+    \hs\hs$|$\hs \asc{if} ${\bf T}f \p= {\bf S}g$, \par
+    \hs\hs$|$\hs \asc{then} there exists a ${\cal C}$-arrow $gf \p\in {\bf Hom}[{\cal C}]$ (aka the \abf{composite-arrow} of $f$ {\bf with} $g$) so that $\a\langle$ \par
+    \hs\hs$|$\hs$|$\hs ${\bf S}gf \p= {\bf S}f$ \asc{and} \par
+    \hs\hs$|$\hs$|$\hs ${\bf T}gf \p= {\bf T}g$ \par
+    \hs\hs$|$\hs $\a\rangle$ \par
+    \hs\hs $\a\rangle$.
+
+\vs
+\proposition {\bf Identity}-arrows and {\bf source}-arrows are the same. {\bf Identity}-arrows and {\bf target}-arrows are the same. \par
+Let ${\cal C}$ be a category. \par
+Let $f \p\in {\bf Hom}[{\cal C}]$ be a ${\cal C}$-arrow. \par
+  \hs{\bf 0)}    $1_{{\bf S}f} \p= {\bf S}f$. \par
+  \hs{\bf 1)}    $1_{{\bf T}f} \p= {\bf T}f$. \par
+  \hs{\bf 0$'$)} The identity-arrow of the source-arrow of $f$ is the source-arrow of $f$. \par
+  \hs{\bf 1$'$)} The identity-arrow of the target-arrow of $f$ is the target-arrow of $f$. \par
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\chapter{Sheaves}
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs
+\abf{Sheaves} keep track of {\bf local-to-global} relationships between data in a way that ensures local-to-global consistency. \par
+
+\vs
+The idea is that we have a bunch of open sets of $X$ stuffed into a topology $\tau_X \p\subseteq {\cal P}X$. \par
+And we take an open set $U \p\subseteq X$. \par
+And we take an open cover of $U$, say, the open cover $\a\{\g{U_0}, \b{U_1}\a\} \p\subseteq \tau_X$ made of {\it two} cover elements. Since $\a\{\g{U_0}, \b{U_1}\a\}$ covers $X$, then $\g{U_0} \p\cup\b{U_1} \p= U$. \par
+On each cover element $U_i \p\in \a\{\g{U_0}, \b{U_1}\a\}$ there is a continuous map $f_i: U_i \to \R$. \par
+Since there are two cover elements ($\g{U_0}$ and $\b{U_1}$), and on each cover element there's a continuous map, then we have {\it two} continuous maps: \par
+  \hs0) a continuous map $\g{f_0}: \g{U_0} \to \R$ on $\g{U_0}$, and \par
+  \hs1) a continuous map $\b{f_1}: \b{U_1} \to \R$ on $\b{U_1}$. \par
+And we want to look at all possible intersections of all cover elements. \par
+So, we take all four interections of $\g{U_0}$ and $\b{U_1}$: \par
+  \hs0) $\g{U_0} \p\cap \g{U_0}$, which is just $\g{U_0}$, \par
+  \hs1) $\g{U_0} \p\cap \b{U_1}$, \par
+  \hs2) $\b{U_1} \p\cap \g{U_0}$, which is the same as $\g{U_0} \p\cap \b{U_1}$, \par
+  \hs3) $\b{U_1} \p\cap \b{U_1}$, which is just $\b{U_1}$. \par
+% (which is the same as the intersection $\b{U_1} \p\cap \g{U_0}$ of $\b{U_1}$ with $\g{U_0}$). \par
+This yields {\it two extra} continuous maps: \par
+  \hs0) the restriction of $\g{f_0}: \g{U_0} \to \R$ to $\g{U_0} \p\cap \b{U_1}$, which is denoted $\g{f_0}|_{\g{U_0} \p\cap \b{U_1}}: \g{U_0} \p\cap \b{U_1} \to \R$, and \par
+  \hs1) the restriction of $\b{f_1}: \b{U_1} \to \R$ to $\g{U_0} \p\cap \b{U_1}$, which is denoted $\b{f_1}|_{\g{U_0} \p\cap \b{U_1}}: \g{U_0} \p\cap \b{U_1} \to \R$. \par
+So, we started with two maps, $\g{f_0}$ and $\b{f_1}$, but now we have four: \par
+  \hs0) $\g{f_0}: \g{U_0} \to \R$, \par
+  \hs1) $\b{f_1}: \b{U_1} \to \R$, \par
+  \hs2) $\g{f_0}|_{\g{U_0} \p\cap \b{U_1}}: \g{U_0} \p\cap \b{U_1} \to \R$, and \par
+  \hs3) $\b{f_1}|_{\g{U_0} \p\cap \b{U_1}}: \g{U_0} \p\cap \b{U_1} \to \R$. \par
+In general, $\g{f_0}: \g{U_0} \to \R$ and $\b{f_1}: \b{U_1} \to \R$ are completely different maps. \par
+And, in general, their restrictions $\g{f_0}|_{\g{U_0} \p\cap \b{U_1}}: \g{U_0} \p\cap \b{U_1} \to \R$ and $\b{f_1}|_{\g{U_0} \p\cap \b{U_1}}: \g{U_0} \p\cap \b{U_1} \to \R$ are completely different maps. \par
+
+\vs
+Now comes the good stuff. \par
+We want to ``glue'' $\g{f_0}$ and $\b{f_1}$, which are defined on $\g{U_0} \p\subseteq U$ and $\b{U_1} \p\subseteq U$, into a {\bf single map} $f$ defined on all of $\g{U_0} \p\cup \b{U_1}$ (which is $U$). \par
+{\it But} there isn't a single map defined on all of $\g{U_0} \p\cup \b{U_1}$: there are {\bf two maps}! Call them $f: \g{U_0} \p\cup \b{U_1} \to \R$ and $g: \g{U_0} \p\cup \b{U_1} \to \R$. \par
+The map $f: \g{U_0} \p\cup \b{U_1} \to \R$ is defined piecewise, as follows. \par
+  \hs0) For every $x$, \asc{if} $x$ is in $\g{U_0} \p-    \b{U_1}$, \asc{then} $f$ maps $x$ to $\g{f_0}[x]$. \par
+  \hs1) For every $x$, \asc{if} $x$ is in $\b{U_1} \p-    \g{U_0}$, \asc{then} $f$ maps $x$ to $\b{f_1}[x]$. \par
+  \hs2) For every $x$, \asc{if} $x$ is in $\g{U_0} \p\cap \b{U_1}$, \asc{then} $f$ maps $x$ to $\g{f_0}|_{\g{U_0} \p\cap \b{U_1}}[x]$. \par
+The map $g: \g{U_0} \p\cup \b{U_1} \to \R$ is defined piecewise, as follows. \par
+  \hs0) For every $x$, \asc{if} $x$ is in $\g{U_0} \p-    \b{U_1}$, \asc{then} $g$ maps $x$ to $\g{f_0}[x]$. \par
+  \hs1) For every $x$, \asc{if} $x$ is in $\b{U_1} \p-    \g{U_0}$, \asc{then} $g$ maps $x$ to $\b{f_1}[x]$. \par
+  \hs2) For every $x$, \asc{if} $x$ is in $\g{U_0} \p\cap \b{U_1}$, \asc{then} $g$ maps $x$ to $\b{f_1}|_{\g{U_0} \p\cap \b{U_1}}[x]$. \par
+By definition, the maps $f$ and $g$ agree on $\g{U_0} \p- \b{U_1}$ and on $\b{U_1} \p- \g{U_0}$, but they disagree on the intersection $\g{U_0} \p\cap \b{U_1}$, because $\g{f_0}|_{\g{U_0} \p\cap \b{U_1}}[x]$ need not equal $\b{f_1}|_{\g{U_0} \p\cap \b{U_1}}[x]$... \par
+But we can {\it demand} that $f$ and $g$ agree $\g{U_0} \p\cap \b{U_1}$ too, and, in that case, $f$ and $g$ become the same map, ie. $f \p= g$. \par
+So, if we want $f \p= g$ to be true, then we keep the piecewise definitions of $f$ and $g$, and we add an extra condition: \par
+  \hs For every $x$, \asc{if} $x$ is in $\g{U_0} \p\cap \b{U_1}$, \asc{then} $\g{f_0}|_{\g{U_0} \p\cap \b{U_1}}[x] \p= \b{f_1}|_{\g{U_0} \p\cap \b{U_1}}[x]$. \par
+This condition ensures that $f: \g{U_0} \p\cup \b{U_1} \to \R$ and $g: \g{U_0} \p\cup \b{U_1} \to \R$ are the same map, ie. $f \p= g$. \par
+
+\vs
+And now we have a single {\bf patchwerk map} $f: \g{U_0} \p\cup \b{U_1} \to \R$ defined on all of $\g{U_0} \p\cup \b{U_1}$, constructed by ``gluing'' $\g{f_0}: \g{U_0} \to \R$ and $\b{f_1}: \b{U_1} \to \R$. \par
+Since $\g{f_0}: \g{U_0} \to \R$ and $\b{f_1}: \b{U_1} \to \R$ are continuous, then the patchwerk map $f: \g{U_0} \p\cup \b{U_1} \to \R$ is also continuous, but this requires proof. \par
+{\bf Patchwerk} is a boss in {\it World of Warcraft}, made by stitching together corpses.
+
+% ------------------------------------------------------------------------------------------------------------------------------
+\vs\hrule\vskip1pt
+\definition {\bf Presheaves} (of abelian groups) on topological spaces. \par
+Let $(X, \tau_X)$ be a topological space. \par
+Let {\bf Ab} be the category of abelian groups. \par
+A \abf{presheaf} ${\cal F}$ (of abelian groups) on the topological space $(X, \tau_X)$ \asc{is} \par
+  \hs a {\bf contravariant functor} ${\cal F}$ from $\tau_X$ to {\bf Ab}, or equivalently \par
+  \hs a {\bf covariant functor} ${\cal F}$ from $\tau_X^{op}$ to {\bf Ab}. \par
+In detail. \par
+
+\hs{\bf 0)} For every $\tau_X$ arrow $f$ \par
+\halign{#\hfil&#\hfil \cr
+  \hs\hs\hs there exists an {\bf Ab} arrow ${\cal F}f$            & so that ${\bf S}{\cal F}f \p= {\cal F}{\bf S}f$ \asc{and} \cr
+  \hs\hs\hs there exists an {\bf Ab} arrow ${\cal F}f$            & so that ${\bf T}{\cal F}f \p= {\cal F}{\bf T}f$ \asc{and} \cr
+  \hs\hs\hs there exists an {\bf Ab} arrow ${\cal F}1_{{\bf S}f}$ & so that ${\cal F}1_{{\bf S}f} \p= 1_{{\cal F}{\bf S}f}$ \asc{and} \cr
+  \hs\hs\hs there exists an {\bf Ab} arrow ${\cal F}1_{{\bf T}f}$ & so that ${\cal F}1_{{\bf T}f} \p= 1_{{\cal F}{\bf T}f}$. \cr
+}
+
+\hs{\bf 0)} {\it Existence of arrows}: \par
+\hs\hs for every $\tau_X$ arrow $f:U \to V$ \par
+\hs\hs\hs there exists an {\bf Ab} arrow ${\cal F}f: {\cal F}U \from {\cal F}V $. \par
+
+\hs{\bf 1)} {\it Composition compatibility}: \par
+\hs\hs for every $\tau_X$ arrow $f:U \to V$ and \par
+\hs\hs for every $\tau_X$ arrow $g:V \to W$ \par
+\hs\hs\hs there exists an {\bf Ab} arrow ${\cal F}gf: {\cal F}U \from {\cal F}W$ \par
+\hs\hs\hs\hs so that ${\cal F}gf \p= {\cal F}f{\cal F}g$. \par
+
+\hs{\bf 2)} {\it Object/identity compatibility}: \par
+\hs\hs for every $\tau_X$ identity arrow $1_U:U \to U$ \par
+\hs\hs\hs there exists an {\bf Ab} identity arrow ${\cal F}1_U: {\cal F}U \from {\cal F}U$ \par
+\hs\hs\hs\hs so that ${\cal F}1_U \p= 1_{{\cal F}U}$. \par
+
+\example \par
+\psc{Let} $\tau_X$ be a category. \par
+\psc{Let} {\bf Ab} be a category. \par
+\psc{Let} $f: U \to V$ be a $\tau_X$ arrow. \par
+\psc{Let} $g: V \to W$ be a $\tau_X$ arrow. \par
+\psc{Let} ${\cal F}$ be an {\bf Ab}-presheaf on $\tau_X$. \par
+
+$|$\hs \par
+$|$\hs \psc{Since} $\tau_X$ is a category, \par
+$|$\hs \psc{and}   $f: U \to V$ is a $\tau_X$ arrow from $U$ to $V$, \par
+$|$\hs \psc{and}   $g: V \to W$ is a $\tau_X$ arrow from $V$ to $W$, \par
+$|$\hs \psc{and}   ${\bf Tar}[f] \p= {\bf Src}[g]$, \par
+$|$\hs \psc{then}, by the category axioms, there exists a $\tau_X$ arrow $gf: U \to W$ from $U$ to $W$. \par
+
+$|$\hs \par
+$|$\hs \psc{Since} $f:  U \to V$ is a $\tau_X$ arrow from $U$ to $V$, \par
+$|$\hs \psc{and}   $g:  V \to W$ is a $\tau_X$ arrow from $V$ to $W$, \par
+$|$\hs \psc{and}   $gf: U \to W$ is a $\tau_X$ arrow from $U$ to $W$, \par
+$|$\hs \psc{and}   ${\cal F}$ is an {\bf Ab}-presheaf on $\tau_X$, \par
+$|$\hs \psc{then}, by presheaf arrow compatibility, there exists an {\bf Ab} arrow ${\cal F}f:  {\cal F}U \from {\cal F}V$ to ${\cal F}U$ from ${\cal F}V$, \par
+$|$\hs \psc{and},  by presheaf arrow compatibility, there exists an {\bf Ab} arrow ${\cal F}g:  {\cal F}V \from {\cal F}W$ to ${\cal F}V$ from ${\cal F}W$, \par
+$|$\hs \psc{and},  by presheaf arrow compatibility, there exists an {\bf Ab} arrow ${\cal F}gf: {\cal F}U \from {\cal F}W$ to ${\cal F}U$ from ${\cal F}W$. \par
+
+$|$\hs \par
+$|$\hs \psc{Since} {\bf Ab} is a category, \par
+$|$\hs \psc{and}   ${\cal F}f: {\cal F}U \from {\cal F}V$ is an {\bf Ab} arrow to ${\cal F}U$ from ${\cal F}V$, \par
+$|$\hs \psc{and}   ${\cal F}g: {\cal F}V \from {\cal F}W$ is an {\bf Ab} arrow to ${\cal F}V$ from ${\cal F}W$, \par
+$|$\hs \psc{and}   ${\bf Tar}[{\cal F}g] \p= {\bf Src}[{\cal F}f]$, \par
+$|$\hs \psc{then}, by the category axioms, there exists an {\bf Ab} arrow ${\cal F}f{\cal F}g: {\cal F}U \from {\cal F}W$ to ${\cal F}U$ from ${\cal F}W$. \par
+
+$|$\hs \par
+$|$\hs By presheaf composition compatibility, ${\cal F}gf \p= {\cal F}f{\cal F}g$. \par
+
+
+
+
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------
+\end
